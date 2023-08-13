@@ -43,8 +43,6 @@ app.use(`${api}/users`,userRouter);
 
 
 
-
-
 //open server for listening
 const port = process.env.PORT
 app.listen(port, () => {

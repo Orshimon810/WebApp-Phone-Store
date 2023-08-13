@@ -16,5 +16,8 @@ router.post('/login',userController.login);
 
 //get users count
 router.get('/get/count',userController.getCount);
+
+//delete user
+router.delete('/:id',userController.deleteUser);
  
 module.exports = router; 
