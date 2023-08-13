@@ -19,5 +19,8 @@ router.get('/get/count',userController.getCount);
 
 //delete user
 router.delete('/:id',userController.deleteUser);
+
+//update user password
+router.put('/:id',userController.updateUser);
  
 module.exports = router; 
