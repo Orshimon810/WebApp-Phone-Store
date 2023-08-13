@@ -13,7 +13,7 @@ router.get(`/`, productController.getAllProducts);
 //create one product
 router.post(`/`,productController.createdProduct);
 
-//get one product by id
+//get one product by ID
 router.get('/:id',productController.getProduct);
 
 //update Product

@@ -8,6 +8,7 @@ const cors = require('cors');
 require('dotenv/config');
 const productsRouter = require('./routes/product');
 const categoriesRouter = require('./routes/category');
+const userRouter = require('./routes/User');
 const api = process.env.API_URL;
 
 //Allowing all http request from other origins
@@ -33,6 +34,8 @@ app.use(morgan('tiny'));
 app.use(`${api}/products`,productsRouter);
 //http://localhost:3000/api/v1/category
 app.use(`${api}/category`,categoriesRouter);
+//http://localhost:3000/api/v1/users
+app.use(`${api}/users`,userRouter);
 
 
 
