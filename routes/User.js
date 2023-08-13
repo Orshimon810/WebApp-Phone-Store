@@ -13,5 +13,8 @@ router.get('/:id',userController.getUser);
 
 //login a user
 router.post('/login',userController.login);
+
+//get users count
+router.get('/get/count',userController.getCount);
  
 module.exports = router; 

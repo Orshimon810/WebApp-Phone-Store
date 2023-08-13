@@ -17,13 +17,13 @@ function authJwt() {
 }
 
 async function isRevoked(req, token) {
-   
-    if(!token.payload.isAdmin) {
-        return true
+    if (!token.payload.isAdmin) {
+        // Revoke tokens for non-admin users
+        return true;
     }
-     return undefined;
+    // Allow tokens for admin users
+    return undefined;
 }
-
 
 
 module.exports = authJwt;

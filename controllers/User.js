@@ -67,10 +67,36 @@ async function login(req, res) {
     }
 }
 
+async function getCount (req,res){
+    console.log('GET /get/count route handler called');
+    const userCount = await User.countDocuments({});
+
+    if(!userCount)
+        res.status(500).json({success:false,message:'Problem with user count'});
+
+    res.send({userCount:userCount});
+}
+
+function deleteUser(req, res) {
+    User.findByIdAndDelete(req.params.id)
+        .then(user => {
+            if (user) {
+                return res.status(200).json({ success: true, message: 'user has been deleted' });
+            } else {
+                return res.status(404).json({ success: false, message: 'user not found' });
+            }
+        })
+        .catch(err => {
+            return res.status(500).json({ success: false, error: err});
+        });
+}
+
 
 module.exports = {
     register,
     getAllUsers,
     getUser,
     login,
+    getCount,
+    deleteUser,
 }
