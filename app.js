@@ -9,6 +9,7 @@ require('dotenv/config');
 const productsRouter = require('./routes/product');
 const categoriesRouter = require('./routes/category');
 const userRouter = require('./routes/User');
+const authJwt = require('./helpers/jwt');
 const api = process.env.API_URL;
 
 //Allowing all http request from other origins
@@ -28,6 +29,7 @@ useNewUrlParser: true,useUnifiedTopology:true,dbName:'Phone-shop'
 //middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
+app.use(authJwt());
 
 //Routers
 //http://localhost:3000/api/v1/products

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 async function register(req,res) { 
     let user = new User({
@@ -41,7 +42,7 @@ async function getUser(req,res){
 
 async function login(req, res) {
     const user = await User.findOne({ email: req.body.email });
-  
+    const secret = process.env.secret;
     if (!user) {
         return res.status(400).send('User has not found');
     }
@@ -50,7 +51,15 @@ async function login(req, res) {
     console.log('Given Password:', req.body.password);
 
     if(bcrypt.compareSync(req.body.password, user.passwordHash)) {
-        res.status(200).send('user Authenticated');
+        const token = jwt.sign(
+            {
+                userId:user.id
+            },
+            secret,{
+                expiresIn:'1d'
+            });
+            
+        res.status(200).send({user:user.email,token:token});
     }
     else{
         res.status(400).send('password is wrong');
