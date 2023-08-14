@@ -6,11 +6,11 @@ const orderSchema = new mongoose.Schema({
         ref: 'OrderItem',
         required:true,
     }],
-    shippingAdress1:{
+    shippingAddress1:{
         type:String,
         required:true,
     },
-    shippingAdress2:{
+    shippingAddress2:{
         type:String,
         required:true,
     },

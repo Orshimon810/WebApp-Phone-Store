@@ -9,6 +9,7 @@ require('dotenv/config');
 const productsRouter = require('./routes/product');
 const categoriesRouter = require('./routes/category');
 const userRouter = require('./routes/User');
+const orderRouter = require('./routes/orders');
 const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
 const api = process.env.API_URL;
@@ -40,6 +41,8 @@ app.use(`${api}/products`,productsRouter);
 app.use(`${api}/category`,categoriesRouter);
 //http://localhost:3000/api/v1/users
 app.use(`${api}/users`,userRouter);
+//http://localhost:3000/api/v1/orders
+app.use(`${api}/orders`,orderRouter);
 
 
 
