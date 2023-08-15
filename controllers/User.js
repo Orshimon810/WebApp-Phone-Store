@@ -21,7 +21,8 @@ async function register(req,res) {
     if(!user)
     return res.status(400).send('the user cannot be created!')
 
-    res.send(user);
+    // After successful registration, send the redirection URL
+    res.send({ message: 'User registered successfully', redirectUrl: 'singIn.html' }); // Modify the URL as needed
 }
 
 async function getAllUsers (req,res) {
@@ -61,7 +62,12 @@ async function login(req, res) {
                 expiresIn:'1d'
             });
 
-        res.status(200).send({user:user.email,token:token});
+        // Send the redirection URL along with the token
+        res.status(200).send({
+            user: user.email,
+            token: token,
+            redirectUrl: 'mainPage.html' // Modify this URL as needed
+        });
     }
     else{
         res.status(400).send('password is wrong');

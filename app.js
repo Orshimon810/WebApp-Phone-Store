@@ -48,11 +48,9 @@ app.use(`${api}/users`,userRouter);
 app.use(`${api}/orders`,orderRouter);
 
 
-
 //open server for listening
 const port = process.env.PORT
 app.listen(port, () => {
     console.log(api);
     console.log('server is running on port ' + port)
     });
-
