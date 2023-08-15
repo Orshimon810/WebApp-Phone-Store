@@ -29,10 +29,13 @@ useNewUrlParser: true,useUnifiedTopology:true,dbName:'Phone-shop'
 });
 
 //middleware
+app.use(express.static('public')); // Serve static files from the "public" directory
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(authJwt());
 app.use(errorHandler);
+
 
 //Routers
 //http://localhost:3000/api/v1/products
