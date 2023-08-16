@@ -39,14 +39,23 @@
             .then(result => {
                 if (result.token) {
                     console.log('Sign in successful:', result);
+                    console.log('isAdmin:', result.isAdmin);
                     // Save the token in local storage
                     localStorage.setItem('token', result.token);
 
-                    // Redirect to the specified URL
+                    if (result.isAdmin) {
+                    console.log('User is an admin. Redirecting to adminPanel...');
                     setTimeout(() => {
-                    // Redirect to the specified URL
-                    window.location.href = result.redirectUrl;
-                }, 2000); // 2000 milliseconds = 2 seconds delay
+                        // Redirect admin to adminPanel.html
+                        window.location.href = 'adminPanel.html';
+                    }, 2000); // 2000 milliseconds = 2 seconds delay
+                } else {
+                    console.log('User is not an admin. Redirecting to main page...');
+                    setTimeout(() => {
+                        // Redirect non-admin to the specified URL (main page)
+                        window.location.href = result.redirectUrl;
+                    }, 2000); // 2000 milliseconds = 2 seconds delay
+                }
                 } else {
                     console.log('Sign in failed:', result.message);
                     // Display an alert for wrong email or password

@@ -65,8 +65,9 @@ async function login(req, res) {
         // Send the redirection URL along with the token
         res.status(200).send({
             user: user.email,
+            isAdmin:user.isAdmin,
             token: token,
-            redirectUrl: 'adminPanel.html' // Modify this URL as needed
+            redirectUrl: 'mainPage.html' // Modify this URL as needed
         });
     }
     else{
