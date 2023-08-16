@@ -6,6 +6,8 @@
     <title>Phonebook</title>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="css/mainPage.css"
+    <link rel="stylesheet" type="text/css" href="css/lightslider.css"
+
 </head>
 <body>
     <!------menu-bar------->
@@ -94,6 +96,53 @@
     </div>
 
 
+    <!--Full slider-->
+    <!--box-1-->
+        <ul id="adaptive" class="cs-hidden">
+            <li class="item-a">
+            <div class="full-slider-box f-slide-1">
+                <!--slider text container-->
+                <div class="slider-text-container">
+                    <div class ="f-slider-text"
+                    <span>Limited offer</span>
+                    <strong>15% off <br/> with <font>promo code</font></strong>
+                    <a href="#" class="f-slider-btn">Shop now</a>
+                    </div>
+                </div>
+            </div>
+            </li>
+
+         <!--box-2-->
+            <li class="item-b">
+                <div class="full-slider-box f-slide-2">
+                    <!--slider text container-->
+                    <div class="slider-text-container">
+                        <div class ="f-slider-text"
+                        <span>Limited offer</span>
+                        <strong>15% off <br/> with <font>promo code</font></strong>
+                        <a href="#" class="f-slider-btn">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+                </li>
+
+             <!--box-3-->
+                <li class="item-c">
+                    <div class="full-slider-box f-slide-3">
+                        <!--slider text container-->
+                        <div class="slider-text-container">
+                            <div class ="f-slider-text"
+                            <span>Limited offer</span>
+                            <strong>15% off <br/> with <font>promo code</font></strong>
+                            <a href="#" class="f-slider-btn">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                    </li>
+        </ul>
+
+
+
     <!--JQuery------->
     <script src="../jquery.js"></script>
     <script type="text/javascript">
@@ -118,6 +167,16 @@
         $(document).on('click','.form-cancel',function(){
             $('.form').removeClass('login-active').removeClass('sign-up-active')
         });
+
+        // Slider script
+        $(document).ready(function(){
+            $('#adaptive').lightSlider({
+                adaptiveHeight:true,
+                item:1,
+                slideMargin:0,
+                loop:true
+            });
+        })
 
             // Log in method to DB
             document.getElementById('login').addEventListener('submit', function(event) {

@@ -232,3 +232,62 @@ a{
         opacity: 1;
     }
 }
+.full-slider-box{
+    width:100%;
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.f-slide-1{
+    background-image: url(../images/slider_01.png);
+}
+.f-slide-2{
+    background-image: url(../images/Slider_02.jpg);
+}
+.f-slide-3{
+    background-image: url(../images/Slider_03.jpg);
+}
+.slider-text-container{
+    width:80%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+}
+.f-slider-text{
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+}
+.f-slider-text strong{
+    color: #333333;
+    font-size: 3rem;
+    line-height: 55px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+}
+.f-slider-text span{
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-weight: 500;
+    color: #666666;
+    font-size: 1.2rem;
+}
+.f-slider-btn{
+    width:170px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #0b9d8a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 14px;
+}
+.f-slider-text strong font{
+    color: #0b9d8a;
+}
