@@ -1,6 +1,7 @@
 const express = require('express'); //Creating Express service
 const app = express();
 const mongoose = require('mongoose'); 
+const path = require('path');
 const { config } = require('dotenv');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -35,6 +36,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(authJwt());
+app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
+//app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(errorHandler);
 
 

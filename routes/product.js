@@ -19,6 +19,7 @@ router.get('/:id',productController.getProduct);
 //update Product
 router.put('/:id',productController.updateProduct);
 
+
 //delete Product
 router.delete('/:id',productController.deleteProduct);
 
@@ -28,6 +29,8 @@ router.get('/get/count',productController.getCount);
 //get featured products
 router.get('/get/featured',productController.getFeaturedProducts);
 
+//update gallery
+router.put('/gallery-images/:id', productController.uploadOptions.array('gallery', 10),productController.updateGallery);
 
 
 module.exports = router;
