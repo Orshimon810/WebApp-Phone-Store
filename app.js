@@ -14,6 +14,7 @@ const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
 const api = process.env.API_URL;
 
+
 //Allowing all http request from other origins
 app.use(cors());
 app.options('*',cors());

@@ -11,7 +11,7 @@ router.get('/',productController.getByCategory);
 router.get(`/`, productController.getAllProducts);
 
 //create one product
-router.post(`/`,productController.createdProduct);
+router.post(`/`,productController.uploadOptions.single('image'),productController.createdProduct);
 
 //get one product by ID
 router.get('/:id',productController.getProduct);
