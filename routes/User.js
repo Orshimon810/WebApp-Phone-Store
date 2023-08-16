@@ -1,12 +1,26 @@
-// const express = require('express');
-// const userRouter = express.Router();
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/User');
 
-// const userController = require('../controllers/User')
-// router.post("/register", userController.register);
-// router.post("/login", userController.login);
-// router.get("/register", userController.registerForm);
-// router.get("/login", userController.loginForm);
-// router.get('/logout',userController.logout);
-// router.get('/', userController.foo);
+//Register a new user
+router.post('/register',userController.register);
 
-// module.exports = userRouter; 
+//Get all users
+router.get('/',userController.getAllUsers);
+
+//Get user by ID
+router.get('/:id',userController.getUser);
+
+//login a user
+router.post('/login',userController.login);
+
+//get users count
+router.get('/get/count',userController.getCount);
+
+//delete user
+router.delete('/:id',userController.deleteUser);
+
+//update user password
+router.put('/:id',userController.updateUser);
+ 
+module.exports = router; 

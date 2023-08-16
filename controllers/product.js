@@ -2,6 +2,20 @@ const Product = require('../models/product');
 const Category = require('../models/category');
 const mongoose = require('mongoose');
 const category = require('../models/category');
+const multer = require('multer');
+
+//for uploads picutres
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '/public/uploads')
+    },
+    filename: function (req, file, cb) {
+      const fileName = file.originalname.split(' ').join('-');
+      cb(null, fileName + '-' + Date.now);
+    }
+  })
+
+  const uploadOptions = multer({storage:storage});
 
 async function getAllProducts (req,res) {
     const productList = await Product.find();
@@ -18,12 +32,14 @@ async function createdProduct(req, res) {
     if(!category)
         return res.status(400).send('Invalid category!');
 
+        const fileName = req.file.fileName;
+        const basePath = `${req.protocol}://${req.get('host')}/public/uploads`;
     
         const product = new Product({
             name: req.body.name,
             description: req.body.description,
             richDescription: req.body.richDescription,
-            image: req.body.image,
+            image: `${basePath}${fileName}`, //http://localhost:3000/public/uploads/image-23232323
             brand: req.body.brand,
             price: req.body.price,
             category: req.body.category,
@@ -152,4 +168,5 @@ module.exports= {
     getCount,
     getFeaturedProducts,
     getByCategory,
+    uploadOptions,
 }
