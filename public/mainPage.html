@@ -3,8 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/mainPage.css"
 </head>
 <body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="images/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="#">Sign In</a></li>
+            <li><a href="#">Sign Up</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Home</a></li>
+         </ul>
+         <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search">
+                    <i class="fa-solid fa-search"></i>
+                </a>
+                 <!--user-->
+                 <a href="#">
+                    <i class="fas fa-user"></i>
+                </a>
+                 <!--cart-icon-->
+                 <a href="#">
+                    <i class="fas fa-shopping-cart">
+                    <!--number of products in cart-->
+                    <span class="num-cart-producuts">0</span>
+                    </i>
+                </a>
+         </div>
+      </div>
+    </nav>
+
+    <!--search-bar-------------------------->
+    <div class="search-bar">
+        <!--search-input--->
+        <div class="search-input">
+            <!--input-->
+            <input type="text" placeholder="Search For Product"/>
+            <!--cancel button-->
+            <a href="#" class="search-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+
+    <!--JQuery------->
+    <script src="../jquery.js"></script>
+    <script type="text/javascript">
+        // Search Bar
+        $(document).on('click','.search',function(){
+            $('.search-bar').addClass('search-bar-active')
+        })
+
+        $(document).on('click','.search-cancel',function(){
+            $('.search-bar').removeClass('search-bar-active')
+        })
+    </script>
+
+
 </body>
 </html>
