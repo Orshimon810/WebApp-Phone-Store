@@ -17,8 +17,8 @@
         </a>
          <!--menu-->
          <ul class ="menu">
-            <li><a href="#">Sign In</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <li><a href="#" class="sign-in">Sign In</a></li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Shop</a></li>
             <li><a href="#">Home</a></li>
@@ -29,7 +29,7 @@
                     <i class="fa-solid fa-search"></i>
                 </a>
                  <!--user-->
-                 <a href="#">
+                 <a href="#" class="user">
                     <i class="fas fa-user"></i>
                 </a>
                  <!--cart-icon-->
@@ -56,6 +56,43 @@
         </div>
     </div>
 
+    <!--login and signup form-->
+    <div class="form">
+        <!--login-->
+        <div class="login-form">
+            <a href="#" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign In</strong>
+            <form id="login">
+                <input type="email" placeholder="Example@gmail.com" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <input type="submit" value="Sign In">
+            </form>
+            <div class="form-btns">
+                <a href="#" class="sign-up-btn">Create Account</a>
+            </div>
+        </div>
+
+
+         <!--Sign Up-->
+         <div class="sign-up-form">
+            <a href="#" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign Up</strong>
+            <form id="register">
+                <input type="text" placeholder="Full Name" name="name" required>
+                <input type="email" placeholder="Example@gmail.com" name="email" required>
+                <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="form-btns">
+                <a href="#" class="already-account">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+
 
     <!--JQuery------->
     <script src="../jquery.js"></script>
@@ -63,11 +100,101 @@
         // Search Bar
         $(document).on('click','.search',function(){
             $('.search-bar').addClass('search-bar-active')
-        })
+        });
 
         $(document).on('click','.search-cancel',function(){
             $('.search-bar').removeClass('search-bar-active')
-        })
+        });
+
+        // Login and Signup Form
+        $(document).on('click','.user,.already-account,.sign-in',function(){
+            $('.form').addClass('login-active').removeClass('sign-up-active')
+        });
+
+        $(document).on('click','.sign-up-btn,.sign-up',function(){
+            $('.form').addClass('sign-up-active').removeClass('login-active')
+        });
+
+        $(document).on('click','.form-cancel',function(){
+            $('.form').removeClass('login-active').removeClass('sign-up-active')
+        });
+
+            // Log in method to DB
+            document.getElementById('login').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Send POST request to your API for sign in
+    fetch('http://localhost:3000/api/v1/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.token) {
+            console.log('Sign in successful:', result);
+            console.log('token is ',result.token);
+            // Save the token in local storage
+            localStorage.setItem('token', result.token);
+
+            // Wait for 5 seconds before redirecting
+            setTimeout(function() {
+                // Redirect to the specified URL
+                window.location.href = result.redirectUrl;
+            }, 5000); // 5000 milliseconds = 5 seconds
+        } else {
+            console.log('Sign in failed:', result.message);
+            alert('Wrong email or password. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Sign in failed:', error);
+        alert('An error occurred during sign in. Please try again.');
+    });
+});
+
+    
+        
+        // Register method
+        document.getElementById('register').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Send POST request to your API
+            fetch('http://localhost:3000/api/v1/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Registration successful:', result);
+                // Add your desired success handling here
+                // Redirect to the sign-in page
+                window.location.href = result.redirectUrl;
+            })
+            .catch(error => {
+                console.error('Registration failed:', error);
+                // Add your error handling here
+            });
+        });
+
+           
     </script>
 
 

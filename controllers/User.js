@@ -22,7 +22,7 @@ async function register(req,res) {
     return res.status(400).send('the user cannot be created!')
 
     // After successful registration, send the redirection URL
-    res.send({ message: 'User registered successfully', redirectUrl: 'singIn.html' }); // Modify the URL as needed
+    res.send({ message: 'User registered successfully', redirectUrl: 'mainPage.html' }); // Modify the URL as needed
 }
 
 async function getAllUsers (req,res) {
