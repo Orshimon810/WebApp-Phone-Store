@@ -66,6 +66,7 @@ async function login(req, res) {
         res.status(200).send({
             user: user.email,
             token: token,
+            isAdmin:user.isAdmin,
             redirectUrl: 'mainPage.html' // Modify this URL as needed
         });
     }

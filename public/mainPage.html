@@ -142,14 +142,21 @@
         if (result.token) {
             console.log('Sign in successful:', result);
             console.log('token is ',result.token);
+            console.log('result is: ',result.isAdmin);
+            
             // Save the token in local storage
             localStorage.setItem('token', result.token);
 
-            // Wait for 5 seconds before redirecting
+            if(result.isAdmin){
+                alert(1);
+                window.location.href = 'singIn.html'
+            }
+            // Redirect to the specified URL
             setTimeout(function() {
                 // Redirect to the specified URL
                 window.location.href = result.redirectUrl;
             }, 5000); // 5000 milliseconds = 5 seconds
+             
         } else {
             console.log('Sign in failed:', result.message);
             alert('Wrong email or password. Please try again.');
