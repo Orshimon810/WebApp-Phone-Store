@@ -217,7 +217,18 @@ a{
 }
 .login-active, .login-active .login-form{
     display: flex;
+    animation: fade 0.3s;
 }
 .sign-up-active, .sign-up-active .sign-up-form{
     display: flex;
+    animation: fade 0.3s;
+
+}
+@keyframes fade {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
