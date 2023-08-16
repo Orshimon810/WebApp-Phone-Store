@@ -31,6 +31,7 @@ useNewUrlParser: true,useUnifiedTopology:true,dbName:'Phone-shop'
 });
 
 //middleware
+app.use(express.json());
 app.use(express.static('public')); // Serve static files from the "public" directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

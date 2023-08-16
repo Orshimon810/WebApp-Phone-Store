@@ -36,7 +36,7 @@ async function getAllProducts (req,res) {
     //.select('name image -_id') if we want to show specific fields
 
     if(!productList){
-        res.status(500).json({success:false});
+        return res.status(500).json({success:false});
     }
     res.send(productList);
 }

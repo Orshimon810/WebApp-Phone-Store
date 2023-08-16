@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Product List</h1>
+    <ul id="product-list"></ul>
+
+    <script>
+        const productListElement = document.getElementById("product-list");
+        const token = localStorage.getItem('token'); // Retrieve token from localStorage
+
+        async function fetchProducts() {
+            try {
+                const response = await fetch('http://localhost:4000/api/v1/users/products', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching products:', error.message);
+                throw error;
+            }
+        }
+
+        async function displayProducts() {
+            try {
+                const products = await fetchProducts();
+                productListElement.innerHTML = "";
+
+                products.forEach(product => {
+                    const listItem = document.createElement("li");
+                    listItem.textContent = product.name;
+                    productListElement.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Error displaying products:', error.message);
+            }
+        }
+
+        window.onload = displayProducts;
+    </script>
+</body>
+</html>
