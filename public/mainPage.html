@@ -354,13 +354,13 @@
 
             if(result.isAdmin){
                 alert(1);
-                window.location.href = 'singIn.html'
+                window.location.href = 'adminPage.html'
             }
             // Redirect to the specified URL
             setTimeout(function() {
                 // Redirect to the specified URL
                 window.location.href = result.redirectUrl;
-            }, 5000); // 5000 milliseconds = 5 seconds
+            }, 500); // 500 milliseconds = 0.5 seconds
              
         } else {
             console.log('Sign in failed:', result.message);

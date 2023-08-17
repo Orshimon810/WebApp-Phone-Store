@@ -1,0 +1,105 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+.navigation{
+    display: flex;
+    align-items: center;
+    padding:0px 45px;
+}
+.logo img{
+    height: 50px;
+}
+.menu{
+    display: flex;
+    align-items: center;
+    margin-left: 27%;
+}
+.menu li{
+    position: relative;
+    margin: 20px;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.menu li a{
+    color: #555555;
+}
+
+.menu a:hover{
+    color: #0b9d8a;
+    transition: all ease 0.3s
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    align-items: center;
+}
+.styled-table th,
+.styled-table td {
+    padding: 15px 50px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 0.9rem;
+    text-align: center;
+    align-items: center;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+  section {
+	padding: 2rem 7%;
+}
+.heading {
+	text-align: center;
+	color: var(--main-color);
+	margin-bottom: 3rem;
+	font-size: 4rem;
+	margin-top: 4rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+.upd{
+	text-align: center;
+	color: var(--main-color);
+	margin-bottom: 3rem;
+    justify-content: space-between;
+	font-size: 3rem;
+	margin-top: 4rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}

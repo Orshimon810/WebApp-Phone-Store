@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/adminPage_Orders.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+</head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="images/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="" class="">Order</a></li>
+            <li><a href="#" class="">Products</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="../public/mainPage.html">Home</a></li>
+         </ul>
+        </div>
+    </nav>
+
+         <section>
+            <h1 class="heading">Orders </h1>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date Ordered</th>
+                            <th>Name</th>
+                            <th>Shipping Address</th>
+                            <th>Status</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orderTableBody">
+                        <tr>
+                        </tr>
+                        <tr class="active-row">
+                        </tr>
+                        <!-- and so on... -->
+                    </tbody>
+                </table>
+        </section>
+
+        <span class="upd">Update</span>
+        <span class="upd">Delete</span>
+
+        <script>
+            const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
+        
+            // Function to fetch orders and populate the table
+            async function fetchAndPopulateOrders() {
+                try {
+                    const response = await fetch('http://localhost:3000/api/v1/orders', {
+                        headers: {
+                            Authorization: `Bearer ${jwtToken}`
+                        }
+                    });
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        const orderTableBody = document.getElementById('orderTableBody');
+                        
+                        data.forEach(order => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${order._id}</td>
+                                <td>${order.dateOrdered}</td>
+                                <td>${order.user.name}</td>
+                                <td>${order.shippingAddress1}</td>
+                                <td>${order.status}</td>
+                                <td>${order.totalPrice} ₪</td>
+                            `;
+                            orderTableBody.appendChild(row);
+                        });
+                    } else {
+                        console.error('Failed to fetch orders');
+                    }
+                } catch (error) {
+                    console.error('Error fetching orders:', error);
+                }
+            }
+        
+            // Call the function to populate the table when the page is loaded
+            document.addEventListener('DOMContentLoaded', fetchAndPopulateOrders);
+
+
+        </script>
+        
+        
+    
+     
+</body>
+</html>
