@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/adminPage_Products.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+</head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="images/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="#">Order</a></li>
+            <li><a href="#" class="active">Products</a></li>
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="../public/mainPage.html">Home</a></li>
+         </ul>
+        </div>
+    </nav>
+
+    <section>
+        <h1 class="heading">Products</h1>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Count In Stock</th>
+                    <th>Rating</th>
+                    <th>Date Created</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+                <!-- Product rows will be added here -->
+            </tbody>
+        </table>
+    </section>
+
+    <hr style="margin-top: 20px; margin-bottom: 60px;">
+    <section>
+        <h1 class="heading">Add Product:</h1>
+        <div class="container">
+            <form id="addProductForm" enctype="multipart/form-data">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" placeholder="Product name.." required>
+                
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" placeholder="Description.." required>
+    
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" placeholder="Brand.." required>
+                
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" placeholder="Price.." required>
+    
+                <label for="category">Category ID:</label>
+                <input type="text" id="category" name="category" placeholder="Category ID.." required>
+    
+                <label for="countInStock">Count in Stock:</label>
+                <input type="number" id="countInStock" name="countInStock" placeholder="Count in Stock.." required>
+    
+                <label for="isFeatured">isFeatured:</label>
+                <select id="isFeatured" name="isFeatured">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <div id="image-label"></div>
+                <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100px; display: none;">
+        
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+
+
+    <script>
+       $(document).ready(function() {
+        const imageLabel = $('#image-label');
+        const imageInput = $('#image');
+        const imagePreview = $('#imagePreview');
+        
+        // Prevent default behavior of dropping outside the browser window
+        $(window).on('dragover', function(e) {
+            e.preventDefault();
+        });
+        
+        $(window).on('drop', function(e) {
+            e.preventDefault();
+        });
+        
+        // Update label text when file is dragged over
+        imageLabel.on('dragenter', function() {
+            imageLabel.text('Drop the image here');
+        });
+        
+        imageLabel.on('dragleave', function() {
+            imageLabel.text('Drag and drop an image or click here');
+        });
+        
+        // Handle dropped file
+        imageLabel.on('drop', function(e) {
+            e.preventDefault();
+            const file = e.originalEvent.dataTransfer.files[0];
+            if (file.type.startsWith('image/')) {
+                imageInput.prop('files', e.originalEvent.dataTransfer.files);
+                imageLabel.text(file.name);
+                imagePreview.attr('src', URL.createObjectURL(file)).show();
+            } else {
+                imageLabel.text('Invalid file type');
+            }
+        });
+        
+        // Handle input change
+        imageInput.on('change', function() {
+            if (imageInput[0].files.length > 0) {
+                const file = imageInput[0].files[0];
+                imageLabel.text(file.name);
+                imagePreview.attr('src', URL.createObjectURL(file)).show();
+            } else {
+                imageLabel.text('Drag and drop an image or click here');
+                imagePreview.hide();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+            $('#addProductForm').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                
+                const formData = new FormData(this);
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:3000/api/v1/products', // Update with your API endpoint
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}` // Replace with your JWT token retrieval
+                    },
+                    data: formData,
+                    contentType: false, // Set to false to let jQuery handle content type
+                    processData: false, // Set to false to prevent jQuery from processing the data
+                    success: function(response) {
+                        console.log('Product added successfully:', response);
+                        // You can perform any additional actions after a successful POST here
+                    },
+                    error: function(error) {
+                        console.error('Error adding product:', error);
+                        // Handle error cases here
+                    }
+                });
+            });
+        });
+
+
+        const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
+
+        // Function to fetch products and populate the table
+        async function fetchAndPopulateProducts() {
+            try {
+                const response = await fetch('http://localhost:3000/api/v1/products', {
+                    headers: {
+                        Authorization: `Bearer ${jwtToken}`
+                    }
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    const productTableBody = document.getElementById('productTableBody');
+
+                    data.forEach(product => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${product._id}</td>
+                            <td>${product.name}</td>
+                            <td>${product.description}</td>
+                            <td>${product.brand}</td>
+                            <td>${product.price} ₪</td>
+                            <td>${product.countInStock}</td>
+                            <td>${product.rating}</td>
+                            <td>${product.dateCreated}</td>
+                            <td><img src="${product.image}" alt="${product.name}" style="max-width: 100px;"></td>
+                        `;
+                        productTableBody.appendChild(row);
+                    });
+                } else {
+                    console.error('Failed to fetch products');
+                }
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        }
+
+        // Call the function to populate the table when the page is loaded
+        document.addEventListener('DOMContentLoaded', fetchAndPopulateProducts);
+    </script>
+</body>
+</html>

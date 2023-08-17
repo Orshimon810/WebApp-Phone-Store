@@ -1,0 +1,191 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+.navigation{
+    display: flex;
+    align-items: center;
+    padding:0px 45px;
+}
+.logo img{
+    height: 50px;
+}
+.menu{
+    display: flex;
+    align-items: center;
+    margin-left: 27%;
+}
+.menu li{
+    position: relative;
+    margin: 20px;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.menu li a{
+    color: #555555;
+}
+
+.menu a:hover{
+    color: #0b9d8a;
+    transition: all ease 0.3s
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.2em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+}
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: center;
+    align-items: center;
+}
+.styled-table th,
+.styled-table td {
+    padding: 15px 50px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 0.9rem;
+    text-align: center;
+    align-items: center;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+  section {
+	padding: 2rem 7%;
+}
+.heading {
+	text-align: center;
+	color: var(--main-color);
+	margin-bottom: 3rem;
+	font-size: 4rem;
+	margin-top: 4rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+.upd{
+	text-align: center;
+	color: var(--main-color);
+	margin-bottom: 3rem;
+    justify-content: space-between;
+	font-size: 3rem;
+	margin-top: 4rem;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+h1{
+color:black;   
+font-family: Quando;   
+font-size:1.2em;   
+font-weight:300;   
+letter-spacing:.02em;   
+text-transform:capitalize;   
+margin-bottom:50px;
+ }
+
+
+/* ... Other CSS rules ... */
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    display: flex; /* Set display to flex to align items in a column */
+    flex-direction: column; /* Align items in a column */
+    gap: 15px; /* Add some spacing between form fields */
+    width: 50%; /* Adjust the width as needed */
+    max-width: 1400px; /* Set a maximum width to ensure responsiveness */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Style for form labels */
+label {
+    font-weight: bold;
+}
+
+
+
+/* Style for form submit button */
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Add media query for responsiveness if needed */
+@media (max-width: 768px) {
+    /* Adjust styles for smaller screens */
+}
+
+
+
+/* Style the labels */
+.container label {
+    display: block; /* Display labels as block elements to separate them */
+    margin-bottom: 5px; /* Add some space below each label */
+}
+
+/* Style the input and select elements */
+.container input[type="text"],
+.container input[type="number"],
+.container select {
+    width: 100%; /* Make the input and select elements take up full width */
+    padding: 10px; /* Add padding to the input/select elements */
+    margin-bottom: 15px; /* Add space below each input/select element */
+    border: 1px solid #ccc; /* Add a border to the input/select elements */
+    border-radius: 4px; /* Round the corners of the input/select elements */
+}
+
+/* Style the submit button */
+.container button[type="submit"] {
+    background-color: #009879;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    display: block;
+    margin-top: 10px; 
+    cursor: pointer;
+}
+
+
+.heading {
+    font-size: 24px; /* Adjust the size as needed */
+    text-align: center;
+}
+
+

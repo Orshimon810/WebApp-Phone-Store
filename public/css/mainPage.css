@@ -19,6 +19,7 @@ a{
 .navigation{
     display: flex;
     justify-content: space-between;
+    background-color: #faf8e4;
     align-items: center;
     padding:0px 45px;
 }
@@ -396,3 +397,86 @@ a{
     justify-content: center;
     align-items: center;
 }
+
+
+.col {
+    margin-left: 20px; /* Adjust the left margin as needed */
+}
+
+.footer-logo {
+    margin-bottom: 30px;
+    max-width: 200px; /* Set the maximum width of the image */
+    height: 50px; /* Maintain the aspect ratio */
+}
+
+.social-icons {
+    font-size: 24px; /* Set the desired font size */
+}
+
+.social-icons i {
+    margin: 0 10px; /* Add spacing between the icons */
+}
+
+footer{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #faf8e4;
+}
+
+footer .col{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+footer h4{
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+footer p{
+    font-size: 13px;
+    margin:0 0 8px 0;
+}
+
+footer a{
+    font-size: 13px;
+    text-decoration: none;
+    color:#222;
+    margin-bottom: 10px;
+}
+
+footer .follow{
+    margin-top: 20px;
+}
+
+footer .follow i{
+    color:#465b52;
+    padding-right: 4px;
+    cursor: pointer;
+}
+
+footer .install .row img{
+    border:1px solid #0b9d8a;
+    border-radius: 6px;
+}
+
+footer .install img{
+    margin:10px 0 15px 0;
+}
+
+footer .follow i:hover,
+footer a:hover{
+    color:#088178;
+}
+
+footer .copyright{
+    width: 100%;
+    text-align: center;
+}
+
+
+
+
