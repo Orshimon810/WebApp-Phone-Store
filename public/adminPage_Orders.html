@@ -111,7 +111,8 @@
                         },
                         success: function (data) {
                             const orderTableBody = $('#orderTableBody');
-    
+                            orderTableBody.empty();
+
                             data.forEach(order => {
                                 const row = `
                                     <tr>
@@ -156,6 +157,8 @@
                             console.error('Failed to update order', error);
                         }
                     });
+                    fetchAndPopulateOrders();
+
                 });
     
                 // Delete an Order
@@ -181,6 +184,8 @@
                     }
                 });
             }
+            fetchAndPopulateOrders();
+
         });
     });
 
