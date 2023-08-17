@@ -113,3 +113,8 @@ a{
 .input-group input {
     margin-left: 10px;
 }
+.input-detail{
+    align-items: center;
+    text-align: center;
+
+}

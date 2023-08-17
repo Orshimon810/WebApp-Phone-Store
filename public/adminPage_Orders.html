@@ -73,11 +73,34 @@
                 <button id="deleteButton">Delete</button>
             </div>
         </div>
+
+        <section>
+            <h1 class="heading">View Order Details</h1>
+            <div class="input-detail">
+                <input id="viewOrderId" type="text" placeholder="Enter Order ID">
+                <button id="viewOrderButton">View Order</button>
+            </div>
+            <div id="viewOrderTableContainer">
+                <table id="viewOrderTable" class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="viewOrderTableBody">
+                        <!-- Order details will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
     
         <script>
+            const jwtToken = localStorage.getItem('token');
+
             $(document).ready(function () {
-                const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
-    
+                
                 // Function to fetch orders and populate the table
                 function fetchAndPopulateOrders() {
                     $.ajax({
@@ -160,7 +183,49 @@
             }
         });
     });
+
+    $(document).ready(function () {
+        // ... Your existing code ...
+
+        // View Order Details
+        $('#viewOrderButton').click(function () {
+            const orderId = $('#viewOrderId').val();
+
+            $.ajax({
+                url: `http://localhost:3000/api/v1/orders/${orderId}`,
+                type: 'GET',
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`
+                },
+                success: function (orderDetails) {
+                    console.log('Order details:', orderDetails);
+                    const viewOrderTableBody = $('#viewOrderTableBody');
+                    viewOrderTableBody.empty();
+
+                    orderDetails.orderItems.forEach(orderItem => {
+                        const row = `
+                            <tr>
+                                <td>${orderItem.product.name}</td>
+                                <td>${orderItem.quantity}</td>
+                                <td>${orderItem.product.price} ₪</td>
+                            </tr>
+                        `;
+                        viewOrderTableBody.append(row);
+                    });
+
+                    // You can add more logic here to update UI or display order summary
+                },
+                error: function (error) {
+                    console.error('Failed to fetch order details', error);
+                }
+            });
+        });
+    });
+    
 </script>
+
+</body>
+</html>
 
 
 
