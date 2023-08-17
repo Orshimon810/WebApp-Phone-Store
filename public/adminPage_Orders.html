@@ -51,28 +51,24 @@
         </section>
 
 
-        <div class="update-div">
+
+        <div class="card">
             <h2>Update an order</h2>
-            <div class="input-group">
-                <input id="inp" type="text" placeholder="Enter ID">
-                <select id="statusSelect">
-                    <option value="Pending">Pending</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Canceled">Canceled</option>
-                    <option value="Shipped">Shipped</option>
-                </select>
-                <button id="updateButton">Update</button>
-            </div>
-        </div>
-    
-        <div class="update-div">
-            <h2>Delete an order</h2>
-            <div class="input-group">
-                <input id="deleteInp" type="text" placeholder="Enter ID">
-                <button id="deleteButton">Delete</button>
-            </div>
+            <input id="inp" type="text" placeholder="Enter ID" class="inputer">
+            <select id="statusSelect">
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Canceled">Canceled</option>
+                <option value="Shipped">Shipped</option>
+            </select>
+            <br><button id="updateButton">Update</button>
         </div>
 
+        <div class="card">
+            <h2>Delete an order</h2>
+            <input id="deleteInp" type="text" placeholder="Enter ID" class="inputer">
+                <br><button id="deleteButton">Delete</button>
+        </div>
         <hr>
         <section>
             <h1 class="heading">View Order Details</h1>

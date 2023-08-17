@@ -54,7 +54,7 @@ a{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 .styled-table thead tr {
     background-color: #009879;
@@ -123,5 +123,57 @@ hr{
     text-align: center;
 }
 #viewOrderTable{
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
+h2{
+    align-items: center;
+    text-align: center;
+}
+.card {
+    padding: 15px;
+    display: inline-block;
+    margin: 30px;
+    margin-left: 15%;
+    width: 25%;
+    height: 254px;
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  }
+  .inputer{
+    margin-left: 15%;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+  }
+  input{
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+  }
+  select{
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+  }
+  button{
+    line-height: 20px; 
+    background-color: #0b9d8a;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    margin-top: 10px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+    font-size: 20px;
+    width: 150px;
+    padding: 3px;
+
+  }
+  #deleteButton,#updateButton{
+    margin-left: 35%;
+    margin-top: 70px;
+    width: 150px;
+    padding: 10px;
+
+  }
