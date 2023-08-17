@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phonebook</title>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="css/mainPage.css"
-    <link rel="stylesheet" type="text/css" href="css/lightslider.css"
-
+    <link rel="stylesheet" type="text/css" href="css/mainPage.css">
+    <link rel="stylesheet" type="text/css" href="css/lightslider.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+    <script src="../public/lightslider.js"></script>
 </head>
 <body>
     <!------menu-bar------->
@@ -96,55 +98,197 @@
     </div>
 
 
-    <!--Full slider-->
-    <!--box-1-->
-        <ul id="adaptive" class="cs-hidden">
-            <li class="item-a">
-            <div class="full-slider-box f-slide-1">
-                <!--slider text container-->
-                <div class="slider-text-container">
-                    <div class ="f-slider-text"
-                    <span>Limited offer</span>
-                    <strong>15% off <br/> with <font>promo code</font></strong>
-                    <a href="#" class="f-slider-btn">Shop now</a>
+      <!-----------full-slider----------------------------->
+      <ul id="adaptive" class="cs-hidden">
+        
+        <!--box-1--------------------------->
+        <li class="item-a">
+            <!---box------------------->
+    <div class="full-slider-box f-slide-1">
+        
+        <div class="f-slider-text-container">
+        <div class="f-slider-text">
+            <span>Limited Offer</span>
+            <strong>30% Off<br/> With <font>Promo Code</font></strong>
+            <a href="#" class="f-slider-btn">Shop Now</a>
+        </div>
+        </div>
+    
+    </div>
+    </li>
+     <!--box-2--------------------------->
+        <li class="item-b">
+            <!---box------------------->
+    <div class="full-slider-box f-slide-2">
+        
+        <!-- <div class="f-slider-text-container">
+        <div class="f-slider-text">
+            <span>Limited Offer</span>
+            <strong>30% Off<br/> With <font>Promo Code</font></strong>
+            <a href="#" class="f-slider-btn">Shop Now</a>
+        </div>
+        </div> -->
+    
+    </div>
+    </li>
+         <!--box-3--------------------------->
+         <li class="item-c">
+            <!---box------------------->
+    <div class="full-slider-box f-slide-3">
+        
+        <!-- <div class="f-slider-text-container">
+        <div class="f-slider-text">
+            <span>Limited Offer</span>
+            <strong>30% Off<br/> With <font>Promo Code</font></strong>
+            <a href="#" class="f-slider-btn">Shop Now</a>
+        </div>
+        </div> -->
+    
+    </div>
+    </li>
+     
+    </ul>
+
+    <!--new-arrivals------>
+       <!--NEW ARRIVAL-------------------------------->
+       <section class="new-arrival">
+            
+        <!--heading-------->
+        <div class="arrival-heading">
+            <strong>New Arrival</strong>
+            <p>We Provide You New Fasion Design Clothes</p>
+        </div>
+          <!--products----------------------->
+          <div class="product-container">
+              
+            <!--product-box-1---------->
+              <div class="product-box">
+                  <!--product-img------------>
+                  <div class="product-img">
+                      <!--add-cart---->
+                      <a href="#" class="add-cart">
+                          <i class="fas fa-shopping-cart"></i>
+                        </a>
+                      <!--img------>
+                    <img src="images/p-1.png" >
+                  </div>
+                  <!--product-details-------->
+                  <div class="product-details">
+                      <a href="#" class="p-name">OnePlus 5T</a>
+                      <span class="p-price">$999.00</span>
+                  </div>
+              </div>
+                <!--product-box-2---------->
+                <div class="product-box">
+                    <!--product-img------------>
+                    <div class="product-img">
+                        <!--add-cart---->
+                      <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                      <!--img------>
+                      <img src="images/p-2.png" >
                     </div>
+                    <!--product-details-------->
+                    <div class="product-details">
+                        <a href="#" class="p-name">Wiko 3Z</a>
+                        <span class="p-price">$249.00</span>
+                    </div>
+                </div>
+              <!--product-box-3---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="images/p-3.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">iQoo Z6 Lite 5G</a>
+                    <span class="p-price">$199.00</span>
                 </div>
             </div>
-            </li>
-
-         <!--box-2-->
-            <li class="item-b">
-                <div class="full-slider-box f-slide-2">
-                    <!--slider text container-->
-                    <div class="slider-text-container">
-                        <div class ="f-slider-text"
-                        <span>Limited offer</span>
-                        <strong>15% off <br/> with <font>promo code</font></strong>
-                        <a href="#" class="f-slider-btn">Shop now</a>
-                        </div>
-                    </div>
+              <!--product-box-4---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="images/p-4.png" >
                 </div>
-                </li>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Nokia shit</a>
+                    <span class="p-price">$199.00</span>
+                </div>
+            </div>
+              <!--product-box-5---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="images/p-5.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+              <!--product-box-6---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="images/p-6.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+              <!--product-box-7---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="images/p-7.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+              <!--product-box-8---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <!--img------>
+                  <img src="images/p-8.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+          </div>
+      </section>
 
-             <!--box-3-->
-                <li class="item-c">
-                    <div class="full-slider-box f-slide-3">
-                        <!--slider text container-->
-                        <div class="slider-text-container">
-                            <div class ="f-slider-text"
-                            <span>Limited offer</span>
-                            <strong>15% off <br/> with <font>promo code</font></strong>
-                            <a href="#" class="f-slider-btn">Shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                    </li>
-        </ul>
-
-
-
-    <!--JQuery------->
-    <script src="../jquery.js"></script>
+   
     <script type="text/javascript">
         // Search Bar
         $(document).on('click','.search',function(){
@@ -169,14 +313,16 @@
         });
 
         // Slider script
-        $(document).ready(function(){
-            $('#adaptive').lightSlider({
-                adaptiveHeight:true,
-                item:1,
-                slideMargin:0,
-                loop:true
-            });
-        })
+        $(document).ready(function() {
+    $('#adaptive').lightSlider({
+        adaptiveHeight:true,
+        auto:true,
+        pause:2000,
+        item:1,
+        slideMargin:0,
+        loop:true
+    });
+});
 
             // Log in method to DB
             document.getElementById('login').addEventListener('submit', function(event) {
