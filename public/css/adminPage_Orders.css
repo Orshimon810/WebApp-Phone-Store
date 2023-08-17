@@ -45,7 +45,7 @@ a{
     transition: all ease 0.3s
 }
 
-.styled-table {
+.styled-table, .update-div {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 1.2em;
@@ -94,12 +94,22 @@ a{
 	margin-top: 4rem;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
 }
-.upd{
-	text-align: center;
-	color: var(--main-color);
-	margin-bottom: 3rem;
-    justify-content: space-between;
-	font-size: 3rem;
-	margin-top: 4rem;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+
+.update-div {
+    display: inline-block;
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group select,
+.input-group input {
+    margin-left: 10px;
 }
