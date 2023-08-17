@@ -175,5 +175,7 @@ h2{
     margin-top: 70px;
     width: 150px;
     padding: 10px;
-
+  }
+  #deleteInp{
+    margin-left: 25%;
   }

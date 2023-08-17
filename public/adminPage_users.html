@@ -66,8 +66,16 @@ $(document).ready(function () {
             success: function (data) {
                 const userTableBody = $('#userTableBody');
                 userTableBody.empty();
-
+                
                 data.forEach(user => {
+                    var permission;
+                    if(user.isAdmin === true)
+                    {
+                        permission= 'Admin'
+                    }
+                    else{
+                        permission ='user'
+                    }
                     const row = `
                         <tr>
                             <td>${user._id}</td>
@@ -75,7 +83,7 @@ $(document).ready(function () {
                             <td>${user.email}</td>
                             <td>${user.city} ${user.country}</td>
                             <td>${user.phone}</td>
-                            <td>${user.isAdmin}</td>
+                            <td>${permission}</td>
                         </tr>
                     `;
                     userTableBody.append(row);
