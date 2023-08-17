@@ -54,7 +54,6 @@ a{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 200px;
 }
 .styled-table thead tr {
     background-color: #009879;
@@ -92,36 +91,6 @@ a{
 	color: var(--main-color);
 	margin-bottom: 3rem;
 	font-size: 3.5rem;
-	margin-top: 2rem;
+	margin-top: 1rem;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
-}
-
-.update-div {
-    display: inline-block;
-    width: 45%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    margin: 10px;
-    box-sizing: border-box;
-    
-}
-hr{
-    margin-top:60px;
-
-}
-.input-group {
-    display: flex;
-    align-items: center;
-}
-
-.input-group select,
-.input-group input {
-    margin-left: 10px;
-}
-.input-detail{
-    align-items: center;
-    text-align: center;
-}
-#viewOrderTable{
-    margin-bottom: 200px;
 }

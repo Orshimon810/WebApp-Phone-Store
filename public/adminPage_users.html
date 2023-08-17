@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/adminPage_users.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+</head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="images/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="../public/adminPage_orders.html">Order</a></li>
+            <li><a href="#" >Products</a></li>
+            <li><a href="../public/adminPage_users.html">Users</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="../public/mainPage.html">Home</a></li>
+         </ul>
+        </div>
+    </nav>`
+
+    <section>
+        <h1 class="heading">Users</h1>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Permissions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <tr>
+                    </tr>
+                    <tr class="active-row">
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    <script>
+          const jwtToken = localStorage.getItem('token');
+
+$(document).ready(function () {
+    
+    // Function to fetch orders and populate the table
+    function fetchAndPopulateOrders() {
+        $.ajax({
+            url: 'http://localhost:3000/api/v1/users',
+            type: 'GET',
+            headers: {
+                Authorization: `Bearer ${jwtToken}`
+            },
+            success: function (data) {
+                const userTableBody = $('#userTableBody');
+                userTableBody.empty();
+
+                data.forEach(user => {
+                    const row = `
+                        <tr>
+                            <td>${user._id}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.city} ${user.country}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.isAdmin}</td>
+                        </tr>
+                    `;
+                    userTableBody.append(row);
+                });
+            },
+            error: function (error) {
+                console.error('Failed to fetch orders', error);
+            }
+        });
+    }
+
+    // Call the function to populate the table when the page is loaded
+    fetchAndPopulateOrders();
+
+});
+    </script>
+</body>
+</html>
