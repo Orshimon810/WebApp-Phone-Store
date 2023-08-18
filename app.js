@@ -13,6 +13,10 @@ const orderRouter = require('./routes/orders');
 const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
 const api = process.env.API_URL;
+//const socketio = require('socket.io');
+// const http = require('http');
+// const server = http.createServer(app);
+// const io = socketio(server);
 
 
 //Allowing all http request from other origins
@@ -36,6 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
 app.use(authJwt());
 app.use(errorHandler);
+
 
 
 //Routers

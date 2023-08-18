@@ -19,8 +19,8 @@
         </a>
          <!--menu-->
          <ul class ="menu">
-            <li><a href="#">Order</a></li>
-            <li><a href="#" class="active">Products</a></li>
+            <li><a href="../public/adminPage_Orders.html">Order</a></li>
+            <li><a href="../public/adminPage_Products.html" class="active">Products</a></li>
             <li><a href="#">Users</a></li>
             <li><a href="#">Stats</a></li>
             <li><a href="../public/mainPage.html">Home</a></li>
@@ -29,7 +29,7 @@
     </nav>
 
     <section>
-        <h1 class="heading">Products</h1>
+        <h1 class="heading">Products:</h1>
         <table class="styled-table">
             <thead>
                 <tr>
@@ -50,7 +50,7 @@
         </table>
     </section>
 
-    <hr style="margin-top: 20px; margin-bottom: 60px;">
+    <hr style="margin-top: 40px; margin-bottom: 40px;">
     <section>
         <h1 class="heading">Add Product:</h1>
         <div class="container">
@@ -89,6 +89,59 @@
         </div>
     </section>
 
+    <hr style="margin-top: 40px; margin-bottom: 40px;">
+    <h1 class="heading">Update Product:</h1>
+    <div class="container">
+        <div class="left-div">
+            <form id="updateProduct" enctype="multipart/form-data">
+                <label for="name">Product id:</label>
+                <input type="text" id="productId"  placeholder="Product id.." required>
+
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" placeholder="Product name.." required>
+                
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" placeholder="Description.." required>
+    
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="brand" placeholder="Brand.." required>
+                
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" placeholder="Price.." required>
+    
+                <label for="category">Category ID:</label>
+                <input type="text" id="category" name="category" placeholder="Category ID.." required>
+    
+                <label for="countInStock">Count in Stock:</label>
+                <input type="number" id="countInStock" name="countInStock" placeholder="Count in Stock.." required>
+    
+                <label for="isFeatured">isFeatured:</label>
+                <select id="isFeatured" name="isFeatured">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <div id="image-label"></div>
+                <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100px; display: none;">
+        
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <hr style="margin-top: 40px; margin-bottom: 40px;">
+    <h1 class="heading">Delete Product:</h1>
+    <section>
+        <div class="container">
+            <form id="deleteProduct" enctype="multipart/form-data">
+                <label for="deleteProductId">Product id:</label>
+                <input type="text" id="deleteProductId" placeholder="Product id.." required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
 
 
     <script>
@@ -139,10 +192,9 @@
                 imagePreview.hide();
             }
         });
-    });
 
-    $(document).ready(function() {
-            $('#addProductForm').submit(function(event) {
+
+        $('#addProductForm').submit(function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 
                 const formData = new FormData(this);
@@ -159,6 +211,7 @@
                     success: function(response) {
                         console.log('Product added successfully:', response);
                         // You can perform any additional actions after a successful POST here
+                        alert('Product added successfully!');
                     },
                     error: function(error) {
                         console.error('Error adding product:', error);
@@ -166,9 +219,58 @@
                     }
                 });
             });
+
+        $('#deleteProduct').submit(function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        
+        const productId = $('#deleteProductId').val(); // Get the product ID from the input
+        console.log('product id: ',productId)
+        $.ajax({
+            type: 'DELETE',
+            url: `http://localhost:3000/api/v1/products/${productId}`, // Update with your API endpoint
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}` // Replace with your JWT token retrieval
+            },
+            success: function(response) {
+                console.log('Product deleted successfully:', response);
+                // You can perform any additional actions after a successful DELETE here
+                $('#deleteProductId').val('');
+                alert('Product deleted successfully');
+            },
+            error: function(error) {
+                console.error('Error deleting product:', error);
+                // Handle error cases here
+            }
         });
+    });
 
+        $('#updateProduct').submit(function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
+            const productId = $('#productId').val(); // Get the product ID from the input
+            const formData = new FormData(this); // Create a FormData object with the form data
+
+            $.ajax({
+                type: 'PUT', // Use the PUT HTTP method for updating
+                url: `http://localhost:3000/api/v1/products/${productId}`, // Update with your API endpoint
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}` // Replace with your JWT token retrieval
+                },
+                data: formData,
+                processData: false, // Prevent jQuery from processing the data
+                contentType: false, // Let jQuery determine the content type
+                success: function(response) {
+                    console.log('Product updated successfully:', response);
+                    // You can perform any additional actions after a successful PUT here
+                    alert('Product updated successfully');
+                },
+                error: function(error) {
+                    console.error('Error updating product:', error);
+                    // Handle error cases here
+                }
+            });
+        });
+   
         const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
 
         // Function to fetch products and populate the table
@@ -208,7 +310,9 @@
         }
 
         // Call the function to populate the table when the page is loaded
-        document.addEventListener('DOMContentLoaded', fetchAndPopulateProducts);
+        fetchAndPopulateProducts();
+    });
+
     </script>
 </body>
 </html>
