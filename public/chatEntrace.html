@@ -22,31 +22,5 @@
             </form>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
-    <script>
-      const token = localStorage.getItem('token'); // Get the JWT token from storage
-        const socket = io('http://localhost:3000', { 
-            query: { token }, // Pass the token as a query parameter
-        });
-
-        const chatForm = document.getElementById('chatForm');
-        const messageInput = document.getElementById('messageInput');
-        const chatBox = document.getElementById('chatBox');
-
-        chatForm.addEventListener('submit', event => {
-            event.preventDefault();
-            const message = messageInput.value;
-            if (message.trim() !== '') {
-                socket.emit('chatMessage', message);
-                messageInput.value = '';
-            }
-        });
-
-        socket.on('chatMessage', message => {
-            const messageElement = document.createElement('p');
-            messageElement.innerText = message;
-            chatBox.appendChild(messageElement);
-        });
-    </script>
 </body>
 </html>
