@@ -7,7 +7,9 @@
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/adminPage.css">
     <!--JQuery------->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="../public/Jquery.js"></script>
+
 </head>
 <body>
     <!------menu-bar------->
@@ -28,5 +30,71 @@
         
       </div>
     </nav>
+    <div id="chart"></div>
+
+    <script>
+        const token = localStorage.getItem('token'); // Replace with your actual token
+        $.ajax({
+            url: "http://localhost:3000/api/v1/orders",
+            type: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            success: function(data) {
+                createChart(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+
+        function createChart(data) {
+            const orders = data; // Assuming data is an array of orders
+            const svgWidth = 600;
+            const svgHeight = 400;
+            const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+            const chartWidth = svgWidth - margin.left - margin.right;
+            const chartHeight = svgHeight - margin.top - margin.bottom;
+
+            const svg = d3.select("#chart")
+                .append("svg")
+                .attr("width", svgWidth)
+                .attr("height", svgHeight);
+
+            const chart = svg.append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            // Extract order details for visualization (e.g., total prices)
+            const orderDetails = orders.map(order => order.totalPrice);
+
+            const xScale = d3.scaleBand()
+                .domain(orders.map((_, index) => index))
+                .range([0, chartWidth])
+                .padding(0.1);
+
+            const yScale = d3.scaleLinear()
+                .domain([0, d3.max(orderDetails)])
+                .nice()
+                .range([chartHeight, 0]);
+
+            chart.selectAll(".bar")
+                .data(orderDetails)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", (d, i) => xScale(i))
+                .attr("y", d => yScale(d))
+                .attr("width", xScale.bandwidth())
+                .attr("height", d => chartHeight - yScale(d));
+
+            chart.append("g")
+                .attr("transform", `translate(0,${chartHeight})`)
+                .call(d3.axisBottom(xScale));
+
+            chart.append("g")
+                .call(d3.axisLeft(yScale));
+        }
+    </script>
+        
 </body>
 </html>
