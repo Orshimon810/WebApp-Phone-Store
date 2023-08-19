@@ -1,5 +1,6 @@
 const express = require('express'); //Creating Express service
 const app = express();
+const path = require('path');
 const mongoose = require('mongoose'); 
 const { config } = require('dotenv');
 const bodyParser = require('body-parser');
@@ -30,7 +31,7 @@ useNewUrlParser: true,useUnifiedTopology:true,dbName:'Phone-shop'
 });
 
 //middleware
-app.use(express.static('public')); // Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname,'public'))); // Serve static files from the "public" directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
