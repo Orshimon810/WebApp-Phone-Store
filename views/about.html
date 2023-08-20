@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/about.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/lightslider.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+    <script src="../public/lightslider.js"></script>
+</head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="../public/img/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="#" class="sign-in">Sign In</a></li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="../views/chatEntrace.html">Chat</a></li>
+         </ul>
+         <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search">
+                    <i class="fa-solid fa-search"></i>
+                </a>
+                 <!--user-->
+                 <a href="#" class="user">
+                    <i class="fas fa-user"></i>
+                </a>
+                 <!--cart-icon-->
+                 <a href="#">
+                    <i class="fas fa-shopping-cart">
+                    <!--number of products in cart-->
+                    <span class="num-cart-producuts">0</span>
+                    </i>
+                </a>
+         </div>
+      </div>
+    </nav>
+
+
+    <!--search-bar-------------------------->
+    <div class="search-bar">
+        <!--search-input--->
+        <div class="search-input">
+            <!--input-->
+            <input type="text" placeholder="Search For Product"/>
+            <!--cancel button-->
+            <a href="#" class="search-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="about-info">
+    <div class="about-container">
+        <div class="video-container">
+            <video class="video" controls>
+                <source src="../public/aboutDemo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="text-container">
+            <h1>About Us</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor, lorem a rhoncus tristique, nulla urna venenatis eros, nec posuere turpis nisl ac metus. Quisque scelerisque nunc sit amet quam convallis tincidunt. Duis eu tortor eu enim fringilla finibus.</p>
+            <p>Suspendisse potenti. Sed vitae felis sit amet elit faucibus euismod. Nam ut lectus vestibulum, aliquet neque id, vestibulum quam. Donec at dignissim felis.</p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>
