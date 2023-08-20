@@ -63,19 +63,62 @@
     </div>
     
     <div class="about-info">
-    <div class="about-container">
-        <div class="video-container">
-            <video class="video" controls>
-                <source src="../public/aboutDemo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="text-container">
-            <h1>About Us</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor, lorem a rhoncus tristique, nulla urna venenatis eros, nec posuere turpis nisl ac metus. Quisque scelerisque nunc sit amet quam convallis tincidunt. Duis eu tortor eu enim fringilla finibus.</p>
-            <p>Suspendisse potenti. Sed vitae felis sit amet elit faucibus euismod. Nam ut lectus vestibulum, aliquet neque id, vestibulum quam. Donec at dignissim felis.</p>
-        </div>
+        <div class="about-container">
+            <div class="video-container">
+                <video class="video" controls>
+                    <source src="../public/aboutDemo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="text-container">
+                <h1>About Us</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor, lorem a rhoncus tristique, nulla urna venenatis eros, nec posuere turpis nisl ac metus. Quisque scelerisque nunc sit amet quam convallis tincidunt. Duis eu tortor eu enim fringilla finibus.</p>
+                <p>Suspendisse potenti. Sed vitae felis sit amet elit faucibus euismod. Nam ut lectus vestibulum, aliquet neque id, vestibulum quam. Donec at dignissim felis.</p>
+            </div>
+         </div>
     </div>
+    <div id="map">
     </div>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGYBpcdK4QppxybDr2SRWDeFkT4HXos8I&callback=initMap"> </script>
+    <script>
+        function initMap() {
+            var options = {
+                center: { lat: 31.97032915755696, lng: 34.77212580873798 },
+                zoom: 12
+            };
+
+            var map = new google.maps.Map(document.getElementById("map"), options);
+            const token = localStorage.getItem('token')
+            $.ajax({
+                url: "http://localhost:3000/api/v1/branch", // Replace with your API endpoint
+                type: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}` // Replace with your actual token
+                },
+                success: function (data) {
+                    data.forEach(branch => {
+                        var coordinates = branch.coordinates.replace(" ","").split(',');
+                        console.log(coordinates)
+                        var marker = new google.maps.Marker({
+                            position: {lat:parseFloat(coordinates[0]), lng:parseFloat(coordinates[1])},
+                            map: map,
+                            title: branch.address
+                        });
+
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: `<strong>Phonebook Store</strong><br>${branch.address}`
+                        });
+
+                        marker.addListener("click", function () {
+                            infoWindow.open(map, marker);
+                        });
+                    });
+                },
+                error: function (error) {
+                    console.error("Error fetching data:", error);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
