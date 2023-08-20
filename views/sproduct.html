@@ -181,6 +181,10 @@
 
                 localStorage.setItem('cart', JSON.stringify(cart));
                 updateCartIcon();
+
+                // Show an alert and redirect the user to the shop page
+                alert('Product added to cart! You will be redirected to the shop.');
+                window.location.href = '../views/shop.html';
             }
 
             function updateCartIcon() {
