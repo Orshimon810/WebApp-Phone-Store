@@ -15,6 +15,7 @@ router.post(`/`,productController.uploadOptions.single('image'),productControlle
 
 //get one product by ID
 router.get('/:id',productController.getProduct);
+router.get('/stock/:id',productController.getProductStockNumber);
 
 //update Product
 router.put('/:id',productController.updateProduct);

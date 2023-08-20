@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
         if(isValid) {
             uploadError = null
         }
-      cb(uploadError, 'public/images')
+      cb(uploadError, 'public/img')
     },
     filename: function (req, file, cb) {
         
@@ -86,6 +86,16 @@ async function getProduct(req,res){
     res.status(200).send(product);
 }
 
+async function getProductStockNumber(req,res){
+    const product = await Product.findById(req.params.id);
+    //.populate('category')
+
+    if(!product){
+        res.status(500).json({ success: false, message: 'Product with this ID has not found' });
+    }
+    res.status(200).send({Stock:product.countInStock});
+}
+
 async function updateProduct (req,res){
     if(!mongoose.isValidObjectId(req.params.id))
          res.status(400).send('Invalid Product ID!');
@@ -149,7 +159,7 @@ async function getFeaturedProducts(req,res){
     if(!featuredProducts)
         res.status(500).json({success:false});
 
-        res.send(featuredProducts);
+    res.send(featuredProducts);
 }
 
 async function getByCategory(req, res) {
@@ -216,6 +226,7 @@ module.exports= {
     getAllProducts,
     createdProduct,
     getProduct,
+    getProductStockNumber,
     updateProduct,
     deleteProduct,
     getCount,

@@ -30,7 +30,14 @@
         
       </div>
     </nav>
-    <div id="chart"></div>
+      <h1>Statistics</h1>
+        <div id="chart1">
+         <h2>Total sum of sales per day</h2>
+        </div>
+
+        <div id="pieChart">
+          <h2>Items in Stock</h2>
+        </div>
 
     <script>
         const token = localStorage.getItem('token'); // Replace with your actual token
@@ -47,6 +54,19 @@
                 console.error('Error fetching data:', error);
             }
         });
+        $.ajax({
+            url: "http://localhost:3000/api/v1/products",
+            type: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            success: function(data) {
+                createPieChart(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+            }
+        });
 
         function createChart(data) {
             const orders = data; // Assuming data is an array of orders
@@ -56,7 +76,7 @@
             const chartWidth = svgWidth - margin.left - margin.right;
             const chartHeight = svgHeight - margin.top - margin.bottom;
 
-            const svg = d3.select("#chart")
+            const svg = d3.select("#chart1")
                 .append("svg")
                 .attr("width", svgWidth)
                 .attr("height", svgHeight);
@@ -64,28 +84,38 @@
             const chart = svg.append("g")
                 .attr("transform", `translate(${margin.left},${margin.top})`);
 
-            // Extract order details for visualization (e.g., total prices)
-            const orderDetails = orders.map(order => order.totalPrice);
+            // Group orders by date and calculate the sum of prices for each date
+            const ordersByDate = d3.group(orders, order => order.dateOrdered.slice(0, 10));
+            const sumOfPricesByDate = Array.from(ordersByDate, ([date, orders]) => ({
+                date,
+                totalPrice: d3.sum(orders, order => order.totalPrice)
+            }));
+            
+            // Extract date and total price for visualization
+            const dates = sumOfPricesByDate.map(entry => entry.date);
+            const totalPrices = sumOfPricesByDate.map(entry => entry.totalPrice);
 
             const xScale = d3.scaleBand()
-                .domain(orders.map((_, index) => index))
+                .domain(dates)
                 .range([0, chartWidth])
                 .padding(0.1);
 
             const yScale = d3.scaleLinear()
-                .domain([0, d3.max(orderDetails)])
+                .domain([0, d3.max(totalPrices)])
                 .nice()
                 .range([chartHeight, 0]);
 
             chart.selectAll(".bar")
-                .data(orderDetails)
+                .data(totalPrices)
                 .enter()
                 .append("rect")
                 .attr("class", "bar")
-                .attr("x", (d, i) => xScale(i))
+                .attr("x", (d, i) => xScale(dates[i]))
                 .attr("y", d => yScale(d))
                 .attr("width", xScale.bandwidth())
-                .attr("height", d => chartHeight - yScale(d));
+                .attr("height", d => chartHeight - yScale(d))
+                .style("fill", "blue"); // Set the fill color to blue
+
 
             chart.append("g")
                 .attr("transform", `translate(0,${chartHeight})`)
@@ -94,6 +124,78 @@
             chart.append("g")
                 .call(d3.axisLeft(yScale));
         }
+
+        function createPieChart(data) {
+    const products = data; // Assuming data is an array of products
+
+    const svgWidth = 700;
+    const svgHeight = 400;
+    const radius = Math.min(svgWidth, svgHeight) / 2;
+
+    const svg = d3.select("#pieChart")
+        .append("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+
+    const chart = svg.append("g")
+        .attr("transform", `translate(${svgWidth / 2},${svgHeight / 2})`);
+
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+    const pie = d3.pie()
+        .value(d => d.countInStock)
+        .sort(null);
+
+    const arc = d3.arc()
+        .innerRadius(0)
+        .outerRadius(radius);
+
+    const arcs = chart.selectAll(".arc")
+        .data(pie(products))
+        .enter()
+        .append("g")
+        .attr("class", "arc");
+
+    arcs.append("path")
+        .attr("d", arc)
+        .attr("fill", (_, i) => colorScale(i))
+        .attr("stroke", "white")
+        .attr("stroke-width", 2);
+
+    const labelArc = d3.arc()
+        .innerRadius(radius * 0.7)
+        .outerRadius(radius * 0.7);
+
+    arcs.append("text")
+        .attr("transform", d => `translate(${labelArc.centroid(d)})`)
+        .attr("dy", "0.35em")
+        .text(d => d.data.countInStock)
+        .style("text-anchor", "middle")
+        .style("font-size", "20px")
+        .style("font-weight", "bold");
+
+    const legend = svg.selectAll(".legend")
+        .data(colorScale.domain())
+        .enter()
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", (d, i) => `translate(0,${i * 20+90})`);
+
+    legend.append("rect")
+        .attr("x", svgWidth - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .attr("fill", colorScale);
+
+    legend.append("text")
+        .attr("x", svgWidth - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "end")
+        .text(d => products[d].name);
+}
+
+
     </script>
         
 </body>

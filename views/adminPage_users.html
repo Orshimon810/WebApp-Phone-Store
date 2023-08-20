@@ -74,7 +74,7 @@
         $(document).ready(function () {
             
             // Function to fetch orders and populate the table
-            function fetchAndPopulateOrders() {
+            function fetchAndPopulateUsers() {
                 $.ajax({
                     url: 'http://localhost:3000/api/v1/users',
                     type: 'GET',
@@ -114,7 +114,7 @@
             }
 
             // Call the function to populate the table when the page is loaded
-            fetchAndPopulateOrders();
+            fetchAndPopulateUsers();
 
 
             $('#updateButton').click(function () {
@@ -200,7 +200,7 @@
                     // Add your error handling logic here
                 }
             });
-
+            fetchAndPopulateUsers();
         }
         </script>
 </body>
