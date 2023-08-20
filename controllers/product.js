@@ -2,13 +2,41 @@ const Product = require('../models/product');
 const Category = require('../models/category');
 const mongoose = require('mongoose');
 const category = require('../models/category');
+const multer = require('multer');
+
+const FILE_TYPE_MAP={
+    'image/png':'png',
+    'image/jpeg':'jpeg',
+    'image/jpg':'jpg',
+}
+
+//for uploads picutres
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const isValid = FILE_TYPE_MAP[file.mimetype];
+        let uploadError = new Error('invalid image type');
+
+        if(isValid) {
+            uploadError = null
+        }
+      cb(uploadError, 'public/img')
+    },
+    filename: function (req, file, cb) {
+        
+      const fileName = file.originalname.split(' ').join('-');
+      const extension = FILE_TYPE_MAP[file.mimetype];
+      cb(null, `${fileName}-${Date.now()}.${extension}`)
+    }
+  })
+  
+const uploadOptions = multer({ storage: storage })
 
 async function getAllProducts (req,res) {
     const productList = await Product.find();
     //.select('name image -_id') if we want to show specific fields
 
     if(!productList){
-        res.status(500).json({success:false});
+        return res.status(500).json({success:false});
     }
     res.send(productList);
 }
@@ -18,12 +46,17 @@ async function createdProduct(req, res) {
     if(!category)
         return res.status(400).send('Invalid category!');
 
+        const file = req.file;
+        if(!file) return res.status(400).send('No image in the request')
+
+        const fileName = file.filename;
+        const basePath = `${req.protocol}://${req.get('host')}/public/img/`;
     
         const product = new Product({
             name: req.body.name,
             description: req.body.description,
             richDescription: req.body.richDescription,
-            image: req.body.image,
+            image: `${basePath}${fileName}`, //http://localhost:3000/public/uploads/image-23232323
             brand: req.body.brand,
             price: req.body.price,
             category: req.body.category,
@@ -51,6 +84,16 @@ async function getProduct(req,res){
         res.status(500).json({ success: false, message: 'Product with this ID has not found' });
     }
     res.status(200).send(product);
+}
+
+async function getProductStockNumber(req,res){
+    const product = await Product.findById(req.params.id);
+    //.populate('category')
+
+    if(!product){
+        res.status(500).json({ success: false, message: 'Product with this ID has not found' });
+    }
+    res.status(200).send({Stock:product.countInStock});
 }
 
 async function updateProduct (req,res){
@@ -116,7 +159,7 @@ async function getFeaturedProducts(req,res){
     if(!featuredProducts)
         res.status(500).json({success:false});
 
-        res.send(featuredProducts);
+    res.send(featuredProducts);
 }
 
 async function getByCategory(req, res) {
@@ -140,16 +183,55 @@ async function getByCategory(req, res) {
     }
 }
 
+async function updateGallery (req, res) { 
+    console.log('start')
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        console.log('Invalid Product ID:', req.params.id);
+        return res.status(400).send('Invalid Product ID!');
+    }
 
+    console.log("Request Files:", req.files); // Log uploaded files
+
+    const files = req.files;
+    let imagesPaths =[];
+    const basePath = `${req.protocol}://${req.get('host')}/public/img/`;
+
+    if (files) {
+        files.map(file => {
+            imagesPaths.push(`${basePath}${file.filename}`);
+        });
+    }
+
+    console.log('Images Paths:', imagesPaths); // Log image paths
+
+    const product = await Product.findByIdAndUpdate(
+        req.params.id,
+        {
+            images: imagesPaths,
+        },
+        { new: true }
+    )
+
+    if (!product) {
+        console.log('Gallery Update Failed');
+        return res.status(500).send('The Gallery cannot be Updated');
+    }
+
+    console.log('Gallery Updated Successfully');
+    res.send(product);
+}
 
 
 module.exports= {
     getAllProducts,
     createdProduct,
     getProduct,
+    getProductStockNumber,
     updateProduct,
     deleteProduct,
     getCount,
     getFeaturedProducts,
     getByCategory,
+    uploadOptions,
+    updateGallery,
 }

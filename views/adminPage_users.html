@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/adminPage_users.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+</head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="../public/img//logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="../views/adminPage_Orders.html">Order</a></li>
+            <li><a href="../views/adminPage_Products.html" >Products</a></li>
+            <li><a href="../views/adminPage_users.html">Users</a></li>
+            <li><a href="../views/adminPage.html">Stats</a></li>
+            <li><a href="../views/mainPage.html">Home</a></li>
+         </ul>
+        </div>
+    </nav>`
+
+    <section>
+        <h1 class="heading">Users</h1>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Permissions</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <tr>
+                    </tr>
+                    <tr class="active-row">
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+
+    
+    <div class="card">
+        <h2>Update user password</h2>
+        <input id="userId" type="text" placeholder="Enter ID" class="inputer">
+        <input id="newPassword" type="password" placeholder="New Password" class="inputer">
+        <button id="updateButton">Update</button>
+    </div>
+    
+
+    <div class="card">
+        <h2>Delete a user</h2>
+        <input id="deleteInp" type="text" placeholder="Enter ID" class="inputer">
+        <br><button id="deleteButton">Delete</button>
+    </div>
+    
+    <hr>
+
+
+    <script>
+        const jwtToken = localStorage.getItem('token');
+
+        $(document).ready(function () {
+            
+            // Function to fetch orders and populate the table
+            function fetchAndPopulateUsers() {
+                $.ajax({
+                    url: 'http://localhost:3000/api/v1/users',
+                    type: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${jwtToken}`
+                    },
+                    success: function (data) {
+                        const userTableBody = $('#userTableBody');
+                        userTableBody.empty();
+                        
+                        data.forEach(user => {
+                            var permission;
+                            if(user.isAdmin === true)
+                            {
+                                permission= 'Admin'
+                            }
+                            else{
+                                permission ='user'
+                            }
+                            const row = `
+                                <tr>
+                                    <td>${user._id}</td>
+                                    <td>${user.name}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.city} ${user.country}</td>
+                                    <td>${user.phone}</td>
+                                    <td>${permission}</td>
+                                </tr>
+                            `;
+                            userTableBody.append(row);
+                        });
+                    },
+                    error: function (error) {
+                        console.error('Failed to fetch orders', error);
+                    }
+                });
+            }
+
+            // Call the function to populate the table when the page is loaded
+            fetchAndPopulateUsers();
+
+
+            $('#updateButton').click(function () {
+        const userId = $('#userId').val();
+        const newPassword = $('#newPassword').val();
+
+        const userData = {
+            password: newPassword
+        };
+
+        $.ajax({
+            url: `http://localhost:3000/api/v1/users/${userId}`,
+            type: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwtToken}`
+            },
+            data: JSON.stringify(userData),
+            success: function (updatedUser) {
+                if (updatedUser.isAdmin) {
+                    alert("You can't change an admin's password.");
+                } else {
+                    alert("Password changed.");
+                }
+            },
+            error: function (error) {
+                console.error('Failed to update user password', error);
+                // Add your error handling logic here
+            }
+            });
+                 });
+
+                 $('#deleteButton').click(function () {
+        const userIdToDelete = $('#deleteInp').val();
+        if (!userIdToDelete) {
+            alert("Please enter a valid user ID.");
+            return;
+        }
+
+        $.ajax({
+            url: `http://localhost:3000/api/v1/users/${userIdToDelete}`,
+            type: 'GET',
+            headers: {
+                Authorization: `Bearer ${jwtToken}`
+            },
+            success: function (user) {
+                if (user && user.isAdmin) {
+                    alert("You can't delete an Admin!");
+                } else {
+                    // Display a confirmation dialog
+                    const confirmed = confirm("Are you sure you want to delete the user?");
+                    
+                    if (confirmed) {
+                        deleteUser(userIdToDelete);
+                    }
+                }
+            },
+            error: function (error) {
+                console.error('Failed to fetch user data', error);
+                // Add your error handling logic here
+            }
+        });
+                });
+                    //
+                     }); 
+
+            function deleteUser(userId) {
+            $.ajax({
+                url: `http://localhost:3000/api/v1/users/${userId}`,
+                type: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`
+                },
+                success: function (response) {
+                    if (response.success) {
+                        alert("User deleted!");
+                    } else {
+                        alert("User not found.");
+                    }
+                },
+                error: function (error) {
+                    console.error('Failed to delete user', error);
+                    // Add your error handling logic here
+                }
+            });
+            fetchAndPopulateUsers();
+        }
+        </script>
+</body>
+</html>

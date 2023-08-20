@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/mainPage.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/lightslider.css">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+    <script src="../public/lightslider.js"></script>
+</head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="../public/img/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="#" class="sign-in">Sign In</a></li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="../views/chatEntrace.html">Chat</a></li>
+         </ul>
+         <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search">
+                    <i class="fa-solid fa-search"></i>
+                </a>
+                 <!--user-->
+                 <a href="#" class="user">
+                    <i class="fas fa-user"></i>
+                </a>
+                 <!--cart-icon-->
+                 <a href="#">
+                    <i class="fas fa-shopping-cart">
+                    <!--number of products in cart-->
+                    <span class="num-cart-producuts">0</span>
+                    </i>
+                </a>
+         </div>
+      </div>
+    </nav>
+
+    <!--search-bar-------------------------->
+    <div class="search-bar">
+        <!--search-input--->
+        <div class="search-input">
+            <!--input-->
+            <input type="text" placeholder="Search For Product"/>
+            <!--cancel button-->
+            <a href="#" class="search-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+    </div>
+
+    <!--login and signup form-->
+    <div class="form">
+        <!--login-->
+        <div class="login-form">
+            <a href="#" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign In</strong>
+            <form id="login">
+                <input type="email" placeholder="Example@gmail.com" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <input type="submit" value="Sign In">
+            </form>
+            <div class="form-btns">
+                <a href="#" class="sign-up-btn">Create Account</a>
+            </div>
+        </div>
+
+
+         <!--Sign Up-->
+         <div class="sign-up-form">
+            <a href="#" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign Up</strong>
+            <form id="register">
+                <input type="text" placeholder="Full Name" name="name" required>
+                <input type="email" placeholder="Example@gmail.com" name="email" required>
+                <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="form-btns">
+                <a href="#" class="already-account">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+
+
+      <!-----------full-slider----------------------------->
+      <ul id="adaptive" class="cs-hidden">
+        
+        <!--box-1--------------------------->
+        <li class="item-a">
+            <!---box------------------->
+    <div class="full-slider-box f-slide-1">
+        
+        <div class="f-slider-text-container">
+        <div class="f-slider-text">
+            <span>Limited Offer</span>
+            <strong>30% Off<br/> With <font>Promo Code</font></strong>
+            <a href="#" class="f-slider-btn">Shop Now</a>
+        </div>
+        </div>
+    
+    </div>
+    </li>
+     <!--box-2--------------------------->
+        <li class="item-b">
+            <!---box------------------->
+    <div class="full-slider-box f-slide-2">
+        
+        <!-- <div class="f-slider-text-container">
+        <div class="f-slider-text">
+            <span>Limited Offer</span>
+            <strong>30% Off<br/> With <font>Promo Code</font></strong>
+            <a href="#" class="f-slider-btn">Shop Now</a>
+        </div>
+        </div> -->
+    
+    </div>
+    </li>
+         <!--box-3--------------------------->
+         <li class="item-c">
+            <!---box------------------->
+    <div class="full-slider-box f-slide-3">
+        
+        <!-- <div class="f-slider-text-container">
+        <div class="f-slider-text">
+            <span>Limited Offer</span>
+            <strong>30% Off<br/> With <font>Promo Code</font></strong>
+            <a href="#" class="f-slider-btn">Shop Now</a>
+        </div>
+        </div> -->
+    
+    </div>
+    </li>
+     
+    </ul>
+
+    <!--new-arrivals------>
+       <!--NEW ARRIVAL-------------------------------->
+       <section class="new-arrival">
+            
+        <!--heading-------->
+        <div class="arrival-heading">
+            <strong>New Arrival</strong>
+            <p>We Provide You New Fasion Design Phones</p>
+        </div>
+          <!--products----------------------->
+          <div class="product-container">
+              
+            <!--product-box-1---------->
+              <div class="product-box">
+                  <!--product-img------------>
+                  <div class="product-img">
+                      <!--add-cart---->
+                      <a href="#" class="add-cart">
+                          <i class="fas fa-shopping-cart"></i>
+                        </a>
+                      <!--img------>
+                    <img src="../public/img/p-1.png" >
+                  </div>
+                  <!--product-details-------->
+                  <div class="product-details">
+                      <a href="#" class="p-name">OnePlus 5T</a>
+                      <span class="p-price">$999.00</span>
+                  </div>
+              </div>
+                <!--product-box-2---------->
+                <div class="product-box">
+                    <!--product-img------------>
+                    <div class="product-img">
+                        <!--add-cart---->
+                      <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                      <!--img------>
+                      <img src="../public/img/p-2.png" >
+                    </div>
+                    <!--product-details-------->
+                    <div class="product-details">
+                        <a href="#" class="p-name">Wiko 3Z</a>
+                        <span class="p-price">$249.00</span>
+                    </div>
+                </div>
+              <!--product-box-3---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/p-3.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">iQoo Z6 Lite 5G</a>
+                    <span class="p-price">$199.00</span>
+                </div>
+            </div>
+              <!--product-box-4---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/p-4.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Nokia shit</a>
+                    <span class="p-price">$199.00</span>
+                </div>
+            </div>
+              <!--product-box-5---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/p-5.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+              <!--product-box-6---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/p-6.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+              <!--product-box-7---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/p-7.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+              <!--product-box-8---------->
+              <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <!--img------>
+                  <img src="../public/img/p-8.png" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Drawstring T-Shirt</a>
+                    <span class="p-price">$22.00</span>
+                </div>
+            </div>
+          </div>
+      </section>
+
+      <footer class="section-p1">
+        <div class="col">
+            <img src ="../public/img/logo.png" alt="" class="footer-logo">
+            <h4>Contact</h4>
+            <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
+            <p><strong>Phone:</strong> +972 52 8090 777 </p>
+            <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
+            <div class="follow">
+                <h4>Follow Us:</h4>
+                <div class ="social-icon">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4><strong>About</strong></h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4><strong>My Account</strong></h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4><strong>Install App</strong></h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="../public/img/app.jpg" alt="">
+                <img src="../public/img/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="../public/img/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
+        </div>
+      </footer>
+   
+    <script type="text/javascript">
+        // Search Bar
+        $(document).on('click','.search',function(){
+            $('.search-bar').addClass('search-bar-active')
+        });
+
+        $(document).on('click','.search-cancel',function(){
+            $('.search-bar').removeClass('search-bar-active')
+        });
+
+        // Login and Signup Form
+        $(document).on('click','.user,.already-account,.sign-in',function(){
+            $('.form').addClass('login-active').removeClass('sign-up-active')
+        });
+
+        $(document).on('click','.sign-up-btn,.sign-up',function(){
+            $('.form').addClass('sign-up-active').removeClass('login-active')
+        });
+
+        $(document).on('click','.form-cancel',function(){
+            $('.form').removeClass('login-active').removeClass('sign-up-active')
+        });
+
+        // Slider script
+        $(document).ready(function() {
+    $('#adaptive').lightSlider({
+        adaptiveHeight:true,
+        auto:true,
+        pause:2000,
+        item:1,
+        slideMargin:0,
+        loop:true
+    });
+});
+
+            // Log in method to DB
+            document.getElementById('login').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    // Send POST request to your API for sign in
+    fetch('http://localhost:3000/api/v1/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.token) {
+            console.log('Sign in successful:', result);
+            console.log('token is ',result.token);
+            console.log('result is: ',result.isAdmin);
+            
+            // Save the token in local storage
+            localStorage.setItem('token', result.token);
+
+            if(result.isAdmin){
+                alert(1);
+                window.location.href = 'adminPage.html'
+            }
+            // Redirect to the specified URL
+            setTimeout(function() {
+                // Redirect to the specified URL
+                window.location.href = result.redirectUrl;
+            }, 500); // 500 milliseconds = 0.5 seconds
+             
+        } else {
+            console.log('Sign in failed:', result.message);
+            alert('Wrong email or password. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Sign in failed:', error);
+        alert('An error occurred during sign in. Please try again.');
+    });
+});
+
+    
+        
+        // Register method
+        document.getElementById('register').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Send POST request to your API
+            fetch('http://localhost:3000/api/v1/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Registration successful:', result);
+                // Add your desired success handling here
+                // Redirect to the sign-in page
+                window.location.href = result.redirectUrl;
+            })
+            .catch(error => {
+                console.error('Registration failed:', error);
+                // Add your error handling here
+            });
+        });
+
+           
+    </script>
+
+
+</body>
+</html>

@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
     },
     category:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'category',
+        ref:'Category',
         required:true,
     },
     countInStock:{
@@ -65,4 +65,4 @@ productSchema.set('toJSON',{
     virtuals:true,
 });
 
-module.exports = mongoose.model('products',productSchema);
+module.exports = mongoose.model('Product',productSchema);

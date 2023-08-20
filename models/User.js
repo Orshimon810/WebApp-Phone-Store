@@ -9,10 +9,6 @@ const userSchema = new mongoose.Schema({
        trim: true,
        lowercase: true
      },
-     isAdmin: {
-        type: Boolean,
-        default:false,
-      },
     email: {                //Unique email for each user
        type: String,
        required: true,
@@ -27,7 +23,6 @@ const userSchema = new mongoose.Schema({
     passwordHash: {
         type: String,
         required: true,
-        minLength: 7,
         trim: true,
         validate(value) { // Password validation
            if( value.toLowerCase().includes('password')) {
@@ -59,7 +54,10 @@ const userSchema = new mongoose.Schema({
       type: String,
       default:"",
     },
-    timestamps: true
+    isAdmin: {
+      type: Boolean,
+      default:false,
+    },
   });
 
   userSchema.virtual('id').get(function(){
