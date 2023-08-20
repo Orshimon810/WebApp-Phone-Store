@@ -19,7 +19,7 @@ const storage = multer.diskStorage({
         if(isValid) {
             uploadError = null
         }
-      cb(uploadError, 'public/images')
+      cb(uploadError, 'public/img')
     },
     filename: function (req, file, cb) {
         
