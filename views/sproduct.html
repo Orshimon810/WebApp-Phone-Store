@@ -21,7 +21,7 @@
         </a>
          <!--menu-->
          <ul class ="menu">
-            <li><a href="#">About</a></li>
+            <li><a href="../views/about.html">About</a></li>
             <li><a href="../views/shop.html">Shop</a></li>
             <li><a href="../views/mainPage.html">Home</a></li>
             <li><a href="../views/chatEntrace.html">Chat</a></li>
@@ -148,7 +148,7 @@
                         document.getElementById('MainImg').src = product.image;
                         document.getElementById('productCategory').textContent = product.category.name;
                         document.getElementById('productName').textContent = product.description;
-                        document.getElementById('productPrice').textContent = `$${product.price.toLocaleString()}`;
+                        document.getElementById('productPrice').textContent = `₪${product.price.toLocaleString()}`;
                         document.getElementById('productDescription').textContent = product.richDescription;
                         // Add functionality to 'Add To Cart' button here
                         document.getElementById('addToCartBtn').addEventListener('click', () => {

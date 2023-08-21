@@ -162,26 +162,6 @@ async function getFeaturedProducts(req,res){
     res.send(featuredProducts);
 }
 
-async function getByCategory(req, res) {
-    try {
-        let filter = {};
-        if (req.query.categories) {
-            const categoryIds = req.query.categories.split(',');
-            console.log('Category IDs:', categoryIds);
-            filter = { category: { $in: categoryIds } };
-        }
-        console.log('Filter:', filter);
-        const productList = await Product.find(filter);
-
-        if (!productList || productList.length === 0) {
-            return res.status(404).json({ success: false, message: 'No products found for the specified category' });
-        }
-
-        res.json(productList);
-    } catch (err) {
-        return res.status(500).json({ success: false, error: err.message });
-    }
-}
 
 async function updateGallery (req, res) { 
     console.log('start')
@@ -222,7 +202,63 @@ async function updateGallery (req, res) {
 }
 
 
+async function getByBrand(req, res) {
+    try {
+        let filter = {};
+        if (req.query.brand) {
+            const brandName = req.query.brand;
+            console.log('Brand Name:', brandName);
+            filter = { brand: brandName };
+        }
+        console.log('Filter:', filter);
+        
+        const productList = await Product.find(filter);
+
+        if (!productList || productList.length === 0) {
+            return res.status(404).json({ success: false, message: 'No products found for the specified brand' });
+        }
+
+        res.json(productList);
+    } catch (err) {
+        return res.status(500).json({ success: false, error: err.message });
+    }
+}
+
+
+async function getByCategory(req, res) {
+    try {
+        if (!req.query.categories) {
+            return res.status(400).json({ success: false, message: 'No category names provided' });
+        }
+
+        const categoryNames = req.query.categories.split(',');
+        console.log('Category Names:', categoryNames);
+
+        // Query the Category collection to find the category IDs
+        const categories = await Category.find({ name: { $in: categoryNames } });
+        const categoryIds = categories.map(category => category._id);
+
+        console.log('Category IDs:', categoryIds);
+
+        // Use the category IDs to query the Product collection
+        const productList = await Product.find({ category: { $in: categoryIds } });
+
+        if (!productList || productList.length === 0) {
+            return res.status(404).json({ success: false, message: 'No products found for the specified category' });
+        }
+
+        res.json(productList);
+    } catch (err) {
+        console.error('Error fetching products by category:', err);
+        return res.status(500).json({ success: false, error: err.message });
+    }
+}
+
+
+
+
 module.exports= {
+    getByBrand,
     getAllProducts,
     createdProduct,
     getProduct,
