@@ -7,21 +7,27 @@ const orderSchema = new mongoose.Schema({
     }],
     shippingAddress1:{
         type:String,
+        default:"",
     },
     shippingAddress2:{
         type:String,
+        default:"",
     },
     city:{
         type:String,
+        default:"",
     },
     zip:{
         type:String,
+        default:"",
     },
     country:{
         type:String,
+        default:"",
     },
     phone:{
         type:String,
+        default:"",
     },
     status:{
         type:String,

@@ -23,7 +23,7 @@
          <ul class ="menu">
             <li><a href="#" class="sign-in">Sign In</a></li>
             <li><a href="#" class="sign-up">Sign Up</a></li>
-            <li><a href="#">About</a></li>
+            <li><a href="../views/about.html">About</a></li>
             <li><a href="../views/shop.html">Shop</a></li>
             <li><a href="#">Home</a></li>
             <li><a href="../views/chatEntrace.html">Chat</a></li>
@@ -91,6 +91,9 @@
                 <input type="email" placeholder="Example@gmail.com" name="email" required>
                 <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
                 <input type="submit" value="Sign Up">
+                <!-- Inside the registration form -->
+                <div class="registration-success-message" style="color: green;"></div>
+                <div class="registration-error-message" style="color: red;"></div>
             </form>
             <div class="form-btns">
                 <a href="#" class="already-account">Already have an account?</a>
@@ -438,7 +441,7 @@
             localStorage.setItem('token', result.token);
 
             if(result.isAdmin){
-                alert(1);
+                alert('You will be redirected to Admin Panel');
                 window.location.href = 'adminPage.html'
             }
             // Redirect to the specified URL
@@ -460,36 +463,47 @@
 
     
         
-        // Register method
-        document.getElementById('register').addEventListener('submit', function(event) {
-            event.preventDefault();
+// Register method
+    // Register method
+document.getElementById('register').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
 
-            // Send POST request to your API
-            fetch('http://localhost:3000/api/v1/users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log('Registration successful:', result);
-                // Add your desired success handling here
-                // Redirect to the sign-in page
-                window.location.href = result.redirectUrl;
-            })
-            .catch(error => {
-                console.error('Registration failed:', error);
-                // Add your error handling here
-            });
-        });
+    // Send POST request to your API
+    fetch('http://localhost:3000/api/v1/users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.message) {
+            // Registration successful
+            document.querySelector('.registration-success-message').textContent = result.message;
+            document.querySelector('.registration-error-message').textContent = '';
+            window.location.href = '../views/mainPage.html';
+            // You can add other handling here if needed
+        } else {
+            // Registration failed
+            document.querySelector('.registration-success-message').textContent = '';
+            document.querySelector('.registration-error-message').textContent = result; // Display error message here
+            // You can add other error handling here if needed
+        }
+    })
+    .catch(error => {
+        console.error('Registration failed:', error);
+        document.querySelector('.registration-error-message').textContent = 'An error occurred during registration. Please try again.';
+        document.querySelector('.registration-success-message').textContent = ''; // Clear success message
+        // Add your error handling here
+    });
+});
 
            
     </script>

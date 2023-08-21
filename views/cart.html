@@ -153,58 +153,60 @@
      </section>
 
     
+     <section class="buttom-footer">
         <footer class="section-p1">
-           <div class="col">
-               <img src ="../public/img/logo.png" alt="" class="footer-logo">
-               <h4>Contact</h4>
-               <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
-               <p><strong>Phone:</strong> +972 52 8090 777 </p>
-               <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
-               <div class="follow">
-                   <h4>Follow Us:</h4>
-                   <div class ="social-icon">
-                       <i class="fab fa-facebook"></i>
-                       <i class="fab fa-twitter"></i>
-                       <i class="fab fa-instagram"></i>
-                       <i class="fab fa-pinterest"></i>
-                       <i class="fab fa-youtube"></i>
-                   </div>
-               </div>
-           </div>
-   
-           <div class="col">
-               <h4><strong>About</strong></h4>
-               <a href="#">About Us</a>
-               <a href="#">Delivery Information</a>
-               <a href="#">Privacy Policy</a>
-               <a href="#">Term & Conditions</a>
-               <a href="#">Contact Us</a>
-           </div>
-   
-           <div class="col">
-               <h4><strong>My Account</strong></h4>
-               <a href="#">Sign In</a>
-               <a href="#">View Cart</a>
-               <a href="#">My Wishlist</a>
-               <a href="#">Track My order</a>
-               <a href="#">Help</a>
-           </div>
-   
-           <div class="col install">
-               <h4><strong>Install App</strong></h4>
-               <p>From App Store or Google Play</p>
-               <div class="row">
-                   <img src="../public/img/app.jpg" alt="">
-                   <img src="../public/img/play.jpg" alt="">
-               </div>
-               <p>Secured Payment Gateways</p>
-               <img src="../public/img/pay.png" alt="">
-           </div>
-   
-           <div class="copyright">
-               <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
-           </div>
+          <div class="col">
+              <img src ="../public/img/logo.png" alt="" class="footer-logo">
+              <h4>Contact</h4>
+              <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
+              <p><strong>Phone:</strong> +972 52 8090 777 </p>
+              <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
+              <div class="follow">
+                  <h4>Follow Us:</h4>
+                  <div class ="social-icon">
+                      <i class="fab fa-facebook"></i>
+                      <i class="fab fa-twitter"></i>
+                      <i class="fab fa-instagram"></i>
+                      <i class="fab fa-pinterest"></i>
+                      <i class="fab fa-youtube"></i>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="col">
+              <h4><strong>About</strong></h4>
+              <a href="#">About Us</a>
+              <a href="#">Delivery Information</a>
+              <a href="#">Privacy Policy</a>
+              <a href="#">Term & Conditions</a>
+              <a href="#">Contact Us</a>
+          </div>
+  
+          <div class="col">
+              <h4><strong>My Account</strong></h4>
+              <a href="#">Sign In</a>
+              <a href="#">View Cart</a>
+              <a href="#">My Wishlist</a>
+              <a href="#">Track My order</a>
+              <a href="#">Help</a>
+          </div>
+  
+          <div class="col install">
+              <h4><strong>Install App</strong></h4>
+              <p>From App Store or Google Play</p>
+              <div class="row">
+                  <img src="../public/img/app.jpg" alt="">
+                  <img src="../public/img/play.jpg" alt="">
+              </div>
+              <p>Secured Payment Gateways</p>
+              <img src="../public/img/pay.png" alt="">
+          </div>
+  
+          <div class="copyright">
+              <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
+          </div>
         </footer>
+      </section>
 
         <script>
             $(document).ready(function() {
@@ -274,51 +276,69 @@
                      location.reload();
                 });
 
+$('.btn-dark').on('click', async function() {
+    // Collect order information and prepare order data
+    const orderData = {
+        // Fill in the order data fields based on your form or user input
+        // Example: shippingAddress1, shippingAddress2, city, zip, country, phone, status, etc.
+        
+        // Include the userId in the order data
+        user: getUserIdFromToken(), // Call the function to get userId from token
+        
+        // ... other order data fields ...
+    };
 
-    // Attach event handler to the "PROCEED TO CHECKOUT" button
-    $('.btn-dark').on('click', async function() {
-        // Collect order information and prepare order data
-        const orderData = {
-            // Fill in the order data fields based on your form or user input
-            // Example: shippingAddress1, shippingAddress2, city, zip, country, phone, status, user, etc.
-        };
+    // Build the order items array
+    const orderItems = cart.map(item => ({
+        product: item.id,
+        quantity: item.quantity
+    }));
 
-        // Build the order items array
-        const orderItems = cart.map(item => ({
-            product: item.id,
-            quantity: item.quantity
-        }));
+    // Add the order items data to the orderData object
+    orderData.orderItems = orderItems;
 
-        // Add the order items data to the orderData object
-        orderData.orderItems = orderItems;
+    try {
+        const response = await fetch('http://localhost:3000/api/v1/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${jwtToken}` // Include the token in the headers
+            },
+            body: JSON.stringify(orderData)
+        });
 
-        try {
-            const response = await fetch('http://localhost:3000/api/v1/orders', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${jwtToken}` // Include the token in the headers
-                },
-                body: JSON.stringify(orderData)
-            });
+        if (response.ok) {
+            // Clear the cart and update the display
+            localStorage.removeItem('cart');
+            updateCartDisplay();
+            updateCartIcon();
 
-            if (response.ok) {
-                // Clear the cart and update the display
-                localStorage.removeItem('cart');
-                updateCartDisplay();
-                updateCartIcon();
-
-                // Show a success message or redirect the user
-                alert('Order placed successfully!');
-                // Redirect the user to a confirmation page or home page
-                window.location.href = '../views/shop.html';
-            } else {
-                console.error('Failed to place order');
-            }
-        } catch (error) {
-            console.error('Error placing order:', error);
+            // Show a success message or redirect the user
+            alert('Order placed successfully!');
+            // Redirect the user to a confirmation page or home page
+            window.location.href = '../views/shop.html';
+        } else {
+            console.error('Failed to place order');
         }
-    });
+    } catch (error) {
+        console.error('Error placing order:', error);
+    }
+});
+
+// Function to extract userId from JWT token
+function getUserIdFromToken() {
+    const token = localStorage.getItem('token'); // Get the JWT token from local storage
+    if (token) {
+        try {
+            const tokenParts = token.split('.');
+            const payload = JSON.parse(atob(tokenParts[1]));
+            return payload.userId; // Extract userId from the payload
+        } catch (error) {
+            console.error('Error decoding token:', error);
+        }
+    }
+    return null; // Return null if token is not available or invalid
+}
 
 
                 // Initial updates on page load
