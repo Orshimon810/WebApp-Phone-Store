@@ -170,22 +170,25 @@
             //CART-------
              // Cart functionality
              function addToCart(product) {
-                const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const existingItem = cart.find(item => item.id === product.id);
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === product.id);
 
-                if (existingItem) {
-                    existingItem.quantity++;
-                } else {
-                    cart.push({ ...product, quantity: 1 });
-                }
+    const productQuantity = parseInt(document.getElementById('productQuantity').value, 10);
 
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCartIcon();
+    if (existingItem) {
+        existingItem.quantity += productQuantity; // Increment the quantity
+    } else {
+        cart.push({ ...product, quantity: productQuantity }); // Add new item with specified quantity
+    }
 
-                // Show an alert and redirect the user to the shop page
-                alert('Product added to cart! You will be redirected to the shop.');
-                window.location.href = '../views/shop.html';
-            }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartIcon();
+
+    // Show an alert and redirect the user to the shop page
+    alert('Product added to cart! You will be redirected to the shop.');
+    window.location.href = '../views/shop.html';
+}
+
 
             function updateCartIcon() {
                 const cart = JSON.parse(localStorage.getItem('cart')) || [];
