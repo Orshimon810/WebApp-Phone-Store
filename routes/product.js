@@ -29,5 +29,4 @@ router.get('/get/count',productController.getCount);
 router.get('/get/featured',productController.getFeaturedProducts);
 
 
-
 module.exports = router;

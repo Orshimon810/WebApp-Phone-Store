@@ -50,9 +50,28 @@
     </nav>
 </section>
 
+
+<h2 class="shop-header">Featured Products:</h2>
+
+<section id="filter-buttons">
+    <div id="button-container">
+        <button class="btn active" onclick="filterByBrand('all')"> Show all</button>
+        <button class="btn" onclick="filterByBrand('Samsung')"> Samsung</button>
+        <button class="btn" onclick="filterByBrand('Apple')"> Apple</button>
+        <button class="btn" onclick="filterByBrand('Realme')"> Realme</button>
+        <button class="btn" onclick="filterByBrand('OnePlus')"> OnePlus</button>
+        <button class="btn" onclick="filterByBrand('Asus')"> Asus</button>
+    </div>
+</section>
+
+
+
+
+
+
+
    
         <section class="shop-display">
-            <h2 class="shop-header">Featured Products:</h2>
             <div class="product-container">
             </div>
             <!-- Product boxes will be generated dynamically by JavaScript -->
@@ -180,9 +199,9 @@
             }
     
             // Call the function to generate product boxes when the page is loaded
-            fetchAndGenerateProductBoxes();
-            
+            fetchAndGenerateProductBoxes();        
         });
+        
     </script>
       
 </body>

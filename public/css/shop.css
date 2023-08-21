@@ -237,3 +237,34 @@ footer .copyright{
     font-weight: 600;
 }
 
+#button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Style the buttons */
+.btn {
+    border: none;
+    color:#fff;
+    outline: none;
+    padding: 12px 16px;
+    background-color: #088178;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  /* Add a light grey background on mouse-over */
+  .btn:hover {
+    background-color: #ddd;
+  }
+  
+  /* Add a dark background to the active button */
+  .btn.active {
+    background-color: #666;
+    color: white;
+  }
