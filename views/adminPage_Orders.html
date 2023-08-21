@@ -108,16 +108,16 @@
                         success: function (data) {
                             const orderTableBody = $('#orderTableBody');
                             orderTableBody.empty();
-
                             data.forEach(order => {
+                      
                                 const row = `
                                     <tr>
-                                        <td>${order._id}</td>
+                                        <td>${order.id}</td>
                                         <td>${order.dateOrdered}</td>
                                         <td>${order.user.name}</td>
                                         <td>${order.shippingAddress1}</td>
                                         <td>${order.status}</td>
-                                        <td>${order.totalPrice} ₪</td>
+                                        <td>₪${order.totalPrice.toLocaleString()}</td>
                                     </tr>
                                 `;
                                 orderTableBody.append(row);
@@ -208,7 +208,7 @@
                             <tr>
                                 <td>${orderItem.product.name}</td>
                                 <td>${orderItem.quantity}</td>
-                                <td>${orderItem.product.price} ₪</td>
+                                <td>₪${orderItem.product.price.toLocaleString()}</td>
                             </tr>
                         `;
                         viewOrderTableBody.append(row);
