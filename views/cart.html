@@ -214,6 +214,8 @@
                 const subtotalValue = $('.subtotal-value');
                 const totalValue = $('.total-value');
                 const shippingPrice = $('.shipping-price');
+                const jwtToken = localStorage.getItem('token');
+
         
                 // Function to update cart totals
                 function updateCartTotals() {
@@ -268,8 +270,57 @@
                      updateCartTotals();
                      // Update cart icon
                      updateCartIcon();
+
+                     location.reload();
                 });
-        
+
+
+    // Attach event handler to the "PROCEED TO CHECKOUT" button
+    $('.btn-dark').on('click', async function() {
+        // Collect order information and prepare order data
+        const orderData = {
+            // Fill in the order data fields based on your form or user input
+            // Example: shippingAddress1, shippingAddress2, city, zip, country, phone, status, user, etc.
+        };
+
+        // Build the order items array
+        const orderItems = cart.map(item => ({
+            product: item.id,
+            quantity: item.quantity
+        }));
+
+        // Add the order items data to the orderData object
+        orderData.orderItems = orderItems;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/v1/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${jwtToken}` // Include the token in the headers
+                },
+                body: JSON.stringify(orderData)
+            });
+
+            if (response.ok) {
+                // Clear the cart and update the display
+                localStorage.removeItem('cart');
+                updateCartDisplay();
+                updateCartIcon();
+
+                // Show a success message or redirect the user
+                alert('Order placed successfully!');
+                // Redirect the user to a confirmation page or home page
+                window.location.href = '../views/shop.html';
+            } else {
+                console.error('Failed to place order');
+            }
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
+    });
+
+
                 // Initial updates on page load
                 updateCartTotals();
                 updateCartDisplay();
