@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" type="text/css" href="../public/css/history.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!--JQuery------->
+    <script src="../public/Jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="../public/img/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="../views/about.html">About</a></li>
+            <li><a href="../views/shop.html">Shop</a></li>
+            <li><a href="../views/mainPage.html">Home</a></li>
+            <li><a href="../views/chatEntrace.html">Chat</a></li>
+         </ul>
+         <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search">
+                    <i class="fa-solid fa-search"></i>
+                </a>
+                 <!--user-->
+                 <a href="#" class="user">
+                    <i class="fas fa-user"></i>
+                </a>
+                 <!--cart-icon-->
+                 <a href="../views/cart.html">
+                    <i class="fas fa-shopping-cart">
+                    <!--number of products in cart-->
+                    <span class="num-cart-producuts">0</span>
+                    </i>
+                </a>
+         </div>
+      </div>
+    </nav>
+
+    
+
+    <section id="orders-container" class="container my-5">
+        <h1 class="your_profile_h1">Order history:</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Items</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Date Ordered</th>
+            </tr>
+        </thead>
+        <tbody id="order-list">
+            <!-- Orders will be populated here -->
+        </tbody>
+    </table>
+</section>
+
+
+   
+     
+
+    
+<section class="buttom-footer">
+    <footer class="section-p1">
+      <div class="col">
+          <img src ="../public/img/logo.png" alt="" class="footer-logo">
+          <h4>Contact</h4>
+          <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
+          <p><strong>Phone:</strong> +972 52 8090 777 </p>
+          <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
+          <div class="follow">
+              <h4>Follow Us:</h4>
+              <div class ="social-icon">
+                  <i class="fab fa-facebook"></i>
+                  <i class="fab fa-twitter"></i>
+                  <i class="fab fa-instagram"></i>
+                  <i class="fab fa-pinterest"></i>
+                  <i class="fab fa-youtube"></i>
+              </div>
+          </div>
+      </div>
+
+      <div class="col">
+          <h4><strong>About</strong></h4>
+          <a href="#">About Us</a>
+          <a href="#">Delivery Information</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Term & Conditions</a>
+          <a href="#">Contact Us</a>
+      </div>
+
+      <div class="col">
+          <h4><strong>My Account</strong></h4>
+          <a href="#">Sign In</a>
+          <a href="#">View Cart</a>
+          <a href="#">My Wishlist</a>
+          <a href="#">Track My order</a>
+          <a href="#">Help</a>
+      </div>
+
+      <div class="col install">
+          <h4><strong>Install App</strong></h4>
+          <p>From App Store or Google Play</p>
+          <div class="row">
+              <img src="../public/img/app.jpg" alt="">
+              <img src="../public/img/play.jpg" alt="">
+          </div>
+          <p>Secured Payment Gateways</p>
+          <img src="../public/img/pay.png" alt="">
+      </div>
+
+      <div class="copyright">
+          <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
+      </div>
+    </footer>
+  </section>
+
+
+
+
+      <script>
+        // Your token received after login
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
+
+        if (!token) {
+        alert('You have to sign in first.');
+        // Redirect to home page
+        window.location.href = '../views/mainPage.html';
+        }
+
+        // Decode the token manually (alternative to jwt-decode library)
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(atob(base64));
+        }
+
+        const decodedToken = parseJwt(token);
+        console.log('Decoded Token:', decodedToken);
+
+        // Extract the user ID from the decoded token
+        const userId = decodedToken.userId;
+        console.log('User ID:', userId);
+
+        // Fetch user orders using the user ID
+        $(document).ready(function() {
+            const apiUrl = `http://localhost:3000/api/v1/orders/get/userorders/${userId}`;
+            console.log('API URL:', apiUrl);
+
+            $.ajax({
+                url: apiUrl,
+                type: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Include the token in the headers
+            },
+                dataType: 'json',
+                success: function(data) {
+                    console.log('Data received:', data);
+                    // Populate the table with user orders
+                    const orderList = document.getElementById('order-list');
+                    data.forEach(order => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${order.id}</td>
+                            <td>${order.orderItems.map(item => item.product.name).join(', ')}</td>
+                            <td>₪${order.totalPrice.toLocaleString()} </td>
+                            <td>${order.status}</td>
+                            <td>${new Date(order.dateOrdered).toLocaleDateString()}</td>
+                        `;
+                        orderList.appendChild(row);
+                    });
+                },
+                error: function(error) {
+                    console.error('Error fetching user orders:', error);
+                    console.log('Response status:', error.status);
+                    console.log('Response text:', error.responseText);
+                }
+            });
+        });
+    </script>
+
+      
+</body>
+</html>
