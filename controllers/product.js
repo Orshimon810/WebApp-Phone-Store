@@ -86,6 +86,23 @@ async function getProduct(req,res){
     res.status(200).send(product);
 }
 
+async function getProductImage(req,res){
+    try {
+
+    const product = await Product.findById(req.params.id);
+    //.populate('category')
+
+    if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+    }
+
+    res.status(200).json({url:product.image});
+    }catch (error) {
+    console.error("Error fetching product from the database:", error);
+    res.status(500).json({ message: 'Internal server error' });
+}
+}
+
 async function getProductStockNumber(req,res){
     const product = await Product.findById(req.params.id);
     //.populate('category')
@@ -224,6 +241,7 @@ async function updateGallery (req, res) {
 
 module.exports= {
     getAllProducts,
+    getProductImage,
     createdProduct,
     getProduct,
     getProductStockNumber,

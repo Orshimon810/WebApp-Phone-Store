@@ -29,7 +29,7 @@
     </nav>
 
     <section>
-        <h1 class="heading">Products:</h1>
+        <h1 class="heading">Products</h1>
         <table class="styled-table">
             <thead>
                 <tr>
@@ -50,9 +50,9 @@
         </table>
     </section>
 
-    <hr style="margin-top: 40px; margin-bottom: 40px;">
+    <hr>
     <section>
-        <h1 class="heading">Add Product:</h1>
+        <h1 class="heading">Add Product</h1>
         <div class="container">
             <form id="addProductForm" enctype="multipart/form-data">
                 <label for="name">Product Name:</label>
@@ -79,7 +79,7 @@
                     <option value="false">No</option>
                 </select>
 
-                <label for="image">Image:</label>
+                <label for="image">Image</label>
                 <input type="file" id="image" name="image" accept="image/*" required>
                 <div id="image-label"></div>
                 <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100px; display: none;">
@@ -87,10 +87,22 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+        <div class="publishtofb">
+        <form id="productForm">
+            <label for="productId">Product ID:</label>
+            <input type="text" id="productId" required>
+            <button type="submit">Publish on Facebook page</button>
+        </form>
+    
+        <div id="productDetails">
+            <!-- Product details will be displayed here -->
+        </div>
+        </div>
     </section>
 
-    <hr style="margin-top: 40px; margin-bottom: 40px;">
-    <h1 class="heading">Update Product:</h1>
+    <hr>
+    <section>
+    <h1 class="heading">Update Product</h1>
     <div class="container">
         <div class="left-div">
             <form id="updateProduct" enctype="multipart/form-data">
@@ -130,10 +142,10 @@
             </form>
         </div>
     </div>
-
-    <hr style="margin-top: 40px; margin-bottom: 40px;">
-    <h1 class="heading">Delete Product:</h1>
+    </section>
+    <hr>
     <section>
+        <h1 class="heading">Delete Product</h1>
         <div class="container">
             <form id="deleteProduct" enctype="multipart/form-data">
                 <label for="deleteProductId">Product id:</label>
@@ -143,7 +155,7 @@
         </div>
     </section>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
        $(document).ready(function() {
         const imageLabel = $('#image-label');
@@ -313,6 +325,59 @@
         fetchAndPopulateProducts();
     });
 
+    const pageId = '122819594237799';
+    const pageAccessToken = 'EAANwSEkrUugBOZBozQnjnli0qIUMfzRja8Ni8VQ4GxU8K2PbQNJC7JzwyzB7vE8fE93NFBn27Vqn7RXA6QwdyT8FWZAmkk4GQVKP1nrUsHrkdZBJytCIWKEcTaZAl99qPIntfZAxBpOy20MSIEsvuzCfuBtHz3lqLHQe3l2ZCFM6aAKa1AJZBL8PFMpohqYrtZAmWZCOeawL7YHqZB5wzUqDOS';
+ 
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+    const productForm = document.getElementById('productForm');
+    const productDetailsContainer = document.getElementById('productDetails');
+
+    productForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const productId = document.getElementById('productId').value;
+        getProductDetails(productId);
+    });
+
+    function getProductDetails(productId) {
+        axios.get(`http://localhost:3000/api/v1/products/${productId}`)
+        .then(response => {
+            const product = response.data;
+            const productDetails = `
+                <h1>published successfuly</h1>
+            `;
+            productDetailsContainer.innerHTML = productDetails;
+
+            // Post product details to Facebook
+            const postData = {
+                message: `Check out our new product:
+            ${product.name}
+            ${product.description}
+            ---------------
+            ${product.richDescription}`,  
+                link: 'http://127.0.0.1:5500/views/mainPage.html',
+            };
+
+            axios.post(`https://graph.facebook.com/v17.0/${pageId}/feed`, null, {
+                params: {
+                    access_token: pageAccessToken,
+                    ...postData,
+                },
+            })
+            .then(response => {
+                console.log('Post created:', response.data);
+            })
+            .catch(error => {
+                console.error('Error creating post:', error.response.data.error);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching product details:', error);
+            productDetailsContainer.innerHTML = 'Product not found';
+        });
+    }
+});
     </script>
 </body>
 </html>
