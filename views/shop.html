@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phonebook</title>
-    <link rel="stylesheet" type="text/css" href="../public/css/shop.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <script src="../public/Jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/shop.css">
 </head>
 <body>
 
@@ -27,10 +24,10 @@
         </a>
          <!--menu-->
          <ul class ="menu">
-            <li><a href="about.html">About</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="mainPage.html">Home</a></li>
-            <li><a href="chatEntrace.html">Chat</a></li>
+            <li><a href="../views/about.html">About</a></li>
+            <li><a href="../views/shop.html">Shop</a></li>
+            <li><a href="../views/mainPage.html">Home</a></li>
+            <li><a href="../views/chatEntrace.html">Chat</a></li>
          </ul>
          <div class="right-menu">
                 <!--search-->
@@ -56,16 +53,30 @@
 
 <h2 class="shop-header">Featured Products:</h2>
 
-<section id="filter-buttons">
-    <div id="button-container">
-        <button class="btn active" onclick="filterByBrand('all')"> Show all</button>
-        <button class="btn" onclick="filterByBrand('Samsung')"> Samsung</button>
-        <button class="btn" onclick="filterByBrand('Apple')"> Apple</button>
-        <button class="btn" onclick="filterByBrand('Realme')"> Realme</button>
-        <button class="btn" onclick="filterByBrand('OnePlus')"> OnePlus</button>
-        <button class="btn" onclick="filterByBrand('Asus')"> Asus</button>
+<section id="filter-category">
+    <div id="button-container2">
+        <button class="btn active" value="all">Show all</button>
+        <button class="btn" value="Phones">Phones</button>
+        <button class="btn" value="laptops">Laptops</button>
     </div>
 </section>
+
+<section id="filter-buttons">
+    <div id="button-container">
+        <button class="btn active" data-filter-type="brand" value="all">Show all</button>
+        <button class="btn" data-filter-type="brand" value="Samsung">Samsung</button>
+        <button class="btn" data-filter-type="brand" value="Apple">Apple</button>
+        <button class="btn" data-filter-type="brand" value="Realme">Realme</button>
+        <button class="btn" data-filter-type="brand" value="OnePlus">OnePlus</button>
+        <button class="btn" data-filter-type="brand" value="Asus">Asus</button>
+    </div>
+</section>
+
+
+
+
+
+
 
    
         <section class="shop-display">
@@ -138,20 +149,21 @@
     </section>
 
 
-    <div class="slider" id="news-slider"></div>
-
 
     <script>
         $(document).ready(function() {
             const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
-            
-            // Array to store product IDs and names
             const productData = [];
-
+    
             // Function to fetch products and generate product boxes
-            async function fetchAndGenerateProductBoxes() {
+            async function fetchAndGenerateProductBoxes(brand) {
                 try {
-                    const response = await fetch('http://localhost:3000/api/v1/products', {
+                    let url = 'http://localhost:3000/api/v1/products';
+                    if (brand) {
+                        url = `http://localhost:3000/api/v1/products/byBrand?brand=${brand}`;
+                    }
+    
+                    const response = await fetch(url, {
                         headers: {
                             Authorization: `Bearer ${jwtToken}`
                         }
@@ -160,11 +172,12 @@
     
                     if (response.ok) {
                         const productContainer = document.querySelector('.product-container');
+                        productContainer.innerHTML = ''; // Clear existing content
     
                         data.forEach(product => {
                             const productBox = document.createElement('div');
                             productBox.className = 'product-box';
-                            productBox.setAttribute('data-product-id', product.id); // Set the product ID as a data attribute
+                            productBox.setAttribute('data-product-id', product.id);
                             productBox.innerHTML = `
                                 <div class="product-img">
                                     <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
@@ -176,11 +189,11 @@
                                 </div>
                             `;
                             productContainer.appendChild(productBox);
-
+    
                             // Store product ID and name in the array
                             productData.push({ id: product.id, name: product.name });
                         });
-
+    
                         // Add a click event listener to the product boxes
                         $('.product-box').on('click', function() {
                             const productId = $(this).data('product-id');
@@ -198,47 +211,107 @@
                 }
             }
     
-            // Call the function to generate product boxes when the page is loaded
-            fetchAndGenerateProductBoxes();        
+            // Add click event listeners to the filter buttons
+            const filterButtons = document.querySelectorAll('.btn');
+    
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const brand = button.textContent.trim();
+                    fetchAndGenerateProductBoxes(brand === 'Show all' ? null : brand);
+    
+                    // Remove 'active' class from other buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+    
+                    // Add 'active' class to the clicked button
+                    button.classList.add('active');
+                });
+            });
+    
+            // Display all products initially
+            fetchAndGenerateProductBoxes(null);
         });
-        
-        $(document).ready(function() {
-  const apiKey = '29b0a07a97700791bcac44414e683f5d';
-  const apiUrl = `https://gnews.io/api/v4/search?q=phone&top-headlines&category=technology&lang=he&country=il&max=10&apikey=${apiKey}`;
-
-  // Make an API request to fetch news data
-  $.get(apiUrl, function(data) {
-    const articles = data.articles;
-    const sliderContainer = $('#news-slider');
-
-    articles.forEach(function(article) {
-      const slide = $('<div>').addClass('slide');
-
-      // Create an anchor tag with the title linked to the original article
-      const titleLink = $('<a>')
-        .attr('href', article.url)
-        .attr('target', '_blank') // Open link in a new tab
-        .text(article.title);
-
-      // Append the title link to the slide
-      slide.append(titleLink);
-
-      // Append the slide to the slider container
-      sliderContainer.append(slide);
-    });
-
-    // Initialize the slick-carousel slider
-    sliderContainer.slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000 // Adjust the speed (in milliseconds) between slides
-    });
-  }).fail(function(error) {
-    console.error('Error fetching news data:', error);
-  });
-});
     </script>
+  
+
+<script>
+  $(document).ready(function() {
+    const jwtToken = localStorage.getItem('token');
+    const productData = [];
+
+    async function fetchAndGenerateProductBoxes(category) {
+        try {
+            let url = 'http://localhost:3000/api/v1/products';
+
+            if (category && category !== 'all') {
+                url = `http://localhost:3000/api/v1/products/byCategory?categories=${category}`;
+            }
+
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const productContainer = document.querySelector('.product-container');
+                productContainer.innerHTML = '';
+
+                data.forEach(product => {
+                    const productBox = document.createElement('div');
+                    productBox.className = 'product-box';
+                    productBox.setAttribute('data-product-id', product.id);
+                    productBox.innerHTML = `
+                        <div class="product-img">
+                            <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                            <img src="${product.image}">
+                        </div>
+                        <div class="product-details">
+                            <a href="#" class="p-name">${product.name}</a>
+                            <span class="p-price">₪${product.price.toLocaleString()} </span>
+                        </div>
+                    `;
+                    productContainer.appendChild(productBox);
+                });
+
+                productData.push(...data.map(product => ({ id: product.id, name: product.name })));
+                
+                $('.product-box').on('click', function() {
+                    const productId = $(this).data('product-id');
+                    const productName = productData.find(product => product.id === productId)?.name;
+                    if (productName) {
+                        window.location.href = `sproduct.html?id=${productId}`;
+                    }
+                });
+            } else {
+                console.error('Failed to fetch products');
+            }
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    const categoryButtons = document.querySelectorAll('#button-container2 .btn');
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.value;
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            fetchAndGenerateProductBoxes(category);
+        });
+    });
+
+    fetchAndGenerateProductBoxes(null);
+});
+
+</script>
+    
+
+    
+    
+    
+    
       
 </body>
 </html>

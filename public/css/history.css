@@ -4,7 +4,7 @@ html, body {
     padding: 0;
 }
 
-body {
+body{
     margin: 0px;
     padding: 0px;
     font-family: Arial, Helvetica, sans-serif;
@@ -327,7 +327,7 @@ a{
     margin: 10px;
     font-size: 0.9rem;
 }
-.product-container{
+.orders-container{
     width:90%;
     display: flex;
     justify-content: center;
@@ -488,138 +488,52 @@ footer .copyright{
     text-align: center;
 }
 
-
-#cart {
-    padding-top: 20px; /* Adjust the value as needed */
-   
+ /* Style for the table container */
+ #orders-container {
+    max-width: 1200px; /* Increase the max-width value */
+    margin: 0 auto;
 }
 
-
-
-/*Cart*/
-
-#cart-container {
-    flex: 1; /* Take up remaining vertical space */
-}
-
-#cart-container table{
+/* Style for the table */
+table {
+    width: 100%; /* Increase the width value */
     border-collapse: collapse;
-    width: 100%;
-    table-layout: fixed;
+    border: 1px solid #0b0101dc;
+    margin-top: 20px;
 }
 
-#cart-container table thead{
-   font-weight: 700;
+/* Style for table header cells */
+th {
+    padding: 10px;
+    text-align: left;
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #333;
 }
 
-#cart-container table thead td{
-    background-color: #faf8e4;
-    color:black;
-    border:none;
-    padding: 6px 0;
- }
-
- #cart-container table td{
-    border:1px solid #b6b3b3;
-    text-align: center;
- }
-
- #cart-container table td:nth-child(1){
-    width:100px;
- }
-
- #cart-container table td:nth-child(2),
- #cart-container table td:nth-child(3){
-    width:200px;
- }
-
- #cart-container table td:nth-child(4),
- #cart-container table td:nth-child(5),
- #cart-container table td:nth-child(6)
- {
-    width:170px;
- }
-
- #cart-container table tbody img{
-    width: 100px;
-    height: 80px;
-    object-fit: cover;
- }
-
-
- #cart-container table tbody i{
-    color:#4d4d4d;
- }
-
- #cart-bottom .coupon>div,
- #cart-bottom .total>div{
-    border:1px solid #b6b3b3;
- }
-
- #cart-bottom .coupon h5,
- #cart-bottom .total h5{
-    background-color: #faf8e4;
-    color:black;
-    border:none;
-    padding: 6px 12px;
-    font-weight:700 ;
- }
- 
- #cart-bottom .coupon p, 
- #cart-bottom .coupon input
- {
-    padding:0 12px;
- }
-
- #cart-bottom .coupon input{
-    height: 44px;
- }
-
- #cart-bottom .coupon input{
-    margin: 0 0 20px 12px; 
- }
-
- #cart-bottom .coupon button{
-    height: 44px;
- }
-
- #cart-bottom .total div>div{
-    padding: 0 12px;
- }
-
- #cart-bottom .total h6{
-    color:#2a2a2a;
- }
-
- .second-hr{
-    background-color:#b8b7b3;
-    width: 100%;
-    height: 1px;
- }
-
- #cart-bottom .total div>button{
-    margin:0 12px 0 0;
-    display: flex;
-    justify-content: flex-end;
- }
-
- .total {
-    position: relative;
-    margin-bottom: 100px; /* Add some margin at the bottom to create space for the footer */
+/* Style for table data cells */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
-.slide {
-    direction: rtl;
-    border-style:groove;
-    border-width: 2px;
-    text-align: center;
-    background-color: rgb(187, 187, 187);
-    border-color: #a5a280;
+
+/* Alternate row background color */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
-.slide a {
-    display: inline-block; /* Ensure proper alignment of anchor tag within slide */
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:0.7rem;
-    font-style: italic;
-    font-weight: 900;
-    text-decoration: underline;
-  }
+
+/* Hover effect on rows */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Add some margin to the bottom of the table */
+table {
+    margin-bottom: 60px;
+    margin-top: 10px;
+}
+
+.your_profile_h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

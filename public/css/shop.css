@@ -268,19 +268,22 @@ footer .copyright{
     background-color: #666;
     color: white;
   }
-  .slide {
-    direction: rtl;
-    border-style:groove;
-    border-width: 2px;
+
+  #button-container2{
     text-align: center;
-    background-color: rgb(187, 187, 187);
-    border-color: #a5a280;
-}
-.slide a {
-    display: inline-block; /* Ensure proper alignment of anchor tag within slide */
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:0.7rem;
-    font-style: italic;
-    font-weight: 900;
-    text-decoration: underline;
+ }
+
+  #button-container2 .btn{
+    background-color: #ddd;
+    color:black;
+  }
+
+  #button-container2 .btn:hover {
+    background-color: #afe0fa;
+  }
+
+  /* Add a dark background to the active button */
+  #button-container2 .btn.active {
+    background-color: #666;
+    color: white;
   }

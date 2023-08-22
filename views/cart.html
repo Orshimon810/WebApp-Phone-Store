@@ -6,13 +6,11 @@
     <title>Phonebook</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" type="text/css" href="../public/css/cart.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!--JQuery------->
     <script src="../public/Jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     </head>
 <body>
     <!------menu-bar------->
@@ -24,10 +22,10 @@
         </a>
          <!--menu-->
          <ul class ="menu">
-            <li><a href="about.html">About</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="mainPage.html">Home</a></li>
-            <li><a href="chatEntrace.html">Chat</a></li>
+            <li><a href="../views/about.html">About</a></li>
+            <li><a href="../views/shop.html">Shop</a></li>
+            <li><a href="../views/mainPage.html">Home</a></li>
+            <li><a href="../views/chatEntrace.html">Chat</a></li>
          </ul>
          <div class="right-menu">
                 <!--search-->
@@ -210,9 +208,6 @@
         </footer>
       </section>
 
-    <div class="slider" id="news-slider"></div>
-
-
         <script>
             $(document).ready(function() {
                 // Retrieve cart data from localStorage
@@ -351,43 +346,6 @@ function getUserIdFromToken() {
                 updateCartDisplay();
                 updateCartIcon();
             });
-
-            $(document).ready(function() {
-  const apiKey = '29b0a07a97700791bcac44414e683f5d';
-  const apiUrl = `https://gnews.io/api/v4/search?q=phone&top-headlines&category=technology&lang=he&country=il&max=10&apikey=${apiKey}`;
-
-  // Make an API request to fetch news data
-  $.get(apiUrl, function(data) {
-    const articles = data.articles;
-    const sliderContainer = $('#news-slider');
-
-    articles.forEach(function(article) {
-      const slide = $('<div>').addClass('slide');
-
-      // Create an anchor tag with the title linked to the original article
-      const titleLink = $('<a>')
-        .attr('href', article.url)
-        .attr('target', '_blank') // Open link in a new tab
-        .text(article.title);
-
-      // Append the title link to the slide
-      slide.append(titleLink);
-
-      // Append the slide to the slider container
-      sliderContainer.append(slide);
-    });
-
-    // Initialize the slick-carousel slider
-    sliderContainer.slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000 // Adjust the speed (in milliseconds) between slides
-    });
-  }).fail(function(error) {
-    console.error('Error fetching news data:', error);
-  });
-});
         </script>
       
 </body>

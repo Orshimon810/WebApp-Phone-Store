@@ -4,8 +4,10 @@ const productController = require('../controllers/product');
 
 
 //get products by category
-//localhost:3000/api/v1/products?categories=2414211551
-router.get('/',productController.getByCategory);
+router.get('/byCategory',productController.getByCategory);
+
+//localhost:3000/api/v1/products?brand=BrandName
+router.get('/byBrand', productController.getByBrand);
 
 //get all the product from DB
 router.get(`/`, productController.getAllProducts);
@@ -15,6 +17,7 @@ router.post(`/`,productController.uploadOptions.single('image'),productControlle
 
 //get one product by ID
 router.get('/:id',productController.getProduct);
+
 router.get('/stock/:id',productController.getProductStockNumber);
 
 //update Product
