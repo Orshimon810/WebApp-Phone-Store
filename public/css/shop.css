@@ -268,3 +268,22 @@ footer .copyright{
     background-color: #666;
     color: white;
   }
+
+  #button-container2{
+    text-align: center;
+ }
+
+  #button-container2 .btn{
+    background-color: #ddd;
+    color:black;
+  }
+
+  #button-container2 .btn:hover {
+    background-color: #afe0fa;
+  }
+
+  /* Add a dark background to the active button */
+  #button-container2 .btn.active {
+    background-color: #666;
+    color: white;
+  }
