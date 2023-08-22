@@ -1,8 +1,16 @@
-const express = require('express'); //Creating Express service
+const express = require('express');
+const http = require('http'); // Add this line
+const socketIo = require('socket.io'); // Add this line
+
 const app = express();
+const server = http.createServer(app); // Create an HTTP server
+const io = socketIo(server, {
+    cors: {
+      origin: '*' // Set this to the origin(s) you want to allow
+    }
+  });
 const path = require('path');
-const mongoose = require('mongoose'); 
-const { config } = require('dotenv');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -16,23 +24,23 @@ const authJwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
 const api = process.env.API_URL;
 
-
-//Allowing all http request from other origins
+// Allow all http requests from other origins
 app.use(cors());
-app.options('*',cors());
+app.options('*', cors());
 
-
-//Checking connection to DB
+// Checking connection to DB
 mongoose.connect(process.env.MONGODB_URL, {
-useNewUrlParser: true,useUnifiedTopology:true,dbName:'Phone-shop'
-}).then(()=>{
-    console.log('Database Connection is ready...')
-}).catch((err)=>{
-    console.log(err);
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  dbName: 'Phone-shop'
+}).then(() => {
+  console.log('Database Connection is ready...')
+}).catch((err) => {
+  console.log(err);
 });
 
-//middleware
-app.use(express.static(path.join(__dirname,'public'))); // Serve static files from the "public" directory
+// Middleware
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the "public" directory
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('tiny'));
@@ -40,21 +48,36 @@ app.use(authJwt());
 app.use(errorHandler);
 
 
-//Routers
-//http://localhost:3000/api/v1/products
-app.use(`${api}/products`,productsRouter);
-//http://localhost:3000/api/v1/category
-app.use(`${api}/category`,categoriesRouter);
-//http://localhost:3000/api/v1/users
-app.use(`${api}/users`,userRouter);
-//http://localhost:3000/api/v1/orders
-app.use(`${api}/orders`,orderRouter);
-//http://localhost:3000/api/v1/branches
-app.use(`${api}/branch`,branchRouter);
+// Routers
+app.use(`${api}/products`, productsRouter);
+app.use(`${api}/category`, categoriesRouter);
+app.use(`${api}/users`, userRouter);
+app.use(`${api}/orders`, orderRouter);
+app.use(`${api}/branch`, branchRouter);
 
-//open server for listening
-const port = process.env.PORT
-app.listen(port, () => {
-    console.log(api);
-    console.log('server is running on port ' + port)
-    });
+app.get('/socket.io/socket.io.js', (req, res) => {
+    res.sendFile(path.join(__dirname, 'node_modules/socket.io/client-dist/socket.io.js'));
+});
+
+// Socket.io chat events
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  socket.on('chat message', (message) => {
+    console.log('Message:', message);
+    io.emit('chat message', message); // Broadcast the message to all connected clients
+  });
+
+  socket.on('disconnect', () => {
+    console.log('A user disconnected');
+  });
+});
+
+
+
+// Open server for listening
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(api);
+  console.log('Server is running on port ' + port);
+});

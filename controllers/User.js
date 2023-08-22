@@ -2,27 +2,39 @@ const User = require("../models/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-async function register(req,res) { 
-    console.log(req.body.password);
-    let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        passwordHash: bcrypt.hashSync(req.body.password, 10),
-        phone: req.body.phone,
-        isAdmin: req.body.isAdmin,
-        street: req.body.street,
-        apartment: req.body.apartment,
-        zip: req.body.zip,
-        city: req.body.city,
-        country: req.body.country,
-    })
-    user = await user.save();
+async function register(req, res) {
+    try {
+        console.log(req.body.password);
 
-    if(!user)
-    return res.status(400).send('the user cannot be created!')
+        // Check if the user with the given email already exists
+        const existingUser = await User.findOne({ email: req.body.email });
+        if (existingUser) {
+            return res.status(400).send('Email is already registered. Please use a different email.');
+        }
 
-    // After successful registration, send the redirection URL
-    res.send({ message: 'User registered successfully', redirectUrl: 'mainPage.html' }); // Modify the URL as needed
+        let user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            passwordHash: bcrypt.hashSync(req.body.password, 10),
+            phone: req.body.phone,
+            isAdmin: req.body.isAdmin,
+            street: req.body.street,
+            apartment: req.body.apartment,
+            zip: req.body.zip,
+            city: req.body.city,
+            country: req.body.country,
+        });
+        user = await user.save();
+
+        if (!user)
+            return res.status(400).send('The user cannot be created!');
+
+        // After successful registration, send the redirection URL
+        res.send({ message: 'User registered successfully', redirectUrl: 'mainPage.html' }); // Modify the URL as needed
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('An error occurred during registration');
+    }
 }
 
 async function getAllUsers (req,res) {

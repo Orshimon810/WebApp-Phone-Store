@@ -1,8 +1,17 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body{
     margin: 0px;
     padding: 0px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #FFFFFF;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
 }
 
 *{
@@ -318,7 +327,7 @@ a{
     margin: 10px;
     font-size: 0.9rem;
 }
-.product-container{
+.orders-container{
     width:90%;
     display: flex;
     justify-content: center;
@@ -417,11 +426,13 @@ a{
     margin: 0 10px; /* Add spacing between the icons */
 }
 
-footer{
-    display:flex;
+footer {
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     background-color: #faf8e4;
+    width: 100%;
+    padding: 20px 0; /* Add some padding for spacing */
 }
 
 footer .col{
@@ -476,22 +487,53 @@ footer .copyright{
     width: 100%;
     text-align: center;
 }
-.slide {
-    direction: rtl;
-    border-style:groove;
-    border-width: 2px;
-    text-align: center;
-    background-color: rgb(187, 187, 187);
-    border-color: #a5a280;
+
+ /* Style for the table container */
+ #orders-container {
+    max-width: 1200px; /* Increase the max-width value */
+    margin: 0 auto;
 }
-.slide a {
-    display: inline-block; /* Ensure proper alignment of anchor tag within slide */
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:0.7rem;
-    font-style: italic;
-    font-weight: 900;
-    text-decoration: underline;
-  }
 
+/* Style for the table */
+table {
+    width: 100%; /* Increase the width value */
+    border-collapse: collapse;
+    border: 1px solid #0b0101dc;
+    margin-top: 20px;
+}
 
+/* Style for table header cells */
+th {
+    padding: 10px;
+    text-align: left;
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #333;
+}
 
+/* Style for table data cells */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Alternate row background color */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect on rows */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Add some margin to the bottom of the table */
+table {
+    margin-bottom: 60px;
+    margin-top: 10px;
+}
+
+.your_profile_h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}

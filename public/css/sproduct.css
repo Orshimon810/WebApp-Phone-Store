@@ -1,0 +1,223 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FFFFFF;
+}
+
+
+*{
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    background-color: #faf8e4;
+    align-items: center;
+    padding:0px 45px;
+}
+.logo img{
+    height: 50px;
+}
+.menu{
+    display: flex;
+}
+.menu li{
+    position: relative;
+    margin: 20px;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.menu li a{
+    color: #555555;
+}
+.right-menu a{
+    margin: 0px 10px;
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.7);
+}
+.menu a:hover,
+.right-menu a:hover, 
+.search-cancel:hover,
+.form-cancel:hover{
+    color: #0b9d8a;
+    transition: all ease 0.3s
+}
+.fa-shopping-cart{
+    position: relative;
+}
+
+
+
+.col {
+    margin-left: 20px; /* Adjust the left margin as needed */
+}
+
+.footer-logo {
+    margin-bottom: 30px;
+    max-width: 200px; /* Set the maximum width of the image */
+    height: 50px; /* Maintain the aspect ratio */
+}
+
+.social-icons {
+    font-size: 24px; /* Set the desired font size */
+}
+
+.social-icons i {
+    margin: 0 10px; /* Add spacing between the icons */
+}
+
+.buttom-footer{
+margin-top: 40px;
+}
+
+footer{
+    display:flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #faf8e4;
+}
+
+
+footer .col{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+footer h4{
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+footer p{
+    font-size: 13px;
+    margin:0 0 8px 0;
+}
+
+footer a{
+    font-size: 13px;
+    text-decoration: none;
+    color:#222;
+    margin-bottom: 10px;
+}
+
+footer .follow{
+    margin-top: 20px;
+}
+
+footer .follow i{
+    color:#465b52;
+    padding-right: 4px;
+    cursor: pointer;
+}
+
+footer .install .row img{
+    border:1px solid #0b9d8a;
+    border-radius: 6px;
+}
+
+footer .install img{
+    margin:10px 0 15px 0;
+}
+
+footer .follow i:hover,
+footer a:hover{
+    color:#088178;
+}
+
+footer .copyright{
+    width: 100%;
+    text-align: center;
+}
+
+.shop-header{
+    text-align: center;
+    padding-bottom: 20px;
+    color:#088178
+}
+
+#prodetails{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-left: 100px;
+}
+
+#prodetails .single-pro-image{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 270px;
+    height: 320px;
+    margin-right: 50px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 50px;
+}
+
+#prodetails .single-pro-details{
+    width: 50%;
+    padding-top: 30px;
+    margin-left: 30px;
+    margin-bottom: 70px;
+}
+
+#prodetails .single-pro-details h4{
+    padding: 5px 0 20px;
+    font-weight: 700;
+}
+
+#prodetails .single-pro-details h2{
+   font-size: 26px;
+   font-weight: 500;
+}
+
+#prodetails .single-pro-details input{
+    width: 50px;
+    height: 47px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right:10px;
+}
+#prodetails .single-pro-details input:focus{
+    outline: none;
+}
+
+#prodetails .single-pro-details button{
+    background: #088178;
+    color:#fff;
+    padding: 14px;
+}
+
+#prodetails .single-pro-details span{
+    line-height: 25px;
+    color:#465b52
+}
+
+.slide {
+    direction: rtl;
+    border-style:groove;
+    border-width: 2px;
+    text-align: center;
+    background-color: rgb(187, 187, 187);
+    border-color: #a5a280;
+}
+.slide a {
+    display: inline-block; /* Ensure proper alignment of anchor tag within slide */
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:0.7rem;
+    font-style: italic;
+    font-weight: 900;
+    text-decoration: underline;
+  }

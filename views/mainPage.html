@@ -7,9 +7,13 @@
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/mainPage.css">
     <link rel="stylesheet" type="text/css" href="../public/css/lightslider.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
     <!--JQuery------->
     <script src="../public/Jquery.js"></script>
     <script src="../public/lightslider.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 </head>
 <body>
     <!------menu-bar------->
@@ -23,8 +27,9 @@
          <ul class ="menu">
             <li><a href="#" class="sign-in">Sign In</a></li>
             <li><a href="#" class="sign-up">Sign Up</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#">Shop</a></li>
+            <li><a href="../views/history.html" class="history">History</a></li>
+            <li><a href="../views/about.html">About</a></li>
+            <li><a href="../views/shop.html">Shop</a></li>
             <li><a href="#">Home</a></li>
             <li><a href="../views/chatEntrace.html">Chat</a></li>
          </ul>
@@ -38,7 +43,7 @@
                     <i class="fas fa-user"></i>
                 </a>
                  <!--cart-icon-->
-                 <a href="#">
+                 <a href="../views/cart.html">
                     <i class="fas fa-shopping-cart">
                     <!--number of products in cart-->
                     <span class="num-cart-producuts">0</span>
@@ -91,6 +96,9 @@
                 <input type="email" placeholder="Example@gmail.com" name="email" required>
                 <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
                 <input type="submit" value="Sign Up">
+                <!-- Inside the registration form -->
+                <div class="registration-success-message" style="color: green;"></div>
+                <div class="registration-error-message" style="color: red;"></div>
             </form>
             <div class="form-btns">
                 <a href="#" class="already-account">Already have an account?</a>
@@ -150,6 +158,10 @@
      
     </ul>
 
+
+
+    
+
     <!--new-arrivals------>
        <!--NEW ARRIVAL-------------------------------->
        <section class="new-arrival">
@@ -157,7 +169,7 @@
         <!--heading-------->
         <div class="arrival-heading">
             <strong>New Arrival</strong>
-            <p>We Provide You New Fasion Design Phones</p>
+            <p>Introducing our latest collection of fashion-forward phone designs – your gateway to new arrivals in the world of style and technology.</p>
         </div>
           <!--products----------------------->
           <div class="product-container">
@@ -171,12 +183,12 @@
                           <i class="fas fa-shopping-cart"></i>
                         </a>
                       <!--img------>
-                    <img src="../public/img/p-1.png" >
+                    <img src="../public/img/OnePlus 11.jpg" >
                   </div>
                   <!--product-details-------->
                   <div class="product-details">
-                      <a href="#" class="p-name">OnePlus 5T</a>
-                      <span class="p-price">$999.00</span>
+                      <a href="#" class="p-name">OnePlus 11</a>
+                      <span class="p-price">3,300 &#8362;</span>
                   </div>
               </div>
                 <!--product-box-2---------->
@@ -186,12 +198,12 @@
                         <!--add-cart---->
                       <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                       <!--img------>
-                      <img src="../public/img/p-2.png" >
+                      <img src="../public/img/Samsung Galaxy Z Flip5.jpg" >
                     </div>
                     <!--product-details-------->
                     <div class="product-details">
-                        <a href="#" class="p-name">Wiko 3Z</a>
-                        <span class="p-price">$249.00</span>
+                        <a href="#" class="p-name">Samsung Galaxy Z Flip5</a>
+                        <span class="p-price">3,799 &#8362;</span>
                     </div>
                 </div>
               <!--product-box-3---------->
@@ -201,12 +213,12 @@
                     <!--add-cart---->
                     <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                     <!--img------>
-                  <img src="../public/img/p-3.png" >
+                  <img src="../public/img/Iphone14.jpg" >
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">iQoo Z6 Lite 5G</a>
-                    <span class="p-price">$199.00</span>
+                    <a href="#" class="p-name">Apple iPhone 14 </a>
+                    <span class="p-price">4,349 &#8362;</span>
                 </div>
             </div>
               <!--product-box-4---------->
@@ -216,12 +228,12 @@
                     <!--add-cart---->
                     <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                     <!--img------>
-                  <img src="../public/img/p-4.png" >
+                  <img src="../public/img/Asus ROG Phone 7.jpg" >
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Nokia shit</a>
-                    <span class="p-price">$199.00</span>
+                    <a href="#" class="p-name"> Asus ROG Phone 7</a>
+                    <span class="p-price">5,200 &#8362;</span>
                 </div>
             </div>
               <!--product-box-5---------->
@@ -231,12 +243,12 @@
                     <!--add-cart---->
                     <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                     <!--img------>
-                  <img src="../public/img/p-5.png" >
+                  <img src="../public/img/Xiaomi Poco F5 Pro.jpg" >
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                    <a href="#" class="p-name">Xiaomi Poco F5 Pro</a>
+                    <span class="p-price">2,679 &#8362;</span>
                 </div>
             </div>
               <!--product-box-6---------->
@@ -246,12 +258,12 @@
                     <!--add-cart---->
                     <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                     <!--img------>
-                  <img src="../public/img/p-6.png" >
+                  <img src="../public/img/Xiaomi Redmi 12.jpeg" >
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                    <a href="#" class="p-name">Xiaomi Redmi Note 12</a>
+                    <span class="p-price">979 &#8362;</span>
                 </div>
             </div>
               <!--product-box-7---------->
@@ -261,12 +273,12 @@
                     <!--add-cart---->
                     <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
                     <!--img------>
-                  <img src="../public/img/p-7.png" >
+                  <img src="../public/img/Samsung Galaxy S23.jpg" >
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                    <a href="#" class="p-name">Samsung Galaxy S23+</a>
+                    <span class="p-price">3,549 &#8362;</span>
                 </div>
             </div>
               <!--product-box-8---------->
@@ -278,12 +290,40 @@
                         <i class="fas fa-shopping-cart"></i>
                     </a>
                     <!--img------>
-                  <img src="../public/img/p-8.png" >
+                  <img src="../public/img/Samsung Galaxy S23 Ultra.jpg" >
                 </div>
                 <!--product-details-------->
                 <div class="product-details">
-                    <a href="#" class="p-name">Drawstring T-Shirt</a>
-                    <span class="p-price">$22.00</span>
+                    <a href="#" class="p-name">Samsung Galaxy S23 Ultra</a>
+                    <span class="p-price">4,549 &#8362;</span>
+                </div>
+            </div>
+            <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/realme.jpg" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Realme C33</a>
+                    <span class="p-price">409 &#8362;</span>
+                </div>
+            </div>
+            <div class="product-box">
+                <!--product-img------------>
+                <div class="product-img">
+                    <!--add-cart---->
+                    <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                    <!--img------>
+                  <img src="../public/img/b_1-(1).jpg-1692460332080.jpeg" >
+                </div>
+                <!--product-details-------->
+                <div class="product-details">
+                    <a href="#" class="p-name">Samsung Galaxy A34</a>
+                    <span class="p-price">1,290 &#8362;</span>
                 </div>
             </div>
           </div>
@@ -342,6 +382,7 @@
         </div>
       </footer>
    
+      <div class="slider" id="news-slider"></div>
     <script type="text/javascript">
         // Search Bar
         $(document).on('click','.search',function(){
@@ -406,7 +447,7 @@
             localStorage.setItem('token', result.token);
 
             if(result.isAdmin){
-                alert(1);
+                alert('You will be redirected to Admin Panel');
                 window.location.href = 'adminPage.html'
             }
             // Redirect to the specified URL
@@ -428,38 +469,84 @@
 
     
         
-        // Register method
-        document.getElementById('register').addEventListener('submit', function(event) {
-            event.preventDefault();
+// Register method
+    // Register method
+document.getElementById('register').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+    const formData = new FormData(event.target);
+    const data = {};
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
 
-            // Send POST request to your API
-            fetch('http://localhost:3000/api/v1/users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log('Registration successful:', result);
-                // Add your desired success handling here
-                // Redirect to the sign-in page
-                window.location.href = result.redirectUrl;
-            })
-            .catch(error => {
-                console.error('Registration failed:', error);
-                // Add your error handling here
-            });
-        });
+    // Send POST request to your API
+    fetch('http://localhost:3000/api/v1/users/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.message) {
+            // Registration successful
+            document.querySelector('.registration-success-message').textContent = result.message;
+            document.querySelector('.registration-error-message').textContent = '';
+            window.location.href = '../views/mainPage.html';
+            // You can add other handling here if needed
+        } else {
+            // Registration failed
+            document.querySelector('.registration-success-message').textContent = '';
+            document.querySelector('.registration-error-message').textContent = result; // Display error message here
+            // You can add other error handling here if needed
+        }
+    })
+    .catch(error => {
+        console.error('Registration failed:', error);
+        document.querySelector('.registration-error-message').textContent = 'An error occurred during registration. Please try again.';
+        document.querySelector('.registration-success-message').textContent = ''; // Clear success message
+        // Add your error handling here
+    });
+});
 
-           
+        $(document).ready(function() {
+  const apiKey = '29b0a07a97700791bcac44414e683f5d';
+  const apiUrl = `https://gnews.io/api/v4/search?q=phone&top-headlines&category=technology&lang=he&country=il&max=10&apikey=${apiKey}`;
+
+  // Make an API request to fetch news data
+  $.get(apiUrl, function(data) {
+    const articles = data.articles;
+    const sliderContainer = $('#news-slider');
+
+    articles.forEach(function(article) {
+      const slide = $('<div>').addClass('slide');
+
+      // Create an anchor tag with the title linked to the original article
+      const titleLink = $('<a>')
+        .attr('href', article.url)
+        .attr('target', '_blank') // Open link in a new tab
+        .text(article.title);
+
+      // Append the title link to the slide
+      slide.append(titleLink);
+
+      // Append the slide to the slider container
+      sliderContainer.append(slide);
+    });
+
+    // Initialize the slick-carousel slider
+    sliderContainer.slick({
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000 // Adjust the speed (in milliseconds) between slides
+    });
+  }).fail(function(error) {
+    console.error('Error fetching news data:', error);
+  });
+});
     </script>
 
 
