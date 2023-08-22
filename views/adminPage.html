@@ -9,7 +9,6 @@
     <!--JQuery------->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="../public/Jquery.js"></script>
-    <script src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 </head>
 <body>
@@ -30,7 +29,6 @@
          </ul>
       </div>
     </nav>
-    
       <h1>Statistics</h1>
         <div id="chart1">
          <h2>Total sum of sales per day</h2>
@@ -39,73 +37,9 @@
           <h2>Items in Stock</h2>
         </div>
 
-        <form id="productForm">
-            <label for="productId">Product ID:</label>
-            <input type="text" id="productId" required>
-            <button type="submit">Publish to FaceBook</button>
-        </form>
-    
-        <div id="productDetails">
-            <!-- Product details will be displayed here -->
-        </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const token = localStorage.getItem('token'); // Replace with your actual token
-        const pageId = '122819594237799';
-    const pageAccessToken = 'EAANwSEkrUugBOZBozQnjnli0qIUMfzRja8Ni8VQ4GxU8K2PbQNJC7JzwyzB7vE8fE93NFBn27Vqn7RXA6QwdyT8FWZAmkk4GQVKP1nrUsHrkdZBJytCIWKEcTaZAl99qPIntfZAxBpOy20MSIEsvuzCfuBtHz3lqLHQe3l2ZCFM6aAKa1AJZBL8PFMpohqYrtZAmWZCOeawL7YHqZB5wzUqDOS';
- 
-
-    document.addEventListener('DOMContentLoaded', function () {
-
-    const productForm = document.getElementById('productForm');
-    const productDetailsContainer = document.getElementById('productDetails');
-
-    productForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const productId = document.getElementById('productId').value;
-        getProductDetails(productId);
-    });
-
-    function getProductDetails(productId) {
-        axios.get(`http://localhost:3000/api/v1/products/${productId}`)
-        .then(response => {
-            const product = response.data;
-            const productDetails = `
-                <h2>${product.name}</h2>
-            `;
-            productDetailsContainer.innerHTML = productDetails;
-
-            // Post product details to Facebook
-            const postData = {
-                message: `Check out our new product:
-            ${product.name}
-            ${product.description}
-            ---------------
-            ${product.richDescription}`,  
-                link: 'http://127.0.0.1:5500/views/mainPage.html',
-            };
-
-            axios.post(`https://graph.facebook.com/v17.0/${pageId}/feed`, null, {
-                params: {
-                    access_token: pageAccessToken,
-                    ...postData,
-                },
-            })
-            .then(response => {
-                console.log('Post created:', response.data);
-            })
-            .catch(error => {
-                console.error('Error creating post:', error.response.data.error);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching product details:', error);
-            productDetailsContainer.innerHTML = 'Product not found';
-        });
-    }
-});
-
 
 
         $.ajax({

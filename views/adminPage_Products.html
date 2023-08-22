@@ -344,9 +344,7 @@
         axios.get(`http://localhost:3000/api/v1/products/${productId}`)
         .then(response => {
             const product = response.data;
-            const productDetails = `
-                <h1>published successfuly</h1>
-            `;
+            const productDetails = `<h1>published successfuly</h1>            `;
             productDetailsContainer.innerHTML = productDetails;
 
             // Post product details to Facebook
