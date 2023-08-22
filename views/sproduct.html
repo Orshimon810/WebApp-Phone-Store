@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="../public/Jquery.js"></script>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/sproduct.css">
+</head>
+<body>
+
+    
+    <!------menu-bar------->
+<section class="navbar-header">
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="#" class="logo">
+            <img src="../public/img/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="#">About</a></li>
+            <li><a href="../views/shop.html">Shop</a></li>
+            <li><a href="../views/mainPage.html">Home</a></li>
+            <li><a href="../views/chatEntrace.html">Chat</a></li>
+         </ul>
+         <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search">
+                    <i class="fa-solid fa-search"></i>
+                </a>
+                 <!--user-->
+                 <a href="#" class="user">
+                    <i class="fas fa-user"></i>
+                </a>
+                 <!--cart-icon-->
+                 <a href="../views/cart.html">
+                    <i class="fas fa-shopping-cart">
+                    <!--number of products in cart-->
+                    <span class="num-cart-producuts">0</span>
+                    </i>
+                </a>
+         </div>
+      </div>
+    </nav>
+</section>
+
+   
+<section id="prodetails" class="section-p1">
+    <div class="single-pro-image">
+        <img src="" width="100%" id="MainImg" alt="">
+    </div>
+
+    <div class="single-pro-details">
+        <h6 id="productCategory"></h6>
+        <h4 id="productName"></h4>
+        <h2 id="productPrice"></h2>
+        <input type="number" value="1" id="productQuantity">
+        <button class="normal" id="addToCartBtn">Add To Cart</button>
+        <h4>Product details:</h4>
+        <span id="productDescription"></span>
+    </div>
+</section>
+
+
+
+       
+    
+
+    <section class="buttom-footer">
+      <footer class="section-p1">
+        <div class="col">
+            <img src ="../public/img/logo.png" alt="" class="footer-logo">
+            <h4>Contact</h4>
+            <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
+            <p><strong>Phone:</strong> +972 52 8090 777 </p>
+            <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
+            <div class="follow">
+                <h4>Follow Us:</h4>
+                <div class ="social-icon">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4><strong>About</strong></h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4><strong>My Account</strong></h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4><strong>Install App</strong></h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="../public/img/app.jpg" alt="">
+                <img src="../public/img/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="../public/img/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
+        </div>
+      </footer>
+    </section>
+
+
+
+    <script>
+        $(document).ready(function() {
+            const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
+    
+            // Get the product ID from the URL query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+    
+            // Fetch and populate product details
+            async function fetchAndPopulateProductDetails() {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/v1/products/${productId}`, {
+                        headers: {
+                            Authorization: `Bearer ${jwtToken}`
+                        }
+                    });
+                    const product = await response.json();
+    
+                    if (response.ok) {
+                        document.getElementById('MainImg').src = product.image;
+                        document.getElementById('productCategory').textContent = product.category.name;
+                        document.getElementById('productName').textContent = product.description;
+                        document.getElementById('productPrice').textContent = `$${product.price.toLocaleString()}`;
+                        document.getElementById('productDescription').textContent = product.richDescription;
+                        // Add functionality to 'Add To Cart' button here
+                        document.getElementById('addToCartBtn').addEventListener('click', () => {
+                        addToCart(product);
+                    });
+                    } else {
+                        console.error('Failed to fetch product details');
+                    }
+                } catch (error) {
+                    console.error('Error fetching product details:', error);
+                }
+            }
+
+            
+    
+            // Call the function to populate product details when the page is loaded
+            fetchAndPopulateProductDetails();
+
+            //CART-------
+             // Cart functionality
+             function addToCart(product) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === product.id);
+
+    const productQuantity = parseInt(document.getElementById('productQuantity').value, 10);
+
+    if (existingItem) {
+        existingItem.quantity += productQuantity; // Increment the quantity
+    } else {
+        cart.push({ ...product, quantity: productQuantity }); // Add new item with specified quantity
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartIcon();
+
+    // Show an alert and redirect the user to the shop page
+    alert('Product added to cart! You will be redirected to the shop.');
+    window.location.href = '../views/shop.html';
+}
+
+
+            function updateCartIcon() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const numCartItems = cart.reduce((total, item) => total + item.quantity, 0);
+                $('.num-cart-producuts').text(numCartItems);
+            }
+            
+        });
+    </script>
+    
+</body>
+</html>

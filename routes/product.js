@@ -33,5 +33,4 @@ router.get('/get/featured',productController.getFeaturedProducts);
 router.get('/img/:id',productController.getProductImage);
 
 
-
 module.exports = router;

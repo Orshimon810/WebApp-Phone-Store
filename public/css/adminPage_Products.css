@@ -20,6 +20,7 @@ a{
     display: flex;
     align-items: center;
     padding:0px 45px;
+    background-color: #faf8e4;
 }
 .logo img{
     height: 50px;
