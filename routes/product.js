@@ -29,6 +29,9 @@ router.get('/get/count',productController.getCount);
 //get featured products
 router.get('/get/featured',productController.getFeaturedProducts);
 
+//get product's image
+router.get('/img/:id',productController.getProductImage);
+
 
 
 module.exports = router;
