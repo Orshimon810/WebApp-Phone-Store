@@ -55,9 +55,9 @@
 
 <section id="filter-category">
     <div id="button-container2">
-        <button class="btn active" data-filter-type="category" value="all">Show all</button>
-        <button class="btn" data-filter-type="category" value="Phones">Phones</button>
-        <button class="btn" data-filter-type="category" value="Laptops">Laptops</button>
+        <button class="btn active" value="all">Show all</button>
+        <button class="btn" value="Phones">Phones</button>
+        <button class="btn" value="laptops">Laptops</button>
     </div>
 </section>
 
@@ -232,6 +232,80 @@
         });
     </script>
   
+
+<script>
+  $(document).ready(function() {
+    const jwtToken = localStorage.getItem('token');
+    const productData = [];
+
+    async function fetchAndGenerateProductBoxes(category) {
+        try {
+            let url = 'http://localhost:3000/api/v1/products';
+
+            if (category && category !== 'all') {
+                url = `http://localhost:3000/api/v1/products/byCategory?categories=${category}`;
+            }
+
+            const response = await fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${jwtToken}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const productContainer = document.querySelector('.product-container');
+                productContainer.innerHTML = '';
+
+                data.forEach(product => {
+                    const productBox = document.createElement('div');
+                    productBox.className = 'product-box';
+                    productBox.setAttribute('data-product-id', product.id);
+                    productBox.innerHTML = `
+                        <div class="product-img">
+                            <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                            <img src="${product.image}">
+                        </div>
+                        <div class="product-details">
+                            <a href="#" class="p-name">${product.name}</a>
+                            <span class="p-price">₪${product.price.toLocaleString()} </span>
+                        </div>
+                    `;
+                    productContainer.appendChild(productBox);
+                });
+
+                productData.push(...data.map(product => ({ id: product.id, name: product.name })));
+                
+                $('.product-box').on('click', function() {
+                    const productId = $(this).data('product-id');
+                    const productName = productData.find(product => product.id === productId)?.name;
+                    if (productName) {
+                        window.location.href = `sproduct.html?id=${productId}`;
+                    }
+                });
+            } else {
+                console.error('Failed to fetch products');
+            }
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
+
+    const categoryButtons = document.querySelectorAll('#button-container2 .btn');
+
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.value;
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            fetchAndGenerateProductBoxes(category);
+        });
+    });
+
+    fetchAndGenerateProductBoxes(null);
+});
+
+</script>
     
 
     
