@@ -487,7 +487,7 @@ footer .copyright{
 .slide a {
     display: inline-block; /* Ensure proper alignment of anchor tag within slide */
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:smaller;
+    font-size:0.7rem;
     font-style: italic;
     font-weight: 900;
     text-decoration: underline;
