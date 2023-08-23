@@ -2,15 +2,14 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/product');
 
-// Middleware to validate product IDs
-router.use('/:id', productController.validateProductId);
+
 
 // Define routes
 router.route('/byCategory').get(productController.getByCategory);
 router.route('/byBrand').get(productController.getByBrand);
 router.route('/').get(productController.getAllProducts)
                  .post(productController.uploadOptions.single('image'), productController.createdProduct);
-router.route('/:id').get(productController.getProduct)
+router.route('/:id').get(productController.validateProductId,productController.getProduct)
                     .put(productController.updateProduct)
                     .delete(productController.deleteProduct);
 
