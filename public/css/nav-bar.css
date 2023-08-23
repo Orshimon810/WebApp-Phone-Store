@@ -36,7 +36,8 @@ a{
 .menu a:hover,
 .right-menu a:hover, 
 .search-cancel:hover,
-.form-cancel:hover{
+.form-cancel:hover,
+.user-popup-menu li a:hover{
     color: #0b9d8a;
     transition: all ease 0.3s
 }
@@ -195,15 +196,14 @@ a{
   
   .user-popup-menu li {
     padding: 10px;
+  border-style: groove;
+  border-width: 1px;
+
   }
   
   .user-popup-menu li a {
     text-decoration: none;
     color: #333;
-  }
-  
-  .user-popup-menu li a:hover {
-    color: #007bff;
   }
   
 
@@ -224,11 +224,13 @@ a{
 /* Styling for user-popup should hide it initially */
 .user-popup {
   display: none;
-  /* Add your styles for the popup */
 }
 .sign-in, .sign-up {
     display: none;
 }
 #logout {
+    display: none;
+}
+.admin-link{
     display: none;
 }
