@@ -35,5 +35,9 @@ router.get('/get/featured',productController.getFeaturedProducts);
 //get product's image
 router.get('/img/:id',productController.getProductImage);
 
+//update countInStock
+router.put('/update-count/:id', productController.updateCountProduct);
+
+
 
 module.exports = router;

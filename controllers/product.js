@@ -271,6 +271,28 @@ async function getByCategory(req, res) {
     }
 }
 
+async function updateCountProduct(req, res) {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+        return res.status(400).send('Invalid Product ID!');
+    }
+
+    try {
+        const product = await Product.findByIdAndUpdate(
+            req.params.id,
+            { $inc: { countInStock: -1 } }, // Decrement the countInStock by 1
+            { new: true }
+        );
+
+        if (!product) {
+            return res.status(500).send('The product countInStock cannot be updated');
+        }
+
+        res.send(product);
+    } catch (error) {
+        console.error('Error updating product countInStock:', error);
+        res.status(500).send('Internal server error');
+    }
+}
 
 
 
@@ -288,4 +310,5 @@ module.exports= {
     getByCategory,
     uploadOptions,
     updateGallery,
+    updateCountProduct,
 }
