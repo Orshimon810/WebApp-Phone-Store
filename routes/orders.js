@@ -2,27 +2,14 @@ const express = require('express');
 const router = express.Router();
 const ordersController = require('../controllers/order');
 
-//get all orders
-router.get('/',ordersController.getOrders);
+// Middleware to validate order IDs
+router.use('/:id', ordersController.validateOrderId);
 
-//add order
-router.post('/',ordersController.addOrder);
-
-//get one Order by ID
-router.get('/:id',ordersController.getOrder);
-
-//update Order
-router.put('/:id',ordersController.updateOrder)
-
-//delete Order
-router.delete('/:id',ordersController.deleteOrder);
-
-router.get('/get/totalsales',ordersController.totalSales);
-
-//get orders count
-router.get('/get/count',ordersController.getOrderCount);
-
-//get orders count for specific user
-router.get('/get/userorders/:userid',ordersController.getUserOrders);
+// Define routes
+router.route('/').get(ordersController.getOrders).post(ordersController.addOrder);
+router.route('/:id').get(ordersController.getOrder).put(ordersController.updateOrder).delete(ordersController.deleteOrder);
+router.route('/get/totalsales').get(ordersController.totalSales);
+router.route('/get/count').get(ordersController.getOrderCount);
+router.route('/get/userorders/:userid').get(ordersController.getUserOrders);
 
 module.exports = router;

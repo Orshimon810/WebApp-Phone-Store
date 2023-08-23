@@ -35,28 +35,32 @@ async function getAllProducts (req,res) {
     const productList = await Product.find();
     //.select('name image -_id') if we want to show specific fields
 
-    if(!productList){
-        return res.status(500).json({success:false});
+    if (!productList || productList.length === 0) {
+        return res.status(404).json({ success: false, message: 'No products found' });
     }
     res.send(productList);
 }
 
 async function createdProduct(req, res) {
-    const category = await Category.findById(req.body.category);
-    if(!category)
-        return res.status(400).send('Invalid category!');
+    try {
+        const category = await Category.findById(req.body.category);
+        if (!category) {
+            return res.status(400).send('Invalid category!');
+        }
 
         const file = req.file;
-        if(!file) return res.status(400).send('No image in the request')
+        if (!file) {
+            return res.status(400).send('No image in the request');
+        }
 
         const fileName = file.filename;
-        const basePath = `${req.protocol}://${req.get('host')}/public/img/`;
+        const basePath = `${req.protocol}://localhost:5500/public/img/`;
     
         const product = new Product({
             name: req.body.name,
             description: req.body.description,
             richDescription: req.body.richDescription,
-            image: `${basePath}${fileName}`, //http://localhost:3000/public/uploads/image-23232323
+            image: `${basePath}${fileName}`,
             brand: req.body.brand,
             price: req.body.price,
             category: req.body.category,
@@ -68,20 +72,34 @@ async function createdProduct(req, res) {
 
         const createdProduct = await product.save();
 
-        if(!createdProduct)
+        if (!createdProduct) {
             return res.status(500).send('The product cannot be created');
+        }
 
-            res.send(createdProduct);
-      
+        res.send(createdProduct);
+    } catch (error) {
+        console.error('Error creating product:', error);
+        res.status(500).send('An error occurred while creating the product');
+    }
 }
 
+
+function validateProductId(req, res, next) {
+    const productId = req.params.id;
+  
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ success: false, message: 'Invalid product ID' });
+    }
+  
+    next();
+  }
 
 async function getProduct(req,res){
     const product = await Product.findById(req.params.id);
     //.populate('category')
 
     if(!product){
-        res.status(500).json({ success: false, message: 'Product with this ID has not found' });
+        res.status(404).json({ success: false, message: 'Product with this ID was not found' });
     }
     res.status(200).send(product);
 }
@@ -276,6 +294,7 @@ async function getByCategory(req, res) {
 
 module.exports= {
     getByBrand,
+    validateProductId,
     getAllProducts,
     getProductImage,
     createdProduct,

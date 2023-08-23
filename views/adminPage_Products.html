@@ -65,13 +65,13 @@
                 <input type="text" id="brand" name="brand" placeholder="Brand.." required>
                 
                 <label for="price">Price:</label>
-                <input type="number" id="price" name="price" placeholder="Price.." required>
+                <input type="text" pattern="^\d+(\.\d+)?$" id="price" name="price" placeholder="Price.." required>
     
                 <label for="category">Category ID:</label>
                 <input type="text" id="category" name="category" placeholder="Category ID.." required>
     
                 <label for="countInStock">Count in Stock:</label>
-                <input type="number" id="countInStock" name="countInStock" placeholder="Count in Stock.." required>
+                <input type="text" pattern="^(?:[1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$" id="countInStock" name="countInStock" placeholder="A number between 1-255" required >
     
                 <label for="isFeatured">isFeatured:</label>
                 <select id="isFeatured" name="isFeatured">
@@ -119,13 +119,13 @@
                 <input type="text" id="brand" name="brand" placeholder="Brand.." required>
                 
                 <label for="price">Price:</label>
-                <input type="number" id="price" name="price" placeholder="Price.." required>
+                <input type="text" pattern="^\d+(\.\d+)?$" id="price" name="price" placeholder="Price.." required>
     
                 <label for="category">Category ID:</label>
                 <input type="text" id="category" name="category" placeholder="Category ID.." required>
     
                 <label for="countInStock">Count in Stock:</label>
-                <input type="number" id="countInStock" name="countInStock" placeholder="Count in Stock.." required>
+                <input type="text" pattern="^(?:[1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$" id="countInStock" name="countInStock" placeholder="number between 1-255" required >
     
                 <label for="isFeatured">isFeatured:</label>
                 <select id="isFeatured" name="isFeatured">
@@ -341,40 +341,41 @@
     });
 
     function getProductDetails(productId) {
-        axios.get(`http://localhost:3000/api/v1/products/${productId}`)
+    axios.get(`http://localhost:3000/api/v1/products/${productId}`)
+    .then(response => {
+        const product = response.data;
+
+        // Post product details to Facebook
+        const postData = {
+            message: `Check out our new product:
+        ${product.name}
+        ${product.description}
+        ---------------
+        ${product.richDescription}`,  
+            link: 'http://127.0.0.1:5500/views/mainPage.html',
+        };
+
+        axios.post(`https://graph.facebook.com/v17.0/${pageId}/feed`, null, {
+            params: {
+                access_token: pageAccessToken,
+                ...postData,
+            },
+        })
         .then(response => {
-            const product = response.data;
-            const productDetails = `<h1>published successfuly</h1>            `;
-            productDetailsContainer.innerHTML = productDetails;
-
-            // Post product details to Facebook
-            const postData = {
-                message: `Check out our new product:
-            ${product.name}
-            ${product.description}
-            ---------------
-            ${product.richDescription}`,  
-                link: 'http://127.0.0.1:5500/views/mainPage.html',
-            };
-
-            axios.post(`https://graph.facebook.com/v17.0/${pageId}/feed`, null, {
-                params: {
-                    access_token: pageAccessToken,
-                    ...postData,
-                },
-            })
-            .then(response => {
-                console.log('Post created:', response.data);
-            })
-            .catch(error => {
-                console.error('Error creating post:', error.response.data.error);
-            });
+            console.log('Post created:', response.data);
+            productDetailsContainer.innerHTML = `<h1>Published successfully</h1>`;
         })
         .catch(error => {
-            console.error('Error fetching product details:', error);
-            productDetailsContainer.innerHTML = 'Product not found';
+            console.error('Error creating post:', error.response.data.error);
+            productDetailsContainer.innerHTML = `<p>Error creating post: ${error.response.data.error.message}</p>`;
         });
-    }
+    })
+    .catch(error => {
+        console.error('Error fetching product details:', error);
+        productDetailsContainer.innerHTML = `<p>Product not found or invalid ID.</p>`;
+    });
+}
+
 });
     </script>
 </body>
