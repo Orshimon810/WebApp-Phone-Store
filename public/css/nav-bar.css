@@ -226,4 +226,9 @@ a{
   display: none;
   /* Add your styles for the popup */
 }
-
+.sign-in, .sign-up {
+    display: none;
+}
+#logout {
+    display: none;
+}
