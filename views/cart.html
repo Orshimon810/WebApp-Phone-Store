@@ -6,10 +6,14 @@
     <title>Phonebook</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link rel="stylesheet" type="text/css" href="../public/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/nav-bar.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <!--JQuery------->
-    <script src="../public/Jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     </head>
 <body>
@@ -22,22 +26,21 @@
         </a>
          <!--menu-->
          <ul class ="menu">
-            <li><a href="../views/about.html">About</a></li>
-            <li><a href="../views/shop.html">Shop</a></li>
-            <li><a href="../views/mainPage.html">Home</a></li>
-            <li><a href="../views/chatEntrace.html">Chat</a></li>
+            <li><a href="#" class="sign-in">Sign In</a></li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
+            <li id="logout" style="display: none;"><a href="#" class="logout">Log Out</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="mainPage.html">Home</a></li>
+            <li><a href="chatEntrace.html">Chat</a></li>
          </ul>
          <div class="right-menu">
-                <!--search-->
-                <a href="#" class="search">
-                    <i class="fa-solid fa-search"></i>
-                </a>
                  <!--user-->
                  <a href="#" class="user">
                     <i class="fas fa-user"></i>
                 </a>
                  <!--cart-icon-->
-                 <a href="#">
+                 <a href="../views/cart.html">
                     <i class="fas fa-shopping-cart">
                     <!--number of products in cart-->
                     <span class="num-cart-producuts">0</span>
@@ -47,20 +50,15 @@
       </div>
     </nav>
 
-    <!--search-bar-------------------------->
-    <div class="search-bar">
-        <!--search-input--->
-        <div class="search-input">
-            <!--input-->
-            <input type="text" placeholder="Search For Product"/>
-            <!--cancel button-->
-            <a href="#" class="search-cancel">
-                <i class="fas fa-times"></i>
-            </a>
-        </div>
-    </div>
-
-    <!--login and signup form-->
+    <div class="user-popup">
+        <ul class="user-popup-menu">
+          <li><a href="../views/history.html">History</a></li>
+          <li><a href="../views/cart.html">Cart</a></li>
+          <li><a href="#" class="logout">Logout</a></li>
+        </ul>
+      </div>
+    
+          <!--login and signup form-->
     <div class="form">
         <!--login-->
         <div class="login-form">
@@ -90,6 +88,9 @@
                 <input type="email" placeholder="Example@gmail.com" name="email" required>
                 <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
                 <input type="submit" value="Sign Up">
+                <!-- Inside the registration form -->
+                <div class="registration-success-message" style="color: green;"></div>
+                <div class="registration-error-message" style="color: red;"></div>
             </form>
             <div class="form-btns">
                 <a href="#" class="already-account">Already have an account?</a>
@@ -207,6 +208,7 @@
           </div>
         </footer>
       </section>
+      <script src="../public/js/nav-bar.js"></script>
 
         <script>
             $(document).ready(function() {

@@ -4,51 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phonebook</title>
-    <script src="../public/Jquery.js"></script>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/shop.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/nav-bar.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
+    <script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
 </head>
 <body>
+ <!------menu-bar------->
+ <nav>
+    <div class="navigation">
+    <!-- logo-->
+    <a href="#" class="logo">
+        <img src="../public/img/logo.png"/>
+    </a>
+     <!--menu-->
+     <ul class ="menu">
+        <li><a href="#" class="sign-in">Sign In</a></li>
+        <li><a href="#" class="sign-up">Sign Up</a></li>
+        <li id="logout" style="display: none;"><a href="#" class="logout">Log Out</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="mainPage.html">Home</a></li>
+        <li><a href="chatEntrace.html">Chat</a></li>
+     </ul>
+     <div class="right-menu">
+             <!--user-->
+             <a href="#" class="user">
+                <i class="fas fa-user"></i>
+            </a>
+             <!--cart-icon-->
+             <a href="../views/cart.html">
+                <i class="fas fa-shopping-cart">
+                <!--number of products in cart-->
+                <span class="num-cart-producuts">0</span>
+                </i>
+            </a>
+     </div>
+  </div>
+</nav>
 
+<div class="user-popup">
+    <ul class="user-popup-menu">
+      <li><a href="../views/history.html">History</a></li>
+      <li><a href="../views/cart.html">Cart</a></li>
+      <li><a href="#" class="logout">Logout</a></li>
+    </ul>
+  </div>
 
-
-
-
-    <!------menu-bar------->
-    <section class="navbar-header">
-    <nav>
-        <div class="navigation">
-        <!-- logo-->
-        <a href="#" class="logo">
-            <img src="../public/img/logo.png"/>
+      <!--login and signup form-->
+<div class="form">
+    <!--login-->
+    <div class="login-form">
+        <a href="#" class="form-cancel">
+            <i class="fas fa-times"></i>
         </a>
-         <!--menu-->
-         <ul class ="menu">
-            <li><a href="../views/about.html">About</a></li>
-            <li><a href="../views/shop.html">Shop</a></li>
-            <li><a href="../views/mainPage.html">Home</a></li>
-            <li><a href="../views/chatEntrace.html">Chat</a></li>
-         </ul>
-         <div class="right-menu">
-                <!--search-->
-                <a href="#" class="search">
-                    <i class="fa-solid fa-search"></i>
-                </a>
-                 <!--user-->
-                 <a href="#" class="user">
-                    <i class="fas fa-user"></i>
-                </a>
-                 <!--cart-icon-->
-                 <a href="../views/cart.html">
-                    <i class="fas fa-shopping-cart">
-                    <!--number of products in cart-->
-                    <span class="num-cart-producuts">0</span>
-                    </i>
-                </a>
-         </div>
-      </div>
-    </nav>
-</section>
+        <strong>Sign In</strong>
+        <form id="login">
+            <input type="email" placeholder="Example@gmail.com" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <input type="submit" value="Sign In">
+        </form>
+        <div class="form-btns">
+            <a href="#" class="sign-up-btn">Create Account</a>
+        </div>
+    </div>
+
+
+     <!--Sign Up-->
+     <div class="sign-up-form">
+        <a href="#" class="form-cancel">
+            <i class="fas fa-times"></i>
+        </a>
+        <strong>Sign Up</strong>
+        <form id="register">
+            <input type="text" placeholder="Full Name" name="name" required>
+            <input type="email" placeholder="Example@gmail.com" name="email" required>
+            <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
+            <input type="submit" value="Sign Up">
+            <!-- Inside the registration form -->
+            <div class="registration-success-message" style="color: green;"></div>
+            <div class="registration-error-message" style="color: red;"></div>
+        </form>
+        <div class="form-btns">
+            <a href="#" class="already-account">Already have an account?</a>
+        </div>
+    </div>
+</div>
 
 
 <h2 class="shop-header">Featured Products:</h2>
@@ -149,7 +194,7 @@
     </section>
 
 
-
+    <script src="../public/js/nav-bar.js"></script>
     <script>
         $(document).ready(function() {
             const jwtToken = localStorage.getItem('token'); // Replace with your actual JWT token
