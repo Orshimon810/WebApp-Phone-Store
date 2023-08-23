@@ -6,37 +6,42 @@
     <title>Phonebook</title>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/about.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/nav-bar.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
-    <script src="../public/Jquery.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.7.0.js"
+    integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+    crossorigin="anonymous"></script>
+      <script src="../public/lightslider.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </head>
 <body>
     <!------menu-bar------->
     <nav>
         <div class="navigation">
         <!-- logo-->
-        <a href="mainPage.html" class="logo">
+        <a href="#" class="logo">
             <img src="../public/img/logo.png"/>
         </a>
          <!--menu-->
          <ul class ="menu">
+            <li><a href="#" class="sign-in">Sign In</a></li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
+            <li id="logout" style="display: none;"><a href="#" class="logout">Log Out</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="shop.html">Shop</a></li>
             <li><a href="mainPage.html">Home</a></li>
             <li><a href="chatEntrace.html">Chat</a></li>
          </ul>
          <div class="right-menu">
-                <!--search-->
-                <a href="#" class="search">
-                    <i class="fa-solid fa-search"></i>
-                </a>
                  <!--user-->
                  <a href="#" class="user">
                     <i class="fas fa-user"></i>
                 </a>
                  <!--cart-icon-->
-                 <a href="#">
+                 <a href="../views/cart.html">
                     <i class="fas fa-shopping-cart">
                     <!--number of products in cart-->
                     <span class="num-cart-producuts">0</span>
@@ -46,20 +51,54 @@
       </div>
     </nav>
 
-
-    <!--search-bar-------------------------->
-    <div class="search-bar">
-        <!--search-input--->
-        <div class="search-input">
-            <!--input-->
-            <input type="text" placeholder="Search For Product"/>
-            <!--cancel button-->
-            <a href="#" class="search-cancel">
+    <div class="user-popup">
+        <ul class="user-popup-menu">
+          <li><a href="../views/history.html">History</a></li>
+          <li><a href="../views/cart.html">Cart</a></li>
+          <li><a href="#" class="logout">Logout</a></li>
+        </ul>
+      </div>
+    
+          <!--login and signup form-->
+    <div class="form">
+        <!--login-->
+        <div class="login-form">
+            <a href="#" class="form-cancel">
                 <i class="fas fa-times"></i>
             </a>
+            <strong>Sign In</strong>
+            <form id="login">
+                <input type="email" placeholder="Example@gmail.com" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <input type="submit" value="Sign In">
+            </form>
+            <div class="form-btns">
+                <a href="#" class="sign-up-btn">Create Account</a>
+            </div>
+        </div>
+
+
+         <!--Sign Up-->
+         <div class="sign-up-form">
+            <a href="#" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign Up</strong>
+            <form id="register">
+                <input type="text" placeholder="Full Name" name="name" required>
+                <input type="email" placeholder="Example@gmail.com" name="email" required>
+                <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
+                <input type="submit" value="Sign Up">
+                <!-- Inside the registration form -->
+                <div class="registration-success-message" style="color: green;"></div>
+                <div class="registration-error-message" style="color: red;"></div>
+            </form>
+            <div class="form-btns">
+                <a href="#" class="already-account">Already have an account?</a>
+            </div>
         </div>
     </div>
-    
+
     <div class="about-info">
         <div class="about-container">
             <div class="video-container">
@@ -78,9 +117,63 @@
     <div id="map">
     </div>
 
+
+    <footer class="section-p1">
+        <div class="col">
+            <img src ="../public/img/logo.png" alt="" class="footer-logo">
+            <h4>Contact</h4>
+            <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
+            <p><strong>Phone:</strong> +972 52 8090 777 </p>
+            <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
+            <div class="follow">
+                <h4>Follow Us:</h4>
+                <div class ="social-icon">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4><strong>About</strong></h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4><strong>My Account</strong></h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4><strong>Install App</strong></h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="../public/img/app.jpg" alt="">
+                <img src="../public/img/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="../public/img/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
+        </div>
+      </footer>
     <div class="slider" id="news-slider"></div>
 
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGYBpcdK4QppxybDr2SRWDeFkT4HXos8I&callback=initMap"> </script>
+    <script src="../public/js/nav-bar.js"></script>
     <script>
         function initMap() {
             var options = {
