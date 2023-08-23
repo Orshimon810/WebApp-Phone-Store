@@ -18,5 +18,7 @@ router.route('/stock/:id').get(productController.getProductStockNumber);
 router.route('/get/count').get(productController.getCount);
 router.route('/get/featured').get(productController.getFeaturedProducts);
 router.route('/img/:id').get(productController.getProductImage);
+router.put('/update-count/:id', productController.updateCountProduct);
+
 
 module.exports = router;
