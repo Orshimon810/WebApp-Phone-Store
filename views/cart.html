@@ -110,7 +110,7 @@
                     <td>Image</td>
                     <td>Product</td>
                     <td>Price</td>
-                    <td>quantity</td>
+                    <td>Quantity</td>
                     <td>Total</td>
                 </tr>
             </thead>
@@ -128,12 +128,12 @@
                     <h5>Shipping details:</h5>
                     <p>Enter your shipping details .</p>
                     <form id="shipping-form">
-                        <input type="text" placeholder="shippingAddress1" class="shippingAddress1">
+                        <input type="text" placeholder="shippingAddress1" class="shippingAddress1" required>
                         <input type="text" placeholder="shippingAddress2" class="shippingAddress2">                    
-                        <input type="text" placeholder="city" class="city">     
-                        <input type="text" placeholder="country" class="country">  
-                        <input type="text" placeholder="zip" class="zip"> 
-                        <input type="text" placeholder="phone" class="phone">   
+                        <input type="text" placeholder="city" class="city" required>     
+                        <input type="text" placeholder="country" class="country" required>  
+                        <input type="text" placeholder="zip" class="zip" required> 
+                        <input type="text" placeholder="phone" class="phone" required>   
                         <button type="submit" class="btn btn-dark" id="apply-details">Apply Details</button>
                     </form>
                 </div>
@@ -290,7 +290,7 @@
                     <td>
                         <h5>₪${item.price}</h5>
                     </td>
-                    <td><input class="w-25 pl-1 quantity-input" value="${item.quantity}" type="number" min="1"></td>
+                    <td><h5 class="item-quantity">${item.quantity}</h5></td>
                     <td>
                         <h5 class="item-total">₪${(item.price * item.quantity).toFixed(2)}</h5>
                     </td>
