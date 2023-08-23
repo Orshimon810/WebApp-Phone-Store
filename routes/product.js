@@ -2,42 +2,23 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/product');
 
+// Middleware to validate product IDs
+router.use('/:id', productController.validateProductId);
 
-//get products by category
-router.get('/byCategory',productController.getByCategory);
+// Define routes
+router.route('/byCategory').get(productController.getByCategory);
+router.route('/byBrand').get(productController.getByBrand);
+router.route('/').get(productController.getAllProducts)
+                 .post(productController.uploadOptions.single('image'), productController.createdProduct);
+router.route('/:id').get(productController.getProduct)
+                    .put(productController.updateProduct)
+                    .delete(productController.deleteProduct);
 
-//localhost:3000/api/v1/products?brand=BrandName
-router.get('/byBrand', productController.getByBrand);
-
-//get all the product from DB
-router.get(`/`, productController.getAllProducts);
-
-//create one product
-router.post(`/`,productController.uploadOptions.single('image'),productController.createdProduct);
-
-//get one product by ID
-router.get('/:id',productController.getProduct);
-
-router.get('/stock/:id',productController.getProductStockNumber);
-
-//update Product
-router.put('/:id',productController.updateProduct);
-
-//delete Product
-router.delete('/:id',productController.deleteProduct);
-
-//get products count
-router.get('/get/count',productController.getCount);
-
-//get featured products
-router.get('/get/featured',productController.getFeaturedProducts);
-
-//get product's image
-router.get('/img/:id',productController.getProductImage);
-
-//update countInStock
+router.route('/stock/:id').get(productController.getProductStockNumber);
+router.route('/get/count').get(productController.getCount);
+router.route('/get/featured').get(productController.getFeaturedProducts);
+router.route('/img/:id').get(productController.getProductImage);
 router.put('/update-count/:id', productController.updateCountProduct);
-
 
 
 module.exports = router;

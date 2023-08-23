@@ -6,12 +6,14 @@
     <title>Phonebook</title>
     <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../public/css/mainPage.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/nav-bar.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/news-bar.css">
     <link rel="stylesheet" type="text/css" href="../public/css/lightslider.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
-    <!--JQuery------->
-    <script src="../public/Jquery.js"></script>
-    <script src="../public/lightslider.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="../public/js/lightslider.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 </head>
@@ -27,11 +29,11 @@
          <ul class ="menu">
             <li><a href="#" class="sign-in">Sign In</a></li>
             <li><a href="#" class="sign-up">Sign Up</a></li>
-            <li><a href="../views/history.html" class="history">History</a></li>
-            <li><a href="../views/about.html">About</a></li>
-            <li><a href="../views/shop.html">Shop</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="../views/chatEntrace.html">Chat</a></li>
+            <li id="logout" style="display: none;"><a href="#" class="logout">Log Out</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="mainPage.html">Home</a></li>
+            <li><a href="chatEntrace.html">Chat</a></li>
          </ul>
          <div class="right-menu">
                 <!--search-->
@@ -53,6 +55,14 @@
       </div>
     </nav>
 
+    <div class="user-popup">
+        <ul class="user-popup-menu">
+          <li><a href="../views/history.html">History</a></li>
+          <li><a href="../views/cart.html">Cart</a></li>
+          <li><a href="#" class="logout">Logout</a></li>
+        </ul>
+      </div>
+      
     <!--search-bar-------------------------->
     <div class="search-bar">
         <!--search-input--->
@@ -155,12 +165,9 @@
     
     </div>
     </li>
-     
+
     </ul>
-
-
-
-    
+  
 
     <!--new-arrivals------>
        <!--NEW ARRIVAL-------------------------------->
@@ -383,29 +390,11 @@
       </footer>
    
       <div class="slider" id="news-slider"></div>
+    <script src="../public/js/nav-bar.js"></script>
+    <script src="../public/js/news-bar.js"></script>
     <script type="text/javascript">
-        // Search Bar
-        $(document).on('click','.search',function(){
-            $('.search-bar').addClass('search-bar-active')
-        });
 
-        $(document).on('click','.search-cancel',function(){
-            $('.search-bar').removeClass('search-bar-active')
-        });
-
-        // Login and Signup Form
-        $(document).on('click','.user,.already-account,.sign-in',function(){
-            $('.form').addClass('login-active').removeClass('sign-up-active')
-        });
-
-        $(document).on('click','.sign-up-btn,.sign-up',function(){
-            $('.form').addClass('sign-up-active').removeClass('login-active')
-        });
-
-        $(document).on('click','.form-cancel',function(){
-            $('.form').removeClass('login-active').removeClass('sign-up-active')
-        });
-
+  
         // Slider script
         $(document).ready(function() {
     $('#adaptive').lightSlider({
@@ -417,136 +406,7 @@
         loop:true
     });
 });
-
-            // Log in method to DB
-            document.getElementById('login').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
-    // Send POST request to your API for sign in
-    fetch('http://localhost:3000/api/v1/users/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.token) {
-            console.log('Sign in successful:', result);
-            console.log('token is ',result.token);
-            console.log('result is: ',result.isAdmin);
-            
-            // Save the token in local storage
-            localStorage.setItem('token', result.token);
-
-            if(result.isAdmin){
-                alert('You will be redirected to Admin Panel');
-                window.location.href = 'adminPage.html'
-            }
-            // Redirect to the specified URL
-            setTimeout(function() {
-                // Redirect to the specified URL
-                window.location.href = result.redirectUrl;
-            }, 500); // 500 milliseconds = 0.5 seconds
-             
-        } else {
-            console.log('Sign in failed:', result.message);
-            alert('Wrong email or password. Please try again.');
-        }
-    })
-    .catch(error => {
-        console.error('Sign in failed:', error);
-        alert('An error occurred during sign in. Please try again.');
-    });
-});
-
-    
-        
-// Register method
-    // Register method
-document.getElementById('register').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const data = {};
-    formData.forEach((value, key) => {
-        data[key] = value;
-    });
-
-    // Send POST request to your API
-    fetch('http://localhost:3000/api/v1/users/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.message) {
-            // Registration successful
-            document.querySelector('.registration-success-message').textContent = result.message;
-            document.querySelector('.registration-error-message').textContent = '';
-            window.location.href = '../views/mainPage.html';
-            // You can add other handling here if needed
-        } else {
-            // Registration failed
-            document.querySelector('.registration-success-message').textContent = '';
-            document.querySelector('.registration-error-message').textContent = result; // Display error message here
-            // You can add other error handling here if needed
-        }
-    })
-    .catch(error => {
-        console.error('Registration failed:', error);
-        document.querySelector('.registration-error-message').textContent = 'An error occurred during registration. Please try again.';
-        document.querySelector('.registration-success-message').textContent = ''; // Clear success message
-        // Add your error handling here
-    });
-});
-
-        $(document).ready(function() {
-  const apiKey = '29b0a07a97700791bcac44414e683f5d';
-  const apiUrl = `https://gnews.io/api/v4/search?q=phone&top-headlines&category=technology&lang=he&country=il&max=10&apikey=${apiKey}`;
-
-  // Make an API request to fetch news data
-  $.get(apiUrl, function(data) {
-    const articles = data.articles;
-    const sliderContainer = $('#news-slider');
-
-    articles.forEach(function(article) {
-      const slide = $('<div>').addClass('slide');
-
-      // Create an anchor tag with the title linked to the original article
-      const titleLink = $('<a>')
-        .attr('href', article.url)
-        .attr('target', '_blank') // Open link in a new tab
-        .text(article.title);
-
-      // Append the title link to the slide
-      slide.append(titleLink);
-
-      // Append the slide to the slider container
-      sliderContainer.append(slide);
-    });
-
-    // Initialize the slick-carousel slider
-    sliderContainer.slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000 // Adjust the speed (in milliseconds) between slides
-    });
-  }).fail(function(error) {
-    console.error('Error fetching news data:', error);
-  });
-});
+      
     </script>
 
 
