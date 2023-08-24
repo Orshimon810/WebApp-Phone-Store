@@ -14,10 +14,14 @@ router.route('/:id').get(productController.validateProductId,productController.g
                     .delete(productController.deleteProduct);
 
 router.route('/stock/:id').get(productController.getProductStockNumber);
+router.route('/getbyname/:name').get(productController.getProductByName);
 router.route('/get/count').get(productController.getCount);
 router.route('/get/featured').get(productController.getFeaturedProducts);
 router.route('/img/:id').get(productController.getProductImage);
 router.put('/update-count/:id', productController.updateCountProduct);
+
+router.route('/autocomplete/:query')
+    .get(productController.autocompleteSuggestions);
 
 
 module.exports = router;

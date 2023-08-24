@@ -68,12 +68,14 @@
         <!--search-input--->
         <div class="search-input">
             <!--input-->
-            <input type="text" placeholder="Search For Product"/>
+            <input type="text" placeholder="Search For Product" id="searchInput"/>
+            <ul class="autocomplete-list" id="autocompleteList"></ul>
             <!--cancel button-->
             <a href="#" class="search-cancel">
                 <i class="fas fa-times"></i>
             </a>
         </div>
+        <div class="search-error" id="searchErrorMessage"></div>
     </div>
 
     <!--login and signup form-->
@@ -394,6 +396,7 @@
     <script src="../public/js/news-bar.js"></script>
     <script type="text/javascript">
 
+
   
         // Slider script
         $(document).ready(function() {
@@ -406,8 +409,66 @@
         loop:true
     });
 });
-      
     </script>
+
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+const autocompleteList = document.getElementById('autocompleteList');
+const searchErrorMessage = document.getElementById('searchErrorMessage');
+
+searchInput.addEventListener('input', async () => {
+    const productName = searchInput.value;
+    
+    // Reset the error message and autocomplete list
+    searchErrorMessage.textContent = '';
+    autocompleteList.innerHTML = '';
+
+    if (productName) {
+        try {
+            // Make an API call to retrieve autocomplete suggestions
+            const autocompleteResponse = await fetch(`http://localhost:3000/api/v1/products/autocomplete/${productName}`);
+            const suggestions = await autocompleteResponse.json();
+
+            if (autocompleteResponse.ok) {
+                // Populate autocomplete list with suggestions
+                suggestions.forEach((suggestion) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = suggestion;
+                    autocompleteList.appendChild(listItem);
+                });
+            } else {
+                console.error('Failed to retrieve autocomplete suggestions');
+            }
+        } catch (error) {
+            console.error('Error retrieving autocomplete suggestions:', error);
+        }
+    }
+});
+
+autocompleteList.addEventListener('click', async (event) => {
+    if (event.target.tagName === 'LI') {
+        const selectedSuggestion = event.target.textContent;
+        
+        try {
+            // Make an API call to retrieve the product by name
+            const response = await fetch(`http://localhost:3000/api/v1/products/getbyname/${selectedSuggestion}`);
+            const product = await response.json();
+
+            if (response.ok) {
+                // Redirect to sproduct page with product ID as query parameter
+                window.location.href = `sproduct.html?id=${product._id}`;
+            } else {
+                // Display error message to user
+                searchErrorMessage.textContent = 'Product not found';
+            }
+        } catch (error) {
+            console.error('Error searching for product:', error);
+        }
+    }
+});
+
+</script>
 
 
 </body>

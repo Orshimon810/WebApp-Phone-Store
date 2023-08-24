@@ -312,9 +312,47 @@ async function updateCountProduct(req, res) {
     }
 }
 
+async function getProductByName(req, res) {
+    try {
+        const productName = req.params.name;
+        console.log(productName)
+    
+        const product = await Product.findOne({ name: productName }); // Assuming 'description' holds the product name
+      
+        console.log(product)
+        
+        if (!product) {
+            return res.status(404).json({ success: false, message: 'Product not found' });
+        }
+
+        res.json(product);
+    } catch (err) {
+        return res.status(500).json({ success: false, error: err.message });
+    }
+}
+
+async function autocompleteSuggestions(req, res) {
+    try {
+        const query = req.params.query; // User's input
+        
+        // Find products with names that start with the query
+        const suggestions = await Product.find({ name: { $regex: `^${query}`, $options: 'i' } })
+            .select('name')
+            .limit(5); // Limit the number of suggestions returned
+        
+        const suggestionNames = suggestions.map(product => product.name);
+        res.json(suggestionNames);
+    } catch (error) {
+        return res.status(500).json({ success: false, error: err.message });
+    }
+}
+
+
 
 
 module.exports= {
+    autocompleteSuggestions,
+    getProductByName,
     getByBrand,
     validateProductId,
     getAllProducts,
