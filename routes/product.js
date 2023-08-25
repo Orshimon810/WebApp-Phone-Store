@@ -5,6 +5,7 @@ const productController = require('../controllers/product');
 
 
 // Define routes
+router.get('/getProductsByPriceRange', productController.getProductsByPriceRange);
 router.route('/byCategory').get(productController.getByCategory);
 router.route('/byBrand').get(productController.getByBrand);
 router.route('/').get(productController.getAllProducts)
@@ -20,8 +21,7 @@ router.route('/get/featured').get(productController.getFeaturedProducts);
 router.route('/img/:id').get(productController.getProductImage);
 router.put('/update-count/:id', productController.updateCountProduct);
 
-router.route('/autocomplete/:query')
-    .get(productController.autocompleteSuggestions);
+router.route('/autocomplete/:query').get(productController.autocompleteSuggestions);
 
 
 module.exports = router;

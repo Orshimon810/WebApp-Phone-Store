@@ -98,6 +98,34 @@
 
 <h2 class="shop-header">Featured Products:</h2>
 
+<section class="price-range">
+<div class="wrapper">
+    <header>
+    <h2>Price Range</h2>
+    <p>User silder or enter min and max price</p>
+    </header>
+<div class="price-input">
+    <div class="field">
+        <span>Min</span>
+        <input type="number" class="input-min" value="0">
+    </div>
+    <div class="separator">-</div>
+    <div class="field">
+        <span>Max</span>
+        <input type="number" class="input-max" value="16000">
+    </div>
+</div>
+<div class="slider">
+    <div class="progress"></div>
+ </div>
+ <div class="range-input">
+    <input type="range" class="range-min" min="0" max="16000" value="2500" step="100">
+    <input type="range" class="range-max" min="0" max="16000" value="7500" step="100">
+ </div>
+</div>
+</section>
+
+
 <section id="filter-category">
     <div id="button-container2">
         <button class="btn active" value="all">Show all</button>
@@ -118,17 +146,12 @@
 </section>
 
 
+<section class="shop-display">
+    <div class="product-container">
+    </div>
+    <!-- Product boxes will be generated dynamically by JavaScript -->
+</section>
 
-
-
-
-
-   
-        <section class="shop-display">
-            <div class="product-container">
-            </div>
-            <!-- Product boxes will be generated dynamically by JavaScript -->
-        </section>
 
 
         <section id="pagination" class="section-pp1">
@@ -352,8 +375,143 @@
 
 </script>
     
+<!--Price Range Script
+    <script>
+        const rangeInput = document.querySelectorAll(".range-input input"),
+        priceInput = document.querySelectorAll(".price-input input"),
+        progress = document.querySelector(".slider .progress");
 
+        let PriceGap = 1000;
+
+
+        rangeInput.forEach(input =>{
+            input.addEventListener("input",(e)=>{
+                //getting two ranges value and parsing them to number
+                let minVal = parseInt(rangeInput[0].value),
+                maxVal = parseInt(rangeInput[1].value);
+
+                if(maxVal -minVal<PriceGap){
+                    if(e.target.className ==="range-min"){
+                        rangeInput[0].value = maxVal - PriceGap;
+                    }
+                    else{
+                        rangeInput[1].value = minVal + PriceGap;
+                    }
+                }
+                else{
+                    priceInput[0].value = minVal;
+                    priceInput[1].value = maxVal;
+                    progress.style.left = (minVal / rangeInput[0].max)*100 +"%";
+                    progress.style.right = 100 - (maxVal / rangeInput[1].max)*100 +"%";
+                }
+            });
+        });
+
+
+        priceInput.forEach(input =>{
+            input.addEventListener("input",(e)=>{
+                //getting two inputs value and parsing them to number
+                let minVal = parseInt(priceInput[0].value),
+                maxVal = parseInt(priceInput[1].value);
+
+                if((maxVal - minVal >= PriceGap) && maxVal <= 16000){
+                    if(e.target.className ==="input-min"){
+                        rangeInput[0].value = minVal;
+                        progress.style.left = (minVal / rangeInput[0].max)*100 +"%";
+                    }
+                    else{
+                        rangeInput[1].value = maxVal;
+                        progress.style.right = 100 - (maxVal / rangeInput[1].max)*100 +"%";
+                    }
+                }
+            });
+        });
+    </script>
+    -->
+
+    <!--Price Range Script-->
+    <script>
+        $(document).ready(function() {
+            const rangeInput = document.querySelectorAll(".range-input input");
+            const priceInput = document.querySelectorAll(".price-input input");
+            const progress = document.querySelector(".slider .progress");
+            const productContainer = document.querySelector('.product-container');
     
+            let PriceGap = 1000;
+    
+            // Function to fetch products based on price range
+            function fetchProductsByPriceRange(minPrice, maxPrice) {
+                const url = `http://localhost:3000/api/v1/products/getProductsByPriceRange?min=${minPrice}&max=${maxPrice}`;
+    
+                $.get(url, function(data) {
+                    // Clear the existing products in the container
+                    productContainer.innerHTML = "";
+    
+                    data.forEach(product => {
+                        const productBox = document.createElement('div');
+                        productBox.className = 'product-box';
+                        productBox.setAttribute('data-product-id', product.id);
+                        productBox.innerHTML = `
+                            <div class="product-img">
+                                <a href="#" class="add-cart"><i class="fas fa-shopping-cart"></i></a>
+                                <img src="${product.image}">
+                            </div>
+                            <div class="product-details">
+                                <a href="#" class="p-name">${product.name}</a>
+                                <span class="p-price">₪${product.price.toLocaleString()} </span>
+                            </div>
+                        `;
+                        productContainer.appendChild(productBox);
+                    });
+                });
+            }
+    
+            rangeInput.forEach(input => {
+                input.addEventListener("input", (e) => {
+                    let minVal = parseInt(rangeInput[0].value),
+                        maxVal = parseInt(rangeInput[1].value);
+    
+                    if (maxVal - minVal < PriceGap) {
+                        if (e.target.className === "range-min") {
+                            rangeInput[0].value = maxVal - PriceGap;
+                        } else {
+                            rangeInput[1].value = minVal + PriceGap;
+                        }
+                    } else {
+                        priceInput[0].value = minVal;
+                        priceInput[1].value = maxVal;
+                        progress.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+                        progress.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+    
+                        // Fetch products based on the updated price range
+                        fetchProductsByPriceRange(minVal, maxVal);
+                    }
+                });
+            });
+    
+            priceInput.forEach(input => {
+                input.addEventListener("input", (e) => {
+                    let minVal = parseInt(priceInput[0].value),
+                        maxVal = parseInt(priceInput[1].value);
+    
+                    if ((maxVal - minVal >= PriceGap) && maxVal <= 16000) {
+                        if (e.target.className === "input-min") {
+                            rangeInput[0].value = minVal;
+                            progress.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+                        } else {
+                            rangeInput[1].value = maxVal;
+                            progress.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+                        }
+    
+                        // Fetch products based on the updated price range
+                        fetchProductsByPriceRange(minVal, maxVal);
+                    }
+                });
+            });
+        });
+    </script>
+    
+
     
     
     

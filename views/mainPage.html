@@ -30,6 +30,7 @@
             <li><a href="#" class="sign-in">Sign In</a></li>
             <li><a href="#" class="sign-up">Sign Up</a></li>
             <li id="logout" style="display: none;"><a href="#" class="logout">Log Out</a></li>
+            <li id="admin-panel" style="display: none;"><a href="adminPanel.html">Admin Panel</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="shop.html">Shop</a></li>
             <li><a href="mainPage.html">Home</a></li>
@@ -359,7 +360,7 @@
 
         <div class="col">
             <h4><strong>About</strong></h4>
-            <a href="#">About Us</a>
+            <a href="../views/about.html">About Us</a>
             <a href="#">Delivery Information</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Term & Conditions</a>
@@ -369,7 +370,7 @@
         <div class="col">
             <h4><strong>My Account</strong></h4>
             <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
+            <a href="../views/cart.html">View Cart</a>
             <a href="#">My Wishlist</a>
             <a href="#">Track My order</a>
             <a href="#">Help</a>
@@ -414,8 +415,8 @@
 
 <script>
     const searchInput = document.getElementById('searchInput');
-const autocompleteList = document.getElementById('autocompleteList');
-const searchErrorMessage = document.getElementById('searchErrorMessage');
+    const autocompleteList = document.getElementById('autocompleteList');
+    const searchErrorMessage = document.getElementById('searchErrorMessage');
 
 searchInput.addEventListener('input', async () => {
     const productName = searchInput.value;
@@ -469,7 +470,6 @@ autocompleteList.addEventListener('click', async (event) => {
 });
 
 </script>
-
 
 </body>
 </html>

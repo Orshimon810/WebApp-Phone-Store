@@ -86,3 +86,11 @@ form button:hover{
     color:rgb(3, 8, 2);
     margin-left: 10px;
 }
+
+.small-text {
+    font-size: medium;
+    color:white;
+    display: block;
+    padding-left: 18px;
+    padding-bottom: 10px;
+}

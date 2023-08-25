@@ -347,10 +347,48 @@ async function autocompleteSuggestions(req, res) {
     }
 }
 
+async function getProductsInRange(minPrice, maxPrice) {
+    try {
+        const productList = await Product.find({
+            price: { $gte: minPrice, $lte: maxPrice }
+        });
+
+        if (!productList || productList.length === 0) {
+            return [];
+        }
+
+        return productList;
+    } catch (error) {
+        console.error('Error fetching products by price range:', error);
+        throw new Error('An error occurred while fetching products');
+    }
+}
+
+async function getProductsByPriceRange(req, res) {
+    try {
+        const minPrice = parseFloat(req.query.min);
+        const maxPrice = parseFloat(req.query.max);
+
+        // Check if the provided min and max prices are valid numbers
+        if (isNaN(minPrice) || isNaN(maxPrice)) {
+            return res.status(400).json({ error: 'Invalid price range' });
+        }
+
+        // Call the function to fetch products within the price range
+        const productsInRange = await getProductsInRange(minPrice, maxPrice);
+
+        // Send the products as response
+        res.json(productsInRange);
+    } catch (error) {
+        console.error('Error fetching products by price range:', error);
+        res.status(500).json({ error: 'An error occurred while fetching products' });
+    }
+}
 
 
 
 module.exports= {
+    getProductsByPriceRange,
     autocompleteSuggestions,
     getProductByName,
     getByBrand,

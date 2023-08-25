@@ -224,3 +224,7 @@ body{
     justify-content: center;
     align-items: center;
 }
+
+.autocomplete-list li:hover {
+    color: #72f33f;
+}
