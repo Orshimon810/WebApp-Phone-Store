@@ -1,2 +1,5 @@
 **/config
 **/node_modules
+
+# Secret
+.env
