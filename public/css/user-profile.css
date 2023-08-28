@@ -1,5 +1,7 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
 }
 
 .container {
@@ -90,3 +92,4 @@ td {
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
+
