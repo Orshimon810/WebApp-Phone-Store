@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const categoryRouter = require('../controllers/category');
 
+//Define routes
 router.get(`/`, categoryRouter.getAllCategories)
       .post(`/`,categoryRouter.addCategory);
 

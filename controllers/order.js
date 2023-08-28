@@ -41,7 +41,9 @@ function validateOrderId(req, res, next) {
     next();
   }
 
+  // Function to add a new order
 async function addOrder(req, res) {
+    // Create an array of promises to save each order item
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
             quantity: orderItem.quantity,
@@ -53,21 +55,24 @@ async function addOrder(req, res) {
         return newOrderItem._id;
     }))
 
+    // Resolve the promises to get the order item IDs
     const orderItemsIdsResolved =  await orderItemsIds;
 
     console.log(orderItemsIdsResolved);
 
+    // Calculate total prices for each order item
     const totalPrices = await Promise.all(orderItemsIdsResolved.map(async (orderItemId)=>{
         const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
         const totalPrice = orderItem.product.price * orderItem.quantity;
         return totalPrice
     }))
 
-
+    // Calculate the total price for the order
     const totalPrice = totalPrices.reduce((a,b) => a + b , 0);
 
     console.log(totalPrice);
 
+     // Create a new order using the calculated data
     let order = new Order({
         orderItems: orderItemsIdsResolved,
         shippingAddress1: req.body.shippingAddress1,
@@ -80,15 +85,20 @@ async function addOrder(req, res) {
         totalPrice: totalPrice,
         user: req.body.user,
     })
+
+    // Save the new order
     order = await order.save();
 
     if(!order)
     return res.status(400).send('the order cannot be created!')
 
+     // Send the newly created order as a response
     res.send(order);
 }
 
+// Function to update the status of an order
 async function updateOrder (req,res){
+     // Update the order's status using findByIdAndUpdate
     const order = await Order.findByIdAndUpdate(
         req.params.id,
         {
@@ -101,6 +111,7 @@ async function updateOrder (req,res){
         return res.status(400).send('the order cannot be Updated');
     }
     
+     // Send the updated order as a response
     res.send(order);
 }
 
@@ -119,8 +130,10 @@ async function deleteOrder(req, res) {
     })
 }
 
+// Function to calculate and retrieve the total sales across all orders
 async function totalSales(req, res) {
     try {
+        // Use the aggregate framework to calculate total sales
         const totalSales = await Order.aggregate([
             {
                 $group: {
@@ -136,6 +149,7 @@ async function totalSales(req, res) {
             return res.status(400).send('The order totalSales cannot be generated');
         }
 
+        // Send the calculated total sales as a response
         res.send({ totalSales: totalSales[0].totalsales });
     } catch (error) {
         console.error('Error:', error);
@@ -153,7 +167,9 @@ async function getOrderCount (req,res){
     res.send({orderCount:orderCount});
 }
 
+// Function to fetch orders for a specific user
 async function getUserOrders(req,res){
+    // Find orders associated with the specified user ID
     const UserOrderList = await Order.find({user:req.params.userid}).populate({
         path: 'orderItems',
         populate: {
@@ -169,6 +185,8 @@ async function getUserOrders(req,res){
     if(!UserOrderList){
         res.status(500).json({success:false});
     }
+
+    // Send the list of user orders as a response
     res.send(UserOrderList);
 }
 

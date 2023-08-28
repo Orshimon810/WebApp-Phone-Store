@@ -1,15 +1,19 @@
 const Category = require('../models/category');
 const mongoose = require('mongoose');
 
+// Function to get all categories
 async function getAllCategories (req,res) {
     const categoryList = await Category.find();
 
     if(!categoryList){
         res.status(500).json({success:false});
     }
+    
+    // Send the list of categories as a response
     res.send(categoryList);
 }
 
+// Function to add category
 async function addCategory(req, res) {
     try {
         const category = new Category({
@@ -38,6 +42,7 @@ function validateCategoryId(req, res, next) {
     next();
   }
 
+// Function to delete category
 function deleteCategory(req, res) {
     Category.findByIdAndDelete(req.params.id)
         .then(category => {
