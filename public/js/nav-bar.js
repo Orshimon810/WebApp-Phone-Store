@@ -110,6 +110,9 @@ const userPopup = $('.user-popup');
                         if (result.isAdmin) {
                             // Store the admin status in local storage
                             localStorage.setItem('isAdmin', true);
+                             // Registration successful
+                        document.querySelector('.login-success-message').textContent = result.message;
+                        document.querySelector('.login-error-message').textContent = '';
                         
                             alert('Admin connected');
                             setTimeout(function () {
@@ -126,13 +129,17 @@ const userPopup = $('.user-popup');
                           }
                          
                     } else {
+                        // Login failed
+                        document.querySelector('.login-success-message').textContent = '';
+                        document.querySelector('.login-error-message').textContent = result; // Display error message here
                         console.log('Sign in failed:', result.message);
-                        alert('Wrong email or password. Please try again.');
                     }
                 })
                 .catch(error => {
+                    console.error('Login failed:', error);
+                    document.querySelector('.login-error-message').textContent = 'The email adress or password is incorrect  . Please try again.';
+                    document.querySelector('.login-success-message').textContent = ''; // Clear success message
                     console.error('Sign in failed:', error);
-                    alert('An error occurred during sign in. Please try again.');
                 });
             });
             
