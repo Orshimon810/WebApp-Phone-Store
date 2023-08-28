@@ -164,22 +164,6 @@ body {
     position: relative;
     margin-bottom: 100px; 
 }
-.slide {
-    direction: rtl;
-    border-style:groove;
-    border-width: 2px;
-    text-align: center;
-    background-color: rgb(187, 187, 187);
-    border-color: #a5a280;
-}
-.slide a {
-    display: inline-block; 
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:0.7rem;
-    font-style: italic;
-    font-weight: 900;
-    text-decoration: underline;
-  }
 
 
 .install img {
