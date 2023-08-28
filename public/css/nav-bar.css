@@ -36,8 +36,7 @@ a{
 .menu a:hover,
 .right-menu a:hover, 
 .search-cancel:hover,
-.form-cancel:hover,
-.user-popup-menu li a:hover{
+.form-cancel:hover{
     color: #0b9d8a;
     transition: all ease 0.3s
 }
@@ -177,13 +176,11 @@ a{
     position: absolute;
     top: 60px;
     right: 40px;
-    background: #fdfdf8;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: none;
     z-index: 100;
-    border-radius: 1rem;
-    
   }
   
   .user-popup.show {
@@ -198,15 +195,15 @@ a{
   
   .user-popup-menu li {
     padding: 10px;
-  border-style: groove;
-  border-width: 1px;
-    background: #fdfdf8;
-    border-radius: 1rem;
   }
   
   .user-popup-menu li a {
     text-decoration: none;
     color: #333;
+  }
+  
+  .user-popup-menu li a:hover {
+    color: #007bff;
   }
   
 
@@ -227,14 +224,11 @@ a{
 /* Styling for user-popup should hide it initially */
 .user-popup {
   display: none;
-
+  /* Add your styles for the popup */
 }
 .sign-in, .sign-up {
     display: none;
 }
 #logout {
-    display: none;
-}
-.admin-link{
     display: none;
 }

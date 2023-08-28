@@ -49,13 +49,13 @@
          </div>
       </div>
     </nav>
+
     <div class="user-popup">
         <ul class="user-popup-menu">
-            <li><a href="../views/history.html">Purchase History</a></li>
-            <li><a href="../views/cart.html">Cart</a></li>
-            <li class="admin-link"><a href="../views/adminPage.html" class="admin-link">Admin Panel</a></li>
-            <li><a href="#" class="logout">Logout</a></li>
-          </ul>
+          <li><a href="../views/history.html">History</a></li>
+          <li><a href="../views/cart.html">Cart</a></li>
+          <li><a href="#" class="logout">Logout</a></li>
+        </ul>
       </div>
     
           <!--login and signup form-->
@@ -202,31 +202,34 @@
 
   <script src="../public/js/nav-bar.js"></script>
       <script>
-      // Your token received after login
-const token = localStorage.getItem('token');
-console.log('Token:', token);
+        // Your token received after login
+        const token = localStorage.getItem('token');
+        console.log('Token:', token);
 
-if (!token) {
-    alert('You have to sign in first.');
-    // Redirect to home page
-    window.location.href = '../views/mainPage.html';
-}
+        if (!token) {
+        alert('You have to sign in first.');
+        // Redirect to home page
+        window.location.href = '../views/mainPage.html';
+        }
 
-// Decode the token manually (alternative to jwt-decode library)
-function parseJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    return JSON.parse(atob(base64));
-}
+        // Decode the token manually (alternative to jwt-decode library)
+        function parseJwt(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(atob(base64));
+        }
 
-const decodedToken = parseJwt(token);
-console.log('Decoded Token:', decodedToken);
+        const decodedToken = parseJwt(token);
+        console.log('Decoded Token:', decodedToken);
 
-// Extract the user ID from the decoded token
-const userId = decodedToken.userId;
-console.log('User ID:', userId);
+        // Extract the user ID from the decoded token
+        const userId = decodedToken.userId;
+        console.log('User ID:', userId);
 
-const apiUrl = 'http://localhost:3000/api/v1/users'; // Replace with your API endpoint URL
+        // Fetch user orders using the user ID
+        $(document).ready(function() {
+            const apiUrl = `http://localhost:3000/api/v1/orders/get/userorders/${userId}`;
+            console.log('API URL:', apiUrl);
 
             $.ajax({
                 url: apiUrl,

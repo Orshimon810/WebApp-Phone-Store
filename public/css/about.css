@@ -9,6 +9,69 @@ body{
     box-sizing: border-box;
 }
 
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+.navigation{
+    display: flex;
+    justify-content: space-between;
+    background-color: #faf8e4;
+    align-items: center;
+    padding:0px 45px;
+}
+.logo img{
+    height: 50px;
+}
+.menu{
+    display: flex;
+}
+.menu li{
+    position: relative;
+    margin: 20px;
+    display: flex;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.menu li a{
+    color: #555555;
+}
+.right-menu a{
+    margin: 0px 10px;
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.7);
+}
+.menu a:hover,
+.right-menu a:hover, 
+.search-cancel:hover,
+.form-cancel:hover{
+    color: #0b9d8a;
+    transition: all ease 0.3s
+}
+.fa-shopping-cart{
+    position: relative;
+}
+.num-cart-products{
+    position: absolute;
+    top:-17px;
+    right: -17px;
+    width: 25px;
+    height:25px;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    background-color: #0b9d8a;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+
+
+
 .about-info {
     font-family: Arial, sans-serif;
     margin: 0;
