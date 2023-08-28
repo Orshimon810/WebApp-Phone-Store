@@ -45,35 +45,28 @@ a{
     color: #0b9d8a;
     transition: all ease 0.3s
 }
-.chartbox{
+#chart1{
+    margin-top: 150px;
     border: 4px solid;
-    width: 60%; /* Adjust the width as needed */
-    margin-bottom: 3%;
-}
-#chart1 {
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    margin: 20px auto; /* Adjust the margins for spacing */
-    width: 80%; /* Adjust the width as needed */
-}
-
-#pieChart {
-    margin: 20px auto; /* Adjust the margins for spacing */
-    width: 80%; /* Adjust the width as needed */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 10px;
 }
-
-section {
-    margin: 5%;
-    display: flex; /* Use flex display for column layout */
-    flex-direction: column; /* Arrange children in a column */
-    align-items: center; /* Center content horizontally */
-}
-
+#pieChart{
+    margin-top: 800px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;}
+    
 h1{
+    
     text-align: center;
-    padding-top: 20px;
+    padding-top: 50px;
+    margin: 0 auto;
+    height: 175px;
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
     font-size: 300%;

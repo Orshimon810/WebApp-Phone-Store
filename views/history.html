@@ -101,25 +101,6 @@
 
     
 
-
-    <section id="userdetails-container" class="container my-5">
-        <h1 class="your_profile_h1">User Details:</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Country</th>
-                <th>Phone</th>
-            </tr>
-        </thead>
-        <tbody id="attribute-list">
-            <!-- Orders will be populated here -->
-        </tbody>
-    </table>
-</section>
-    
-
     <section id="orders-container" class="container my-5">
         <h1 class="your_profile_h1">Order history:</h1>
     <table>
@@ -231,77 +212,36 @@
             const apiUrl = `http://localhost:3000/api/v1/orders/get/userorders/${userId}`;
             console.log('API URL:', apiUrl);
 
-            $.ajax({
-                url: apiUrl,
-                type: 'GET',
-                headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Include the token in the headers
-            },
-                dataType: 'json',
-                success: function(data) {
-                    console.log('Data received:', data);
-                    // Populate the table with user orders
-                    const orderList = document.getElementById('order-list');
-                    data.forEach(order => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${order.id}</td>
-                            <td>${order.orderItems.map(item => item.product.name).join(', ')}</td>
-                            <td>₪${order.totalPrice.toLocaleString()} </td>
-                            <td>${order.status}</td>
-                            <td>${new Date(order.dateOrdered).toLocaleDateString()}</td>
-                        `;
-                        orderList.appendChild(row);
-                    });
-                },
-                error: function(error) {
-                    console.error('Error fetching user orders:', error);
-                    console.log('Response status:', error.status);
-                    console.log('Response text:', error.responseText);
-                }
-            });
-        });
+// Fetch user details based on the extracted user ID
+function fetchAndDisplayUserDetails(userId) {
+    $.ajax({
+        url: `${apiUrl}/${userId}`, // Use the API endpoint to fetch user details by ID
+        type: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        success: function (user) {
+            $("#name").text(user.name);
+            $("#email").text(user.email);
+            $("#street").text(user.street);
+            $("#apartment").text(user.apartment);
+            $("#city").text(user.city);
+            $("#zip").text(user.zip);
+            $("#country").text(user.country);
+            $("#phone").text(user.phone);
 
-
-        // Fetch user details by ID and populate the table
-    async function fetchUserDetails(userId) {
-        const jwtToken = localStorage.getItem('token');
-        if (!jwtToken) {
-            console.error('User is not logged in.');
-            return;
+            var permission = user.permissions && user.permissions.length > 0
+                ? user.permissions.join(', ')
+                : 'N/A';
+            $("#permissions").text(permission);
+        },
+        error: function () {
+            console.log('Error fetching user data.');
         }
+    });
+}
 
-        try {
-            const response = await fetch(`http://localhost:3000/api/v1/users/${userId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${jwtToken}`
-                }
-            });
-
-            if (response.ok) {
-                const userDetails = await response.json();
-                const attributeList = document.getElementById('attribute-list');
-
-                const userRow = document.createElement('tr');
-                userRow.innerHTML = `
-                    <td>${userDetails.name}</td>
-                    <td>${userDetails.email}</td>
-                    <td>${userDetails.country}</td>
-                    <td>${userDetails.phone}</td>
-                `;
-
-                attributeList.appendChild(userRow);
-            } else {
-                console.error('Failed to fetch user details.');
-            }
-        } catch (error) {
-            console.error('Error fetching user details:', error);
-        }
-    }
-
-    fetchUserDetails(userId);
+fetchAndDisplayUserDetails(userId);
     </script>
 
       

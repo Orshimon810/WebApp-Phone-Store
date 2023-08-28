@@ -1,6 +1,5 @@
 const Order = require('../models/order');
 const OrderItem = require('../models/order-item');
-const mongoose = require('mongoose');
 
 async function getOrders(req,res){
     const orderList = await Order.find().populate('user','name').sort({'dateOrdered':-1});
@@ -30,16 +29,6 @@ async function getOrder(req,res){
     } 
     res.send(order);
 }
-
-function validateOrderId(req, res, next) {
-    const order = req.params.id;
-  
-    if (!mongoose.Types.ObjectId.isValid(order)) {
-      return res.status(400).json({ success: false, message: 'Invalid order ID' });
-    }
-  
-    next();
-  }
 
 async function addOrder(req, res) {
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
@@ -174,7 +163,6 @@ async function getUserOrders(req,res){
 
 module.exports = {
 getOrders,
-validateOrderId,
 addOrder,
 getOrder,
 updateOrder,
