@@ -116,55 +116,40 @@ text-transform:capitalize;
 margin-bottom:50px;
  }
 
-
-/* ... Other CSS rules ... */
-
 .container,container2 {
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    display: flex; /* Set display to flex to align items in a column */
-    flex-direction: column; /* Align items in a column */
-    gap: 15px; /* Add some spacing between form fields */
-    width: 50%; /* Adjust the width as needed */
-    max-width: 1400px; /* Set a maximum width to ensure responsiveness */
-    margin: 0 auto; /* Center the container horizontally */
+    display: flex; 
+    flex-direction: column; 
+    gap: 15px; 
+    width: 50%; 
+    max-width: 1400px; 
+    margin: 0 auto; 
 }
 
-/* Style for form labels */
 label {
     font-weight: bold;
 }
 
 
-
-
-
-/* Add media query for responsiveness if needed */
-@media (max-width: 768px) {
-    /* Adjust styles for smaller screens */
-}
-
-
-
-/* Style the labels */
 .container label {
-    display: block; /* Display labels as block elements to separate them */
-    margin-bottom: 5px; /* Add some space below each label */
+    display: block; 
+    margin-bottom: 5px;
 }
 
-/* Style the input and select elements */
+
 .container input[type="text"],
 .container input[type="number"],
 .container select {
-    width: 100%; /* Make the input and select elements take up full width */
-    padding: 10px; /* Add padding to the input/select elements */
-    margin-bottom: 15px; /* Add space below each input/select element */
-    border: 1px solid #ccc; /* Add a border to the input/select elements */
-    border-radius: 4px; /* Round the corners of the input/select elements */
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
-/* Style the submit button */
+
 button[type="submit"] {
     background-color: #009879;
     color: white;
@@ -178,7 +163,7 @@ button[type="submit"] {
 
 
 .heading {
-    font-size: 24px; /* Adjust the size as needed */
+    font-size: 24px; 
     text-align: center;
 }
 .publishtofb{

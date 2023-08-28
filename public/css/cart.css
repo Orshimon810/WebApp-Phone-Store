@@ -18,138 +18,6 @@ body {
     box-sizing: border-box;
 }
 
-
-@keyframes fade {
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-}
-.full-slider-box{
-    width:100%;
-    height: 65vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.f-slide-1{
-    background-image: url(../img/slider_01.png);
-}
-.f-slide-2{
-    background-image: url(../img/slider_02.png);
-}
-.f-slide-3{
-    background-image: url(../img/slider_03.png);
-}
-.slider-text-box{
-    width:80%;
-    height: 90%;
-    display: flex;
-    align-items: center;
-}
-.f-slider-text{
-    display: flex;
-    flex-direction: column;
-    margin-right: auto;
-}
-.f-slider-text strong{
-    color: #333333;
-    font-size: 3rem;
-    line-height: 55px;
-    margin-top: 10px;
-    letter-spacing: 1px;
-}
-.f-slider-text span{
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    font-weight: 500;
-    color: #666666;
-    font-size: 1.2rem;
-}
-.f-slider-btn{
-    width:170px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-    background-color: #0b9d8a;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 14px;
-}
-.f-slider-text strong font{
-    color: #0b9d8a;
-}
-.arrival-heading strong{
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    color: #1b1919;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 40px;
-    padding: 5px 30px;
-    border: 1px solid #e0e0e0;
-}
-.arrival-heading{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.arrival-heading strong{
-    color: #ffffff;
-    background-color: #202020;
-    font-weight: 500;
-}
-.arrival-heading p{
-    color: #808080;
-    margin: 10px;
-    font-size: 0.9rem;
-}
-.product-container{
-    width:90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-.product-box{
-    display: flex;
-    flex-grow: 0.5;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #f7f7f7;
-    border-radius: 10px;
-    margin: 20px;
-}
-.product-img{
-    width:200px;
-    height: 210px;
-    margin: 20px;
-    cursor: pointer;
-    position: relative;
-}
-.product-img img{
-    width:100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-}
-.product-details{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 10px 20px;
-    border-top: 1px solid #f3f3f3;
-}
 .p-name{
     color: #727272;
 }
@@ -158,9 +26,7 @@ body {
     font-size: 1.2rem;
     font-weight: 400;
 }
-.product-box:hover{
-    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
-}
+
 .add-cart{
     position: absolute;
     right: -20px;
@@ -182,30 +48,15 @@ body {
     background-color: #f76b6a;
     transition: all ease 0.2s;
 }
-.product-box:hover .add-cart{
-    display: flex;
-}
-.new-arrival{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
 
 
 #cart {
-    padding-top: 20px; /* Adjust the value as needed */
+    padding-top: 20px; 
    
 }
 
-
-
-/*Cart*/
-
 #cart-container {
-    flex: 1; /* Take up remaining vertical space */
+    flex: 1; 
 }
 
 #cart-container table{
@@ -311,7 +162,7 @@ body {
 
  .total {
     position: relative;
-    margin-bottom: 100px; /* Add some margin at the bottom to create space for the footer */
+    margin-bottom: 100px; 
 }
 .slide {
     direction: rtl;
@@ -322,7 +173,7 @@ body {
     border-color: #a5a280;
 }
 .slide a {
-    display: inline-block; /* Ensure proper alignment of anchor tag within slide */
+    display: inline-block; 
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size:0.7rem;
     font-style: italic;
@@ -330,12 +181,12 @@ body {
     text-decoration: underline;
   }
 
- /* Custom styles for the images in the "Install App" section */
+
 .install img {
     max-width: 50%;
     height: auto;
-    border: none; /* Remove the default border */
-    margin: 10px 0; /* Add margin between images */
+    border: none; 
+    margin: 10px 0; 
 }
 
 .appLogo{
