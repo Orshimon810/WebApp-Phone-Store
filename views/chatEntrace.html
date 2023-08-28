@@ -7,21 +7,23 @@
     <link rel="stylesheet" type="text/css" href="../public/css/chatEntrace.css">
 </head>
 <body>
+    <canvas id="canvas"></canvas>
     <div class="container">
         <div class="header">
-            <h1>webChat</h1>
-            <span class="small-text">Consultation with experts</span>      </div>
-        <div class="body">
-            <!-- Messages will be displayed here -->
+            <h1>Web Chat</h1>
+            <span class="small-text">Consult with experts</span>      </div>
+            <div class="body">
+                <!-- Messages will be displayed here -->
+            </div>
+            <div class="footer">
+                <form id="chat-form">
+                    <input type="text" id="name" placeholder="Your Name" required style="border: 1px solid black;">
+                    <input type="text" id="message" name="message" placeholder="Your Message" required style="border: 1px solid black;">
+                    <button type="submit">SEND</button>
+                </form>
+            </div>
         </div>
-        <div class="footer">
-            <form id="chat-form">
-                <input type="text" id="name" placeholder="Your Name" required style="border: 1px solid black;">
-                <input type="text" id="message" name="message" placeholder="Your Message" required style="border: 1px solid black;">
-                <button type="submit">SEND</button>
-            </form>
-        </div>
-    </div>
+
     <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
     <script src="/public/chat.js"></script>
 </body>
