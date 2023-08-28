@@ -329,3 +329,16 @@ body {
     font-weight: 900;
     text-decoration: underline;
   }
+
+ /* Custom styles for the images in the "Install App" section */
+.install img {
+    max-width: 50%;
+    height: auto;
+    border: none; /* Remove the default border */
+    margin: 10px 0; /* Add margin between images */
+}
+
+.appLogo{
+    margin-right: 10px;
+    border: none;
+}

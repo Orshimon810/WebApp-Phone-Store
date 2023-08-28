@@ -15,9 +15,11 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <script src="../public/js/lightslider.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 </head>
 <body>
+    
     <!------menu-bar------->
     <nav>
         <div class="navigation">
@@ -64,20 +66,17 @@
         </ul>
       </div>
       
-    <!--search-bar-------------------------->
-    <div class="search-bar">
-        <!--search-input--->
+      <div class="search-bar">
         <div class="search-input">
-            <!--input-->
             <input type="text" placeholder="Search For Product" id="searchInput"/>
-            <ul class="autocomplete-list" id="autocompleteList"></ul>
-            <!--cancel button-->
-            <a href="#" class="search-cancel">
-                <i class="fas fa-times"></i>
-            </a>
+            <ul class="autocomplete-list" id="autocompleteList"></ul> <!-- Moved the ul here -->
+            <div class="search-error" id="searchErrorMessage"></div>
         </div>
-        <div class="search-error" id="searchErrorMessage"></div>
+        <a href="#" class="search-cancel">
+            <i class="fas fa-times"></i>
+        </a>
     </div>
+    
 
     <!--login and signup form-->
     <div class="form">
@@ -91,6 +90,9 @@
                 <input type="email" placeholder="Example@gmail.com" name="email">
                 <input type="password" placeholder="Password" name="password">
                 <input type="submit" value="Sign In">
+                  <!-- Inside the login form -->
+                  <div class="login-success-message" style="color: green;"></div>
+                  <div class="login-error-message" style="color: red;"></div>
             </form>
             <div class="form-btns">
                 <a href="#" class="sign-up-btn">Create Account</a>

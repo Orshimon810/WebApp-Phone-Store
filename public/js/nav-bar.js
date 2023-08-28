@@ -99,11 +99,18 @@ const userPopup = $('.user-popup');
                         
                         // Save the token in local storage
                         localStorage.setItem('token', result.token);
+
+                        // Registration successful
+                        document.querySelector('.login-success-message').textContent = result.message;
+                        document.querySelector('.login-error-message').textContent = '';
             
                         if(result.isAdmin){
                             alert('You will be redirected to Admin Panel');
                             window.location.href = 'adminPage.html'
                         }
+
+                        
+
                         // Redirect to the specified URL
                         setTimeout(function() {
                             // Redirect to the specified URL
@@ -111,13 +118,17 @@ const userPopup = $('.user-popup');
                         }, 500); // 500 milliseconds = 0.5 seconds
                          
                     } else {
-                        console.log('Sign in failed:', result.message);
-                        alert('Wrong email or password. Please try again.');
+                        // Login failed
+                        document.querySelector('.login-success-message').textContent = '';
+                        document.querySelector('.login-error-message').textContent = result; // Display error message here
+                        // You can add other error handling here if needed
                     }
                 })
                 .catch(error => {
-                    console.error('Sign in failed:', error);
-                    alert('An error occurred during sign in. Please try again.');
+                    console.error('Login failed:', error);
+                    document.querySelector('.login-error-message').textContent = 'The email adress or password is incorrect  . Please try again.';
+                    document.querySelector('.login-success-message').textContent = ''; // Clear success message
+                    // Add your error handling here
                 });
             });
             
@@ -164,3 +175,5 @@ const userPopup = $('.user-popup');
                     // Add your error handling here
                 });
             });
+
+            

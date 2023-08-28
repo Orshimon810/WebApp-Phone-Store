@@ -224,7 +224,15 @@ body{
     justify-content: center;
     align-items: center;
 }
+.autocomplete-list li{
+    list-style: none;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+}
 
 .autocomplete-list li:hover {
     color: #72f33f;
 }
+
