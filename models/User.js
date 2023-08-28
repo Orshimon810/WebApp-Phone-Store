@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
       type: String,
       default:"",
     },
-    apartmant: {
+    apartment: {
       type: String,
       default:"",
     },

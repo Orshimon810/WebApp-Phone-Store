@@ -114,8 +114,8 @@ function deleteUser(req, res) {
 async function updateUser(req,res){
     const userExist = await User.findById(req.params.id);
     let newPassword
-    if(req.body.password) {
-        newPassword = bcrypt.hashSync(req.body.password, 10)
+    if(req.body.newPassword) {
+        newPassword = bcrypt.hashSync(req.body.newPassword, 10)
     } else {
         newPassword = userExist.passwordHash;
     }
@@ -143,8 +143,28 @@ async function updateUser(req,res){
     res.send(user);
 }
 
+async function validePassword(req,res){
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).send('User not found.');
+        }
+
+        const isPasswordValid = await bcrypt.compare(req.body.oldPassword, user.passwordHash);
+        if (!isPasswordValid) {
+            return res.status(401).send('Old password is incorrect.');
+        }
+
+        res.status(200).send('Old password is correct.');
+    } catch (error) {
+        console.error('Error validating old password:', error);
+        res.status(500).send('Internal server error.');
+    }
+}
 module.exports = {
     register,
+    validateUserId,
+    validePassword,
     getAllUsers,
     getUser,
     login,

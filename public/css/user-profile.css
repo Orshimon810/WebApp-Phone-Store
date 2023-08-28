@@ -1,0 +1,101 @@
+/* Set a background color for the whole page */
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* Add some margin and padding to elements */
+.container {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 800px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for section headings */
+h1, h2 {
+    color: #333333;
+    margin-bottom: 1rem;
+}
+
+/* Style for forms */
+form {
+    margin-top: 1.5rem;
+    max-width: 400px; /* Adjust form width */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+button[type="submit"] {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Style for success and error messages */
+.success-message, .error-message {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
+}
+
+/* Add space between password change section and profile edit section */
+.edit-section{
+    margin:7% 20% 10% 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile-edit-section,.password-change-section{
+    border-style: double;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+.password-change-section{
+    margin-top: -40%;
+}
+table {
+    width: 100%; /* Increase the width value */
+    border-collapse: collapse;
+    border: 1px solid #0b0101dc;
+    margin-top: 20px;
+}
+
+/* Style for table header cells */
+th {
+    padding: 10px;
+    text-align: left;
+    background-color: #f2f2f2;
+    border-bottom: 2px solid #333;
+}
+
+/* Style for table data cells */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
