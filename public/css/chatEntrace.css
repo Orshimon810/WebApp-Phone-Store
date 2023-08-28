@@ -7,10 +7,10 @@
 
 body{
     height: 100vh;
+    background-color: #f8f8f8;
     display: flex;
     justify-content:center;
     align-items: center;
-    background-color: rgb(244, 244, 243);
 }
 
 .container{
@@ -19,11 +19,7 @@ body{
     display: flex;
     flex-direction: column;
     box-shadow: 2px 2px 20px rgba(0,0,0,0.4);
-    background-color: white;
-}
-
-.header{
-    background-color: rgb(169, 231, 144);
+    background-color: dodgerblue;
 }
 
  h1{
@@ -34,16 +30,17 @@ body{
 .body{
     flex:1;
     color:white;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.7);
     padding: 20px 30px;
 }
 
 .message{
+    background-color: dodgerblue;
     padding: 10px;
     color:white;
     width: fit-content;
     border-radius: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .user_message{
@@ -71,18 +68,11 @@ form button{
     font-size: 18px;
     border: none;
     outline: none;
-    background-color: rgb(169, 231, 144);
+    background-color: dodgerblue;
     cursor: pointer;
 }
 
 form button:hover{
-    background-color: rgb(169, 231, 144);
+    background-color: blue;
     transition: 0.2s
-}
-
-.sender-name {
-    font-size:x-large;
-    font-weight: 400;
-    color:rgb(3, 8, 2);
-    margin-left: 10px;
 }

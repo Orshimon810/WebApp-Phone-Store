@@ -2,14 +2,25 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/User');
 
-// Middleware to validate user IDs
-router.use('/:id', userController.validateUserId);
+//Register a new user
+router.post('/register',userController.register);
 
-// Define routes
-router.route('/register').post(userController.register);
-router.route('/').get(userController.getAllUsers);
-router.route('/:id').get(userController.getUser).delete(userController.deleteUser).put(userController.updateUser);
-router.route('/login').post(userController.login);
-router.route('/get/count').get(userController.getCount);
+//Get all users
+router.get('/',userController.getAllUsers);
 
-module.exports = router;
+//Get user by ID
+router.get('/:id',userController.getUser);
+
+//login a user
+router.post('/login',userController.login);
+
+//get users count
+router.get('/get/count',userController.getCount);
+
+//delete user
+router.delete('/:id',userController.deleteUser);
+
+//update user password
+router.put('/:id',userController.updateUser);
+ 
+module.exports = router; 
