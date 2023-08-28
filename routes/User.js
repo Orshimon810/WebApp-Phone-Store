@@ -8,5 +8,6 @@ router.route('/').get(userController.getAllUsers);
 router.route('/:id').get(userController.validateUserId,userController.getUser).delete(userController.deleteUser).put(userController.updateUser);
 router.route('/login').post(userController.login);
 router.route('/get/count').get(userController.getCount);
+router.route('/:id/validate-password').post(userController.validatePassword);
 
 module.exports = router;

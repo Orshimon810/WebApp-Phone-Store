@@ -58,30 +58,22 @@
       </div>
     </nav>
 
-    <!------user-popup------->
     <div class="user-popup">
-         <!-- User popup menu -->
         <ul class="user-popup-menu">
-             <!-- Link to user's history page -->
-          <li><a href="../views/history.html">History</a></li>
-            <!-- Link to user's cart page -->
-          <li><a href="../views/cart.html">Cart</a></li>
-          <!-- Logout link with "logout" class -->
-          <li><a href="#" class="logout">Logout</a></li>
-        </ul>
+            <li><a href="../views/user-profile.html">Profile</a></li>
+            <li><a href="../views/history.html">Purchase History</a></li>
+            <li><a href="../views/cart.html">Cart</a></li>
+            <li class="admin-link"><a href="../views/adminPage.html" class="admin-link">Admin Panel</a></li>
+            <li><a href="#" class="logout">Logout</a></li>
+          </ul>
       </div>
       
-<!------search-bar------->
       <div class="search-bar">
         <div class="search-input">
-             <!-- Input field for searching products -->
             <input type="text" placeholder="Search For Product" id="searchInput"/>
-              <!-- Autocomplete list for search suggestions -->
-            <ul class="autocomplete-list" id="autocompleteList"></ul> 
-             <!-- Display error message for search -->
+            <ul class="autocomplete-list" id="autocompleteList"></ul> <!-- Moved the ul here -->
             <div class="search-error" id="searchErrorMessage"></div>
         </div>
-         <!-- Cancel search button -->
         <a href="#" class="search-cancel">
             <i class="fas fa-times"></i>
         </a>
@@ -185,6 +177,7 @@
   
 
     <!--new-arrivals------>
+       <!--NEW ARRIVAL-------------------------------->
        <section class="new-arrival">
             
         <!--heading-------->
@@ -404,22 +397,83 @@
       </footer>
    
       <div class="slider" id="news-slider"></div>
-      
     <script src="../public/js/nav-bar.js"></script>
     <script src="../public/js/news-bar.js"></script>
     <script type="text/javascript">
+
+
+  
         // Slider script
         $(document).ready(function() {
-            $('#adaptive').lightSlider({
-                adaptiveHeight:true,
-                auto:true,
-                pause:2000,
-                item:1,
-                slideMargin:0,
-                loop:true
-            });
-        });
+    $('#adaptive').lightSlider({
+        adaptiveHeight:true,
+        auto:true,
+        pause:2000,
+        item:1,
+        slideMargin:0,
+        loop:true
+    });
+});
     </script>
-   <script src="../public/js/search.js"></script>
+
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const autocompleteList = document.getElementById('autocompleteList');
+    const searchErrorMessage = document.getElementById('searchErrorMessage');
+
+searchInput.addEventListener('input', async () => {
+    const productName = searchInput.value;
+    
+    // Reset the error message and autocomplete list
+    searchErrorMessage.textContent = '';
+    autocompleteList.innerHTML = '';
+
+    if (productName) {
+        try {
+            // Make an API call to retrieve autocomplete suggestions
+            const autocompleteResponse = await fetch(`http://localhost:3000/api/v1/products/autocomplete/${productName}`);
+            const suggestions = await autocompleteResponse.json();
+
+            if (autocompleteResponse.ok) {
+                // Populate autocomplete list with suggestions
+                suggestions.forEach((suggestion) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = suggestion;
+                    autocompleteList.appendChild(listItem);
+                });
+            } else {
+                console.error('Failed to retrieve autocomplete suggestions');
+            }
+        } catch (error) {
+            console.error('Error retrieving autocomplete suggestions:', error);
+        }
+    }
+});
+
+autocompleteList.addEventListener('click', async (event) => {
+    if (event.target.tagName === 'LI') {
+        const selectedSuggestion = event.target.textContent;
+        
+        try {
+            // Make an API call to retrieve the product by name
+            const response = await fetch(`http://localhost:3000/api/v1/products/getbyname/${selectedSuggestion}`);
+            const product = await response.json();
+
+            if (response.ok) {
+                // Redirect to sproduct page with product ID as query parameter
+                window.location.href = `sproduct.html?id=${product._id}`;
+            } else {
+                // Display error message to user
+                searchErrorMessage.textContent = 'Product not found';
+            }
+        } catch (error) {
+            console.error('Error searching for product:', error);
+        }
+    }
+});
+
+</script>
+
 </body>
 </html>
