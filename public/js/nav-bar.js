@@ -45,22 +45,29 @@ const userPopup = $('.user-popup');
 // Check if the user is logged in
     $(document).ready(function() {
 
-    if (isLoggedIn) {
-      // Hide sign in and sign up links
-      $('.sign-in').hide();
-      $('.sign-up').hide();
-  
-      // Show logout options
-      $('#logout').show();
-    } else {
-      // Show sign in and sign up links
-      $('.sign-in').show();
-      $('.sign-up').show();
-  
-      // Hide logout options
-      $('#logout').hide();
-      $('.user-popup').hide();
-    }
+        if (isLoggedIn) {
+            // Hide sign in and sign up links
+            $('.sign-in').hide();
+            $('.sign-up').hide();
+        
+            // Show logout options
+            $('#logout').show();
+        
+            // Check if the user is an admin
+            if (localStorage.getItem('isAdmin') === 'true') {
+              $('.admin-link').show(); // Show the Admin link
+            } else {
+              $('.admin-link').hide(); // Hide the Admin link
+            }
+          } else {
+            // Show sign in and sign up links
+            $('.sign-in').show();
+            $('.sign-up').show();
+        
+            // Hide logout options
+            $('#logout').hide();
+            $('.user-popup').hide();
+          }
   
     // Handle logout button click
     $(document).on('click', '.logout', function() {
@@ -99,36 +106,33 @@ const userPopup = $('.user-popup');
                         
                         // Save the token in local storage
                         localStorage.setItem('token', result.token);
-
-                        // Registration successful
-                        document.querySelector('.login-success-message').textContent = result.message;
-                        document.querySelector('.login-error-message').textContent = '';
             
-                        if(result.isAdmin){
-                            alert('You will be redirected to Admin Panel');
-                            window.location.href = 'adminPage.html'
-                        }
-
+                        if (result.isAdmin) {
+                            // Store the admin status in local storage
+                            localStorage.setItem('isAdmin', true);
                         
-
-                        // Redirect to the specified URL
-                        setTimeout(function() {
+                            alert('Admin connected');
+                            setTimeout(function () {
+                                window.location.href = result.redirectUrl;
+                              }, 500); // 500 milliseconds = 0.5 seconds
+                          } else {
+                            // Store the admin status in local storage
+                            localStorage.setItem('isAdmin', false);
+                        
                             // Redirect to the specified URL
-                            window.location.href = result.redirectUrl;
-                        }, 500); // 500 milliseconds = 0.5 seconds
+                            setTimeout(function () {
+                              window.location.href = result.redirectUrl;
+                            }, 500); // 500 milliseconds = 0.5 seconds
+                          }
                          
                     } else {
-                        // Login failed
-                        document.querySelector('.login-success-message').textContent = '';
-                        document.querySelector('.login-error-message').textContent = result; // Display error message here
-                        // You can add other error handling here if needed
+                        console.log('Sign in failed:', result.message);
+                        alert('Wrong email or password. Please try again.');
                     }
                 })
                 .catch(error => {
-                    console.error('Login failed:', error);
-                    document.querySelector('.login-error-message').textContent = 'The email adress or password is incorrect  . Please try again.';
-                    document.querySelector('.login-success-message').textContent = ''; // Clear success message
-                    // Add your error handling here
+                    console.error('Sign in failed:', error);
+                    alert('An error occurred during sign in. Please try again.');
                 });
             });
             
@@ -175,5 +179,3 @@ const userPopup = $('.user-popup');
                     // Add your error handling here
                 });
             });
-
-            
