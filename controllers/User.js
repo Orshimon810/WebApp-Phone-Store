@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 async function register(req, res) {
     try {
@@ -87,6 +88,16 @@ async function login(req, res) {
     }
 }
 
+function validateUserId(req, res, next) {
+    const user = req.params.id;
+  
+    if (!mongoose.Types.ObjectId.isValid(user)) {
+      return res.status(400).json({ success: false, message: 'Invalid user ID' });
+    }
+  
+    next();
+  }
+
 async function getCount (req,res){
     console.log('GET /get/count route handler called');
     const userCount = await User.countDocuments({});
@@ -145,6 +156,7 @@ async function updateUser(req,res){
 
 module.exports = {
     register,
+    validateUserId,
     getAllUsers,
     getUser,
     login,
