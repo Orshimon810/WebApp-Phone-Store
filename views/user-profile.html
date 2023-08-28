@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook - profile</title>
+    <script src="https://kit.fontawesome.com/6bf8df2f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="../public/css/nav-bar.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/user-profile.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+    <!------menu-bar------->
+    <nav>
+        <div class="navigation">
+        <!-- logo-->
+        <a href="mainPage.html" class="logo">
+            <img src="../public/img/logo.png"/>
+        </a>
+         <!--menu-->
+         <ul class ="menu">
+            <li><a href="#" class="sign-in">Sign In</a></li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
+            <li id="logout" style="display: none;"><a href="#" class="logout">Log Out</a></li>
+            <li id="admin-panel" style="display: none;"><a href="adminPanel.html">Admin Panel</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="mainPage.html">Home</a></li>
+            <li><a href="chatEntrace.html">Chat</a></li>
+         </ul>
+         <div class="right-menu">
+                <!--search-->
+                <a href="#" class="search">
+                    <i class="fa-solid fa-search"></i>
+                </a>
+                 <!--user-->
+                 <a href="#" class="user">
+                    <i class="fas fa-user"></i>
+                </a>
+                 <!--cart-icon-->
+                 <a href="../views/cart.html">
+                    <i class="fas fa-shopping-cart">
+                    <!--number of products in cart-->
+                    <span class="num-cart-producuts">0</span>
+                    </i>
+                </a>
+         </div>
+      </div>
+    </nav>
+
+    <div class="user-popup">
+        <ul class="user-popup-menu">
+            <li><a href="../views/user-profile.html">Profile</a></li>
+            <li><a href="../views/history.html">Purchase History</a></li>
+            <li><a href="../views/cart.html">Cart</a></li>
+            <li class="admin-link"><a href="../views/adminPage.html" class="admin-link">Admin Panel</a></li>
+            <li><a href="#" class="logout">Logout</a></li>
+          </ul>
+      </div>
+      
+
+    
+
+    <!--login and signup form-->
+    <div class="form">
+        <!--login-->
+        <div class="login-form">
+            <a href="#" class="form-cancel">
+               <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign In</strong>
+            <form id="login">
+                <input type="email" placeholder="Example@gmail.com" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <input type="submit" value="Sign In">
+                  <!-- Inside the login form -->
+                  <div class="login-success-message" style="color: green;"></div>
+                  <div class="login-error-message" style="color: red;"></div>
+            </form>
+            <div class="form-btns">
+                <a href="#" class="sign-up-btn">Create Account</a>
+            </div>
+        </div>
+
+
+         <!--Sign Up-->
+         <div class="sign-up-form">
+            <a href="#" class="form-cancel">
+                <i class="fas fa-times"></i>
+            </a>
+            <strong>Sign Up</strong>
+            <form id="register">
+                <input type="text" placeholder="Full Name" name="name" required>
+                <input type="email" placeholder="Example@gmail.com" name="email" required>
+                <input type="password" placeholder="Password" name="password" const packageName = require('packageName');>
+                <input type="submit" value="Sign Up">
+                <!-- Inside the registration form -->
+                <div class="registration-success-message" style="color: green;"></div>
+                <div class="registration-error-message" style="color: red;"></div>
+            </form>
+            <div class="form-btns">
+                <a href="#" class="already-account">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+
+    <!--------------user-details-------------->
+    <div id="user-profile">
+        <section id="userdetails-container" class="container">
+            <h1>User Details:</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Street</th>
+                        <th>Apartment</th>
+                        <th>City</th>
+                        <th>Zip</th>
+                        <th>Country</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody id="attribute-list">
+                    <tr>
+                        <td id="user-name"></td>
+                        <td id="user-email"></td>
+                        <td id="user-street"></td>
+                        <td id="user-apartment"></td>
+                        <td id="user-city"></td>
+                        <td id="user-zip"></td>
+                        <td id="user-country"></td>
+                        <td id="user-phone"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+<div class="edit-section">
+        <div class="profile-edit-section">
+            <h2>Edit Profile</h2>
+            <form id="profile-edit-form">
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" name="name" required>
+
+                <label for="edit-email">Email:</label>
+                <input type="email" id="edit-email" name="email" required>
+
+                <label for="edit-street">Street:</label>
+                <input type="text" id="edit-street" name="street" required>
+
+                <label for="edit-apartment">Apartment:</label>
+                <input type="text" id="edit-apartment" name="apartment" required>
+                
+                <label for="edit-city">City:</label>
+                <input type="text" id="edit-city" name="city" required>
+                                
+                <label for="edit-zip">Zip:</label>
+                <input type="text" id="edit-zip" name="zip" required>
+
+                <label for="edit-country">Country:</label>
+                <input type="text" id="edit-country" name="country" required>
+
+                <label for="edit-phone">Phone:</label>
+                <input type="text" id="edit-phone" name="phone" required>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+
+    <div class="password-change-section">
+        <h2>Change Password</h2>
+        <form id="password-change-form">
+            <label for="old-password">Old Password:</label>
+            <input type="password" id="old-password" name="oldPassword" required>
+    
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="newPassword" required>
+    
+            <label for="confirm-new-password">Confirm New Password:</label>
+            <input type="password" id="confirm-new-password" name="confirmNewPassword" required>
+    
+            <button type="submit">Change Password</button>
+        </form>
+        <div class="password-change-message" style="color: green;"></div>
+        <div class="password-change-error-message" style="color: red;"></div>
+    </div>
+</div>
+    
+<!-----------footer--------->
+      <footer class="section-p1">
+        <div class="col">
+            <img src ="../public/img/logo.png" alt="" class="footer-logo">
+            <h4>Contact</h4>
+            <p><strong>Adress:</strong> Wiesel St 2, Rishon LeTsiyon</p>
+            <p><strong>Phone:</strong> +972 52 8090 777 </p>
+            <p><strong>Hours:</strong> 10:00-20:00, Sun-Fri</p>
+            <div class="follow">
+                <h4>Follow Us:</h4>
+                <div class ="social-icon">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4><strong>About</strong></h4>
+            <a href="../views/about.html">About Us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Term & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4><strong>My Account</strong></h4>
+            <a href="#">Sign In</a>
+            <a href="../views/cart.html">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4><strong>Install App</strong></h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="../public/img/app.jpg" alt="">
+                <img src="../public/img/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="../public/img/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2023 Zigel&Or PHONEBOOK - Digital Shop</p>
+        </div>
+      </footer>
+   
+    <script src="../public/js/nav-bar.js"></script>
+    <script src="../public/js/user-profile.js"></script>
+    
+
+</body>
+</html>
