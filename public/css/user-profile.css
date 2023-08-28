@@ -1,9 +1,7 @@
-/* Set a background color for the whole page */
 body {
     font-family: Arial, sans-serif;
 }
 
-/* Add some margin and padding to elements */
 .container {
     margin: 2rem auto;
     padding: 1rem;
@@ -12,13 +10,11 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for section headings */
 h1, h2 {
     color: #333333;
     margin-bottom: 1rem;
 }
 
-/* Style for forms */
 form {
     margin-top: 1.5rem;
     max-width: 400px; /* Adjust form width */
@@ -36,7 +32,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Include padding and border in the width calculation */
+    box-sizing: border-box; 
 }
 
 button[type="submit"] {
@@ -48,7 +44,6 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-/* Style for success and error messages */
 .success-message, .error-message {
     margin-top: 1rem;
     font-weight: bold;
@@ -62,7 +57,6 @@ button[type="submit"] {
     color: red;
 }
 
-/* Add space between password change section and profile edit section */
 .edit-section{
     margin:7% 20% 10% 20%;
     display: flex;
@@ -79,13 +73,12 @@ button[type="submit"] {
     margin-top: -40%;
 }
 table {
-    width: 100%; /* Increase the width value */
+    width: 100%; 
     border-collapse: collapse;
     border: 1px solid #0b0101dc;
     margin-top: 20px;
 }
 
-/* Style for table header cells */
 th {
     padding: 10px;
     text-align: left;
@@ -93,7 +86,6 @@ th {
     border-bottom: 2px solid #333;
 }
 
-/* Style for table data cells */
 td {
     padding: 10px;
     border-bottom: 1px solid #ccc;

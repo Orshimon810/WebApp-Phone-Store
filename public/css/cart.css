@@ -193,3 +193,9 @@ body {
     margin-right: 10px;
     border: none;
 }
+.menu{
+   position: relative;
+   padding: 5px;
+   margin-top:5px;
+   font-family: Arial, Helvetica, sans-serif;
+   }

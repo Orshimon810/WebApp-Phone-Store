@@ -56,16 +56,20 @@ function createChart(data) {
     const dates = sumOfPricesByDate.map(entry => entry.date);
     const totalPrices = sumOfPricesByDate.map(entry => entry.totalPrice);
 
-    const xScale = d3.scaleBand()
-        .domain(dates)
-        .range([0, chartWidth])
-        .padding(0.1);
+
 
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(totalPrices)])
         .nice()
         .range([chartHeight, 0]);
 
+        const xScale = d3.scaleBand()
+        .domain(dates)
+        .range([0, chartWidth])
+        .paddingInner(0.2) // Adjust this value to change the spacing between bars
+        .paddingOuter(0.1);
+    
+    // Adjust the x position and width of the bars
     chart.selectAll(".bar")
         .data(totalPrices)
         .enter()
@@ -75,12 +79,17 @@ function createChart(data) {
         .attr("y", d => yScale(d))
         .attr("width", xScale.bandwidth())
         .attr("height", d => chartHeight - yScale(d))
-        .style("fill", "blue"); // Set the fill color to blue
+        .style("fill", "blue");
 
 
-    chart.append("g")
+        chart.append("g")
         .attr("transform", `translate(0,${chartHeight})`)
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale))
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-0.8em")
+        .attr("dy", "0.15em")
+        .attr("transform", "rotate(-45)");
 
     chart.append("g")
         .call(d3.axisLeft(yScale));

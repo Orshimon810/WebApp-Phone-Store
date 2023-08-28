@@ -492,6 +492,8 @@ footer .copyright{
  #orders-container {
     max-width: 1200px; /* Increase the max-width value */
     margin: 0 auto;
+    padding: 60px;
+    margin-bottom: 90px;
 }
 
 /* Style for the table */
@@ -532,9 +534,11 @@ table {
     margin-top: 10px;
 }
 
-.your_profile_h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
 
+
+.menu{
+    position: relative;
+    padding: 5px;
+    margin-top:5px;
+    font-family: Arial, Helvetica, sans-serif;
+    }
