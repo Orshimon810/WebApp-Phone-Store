@@ -138,44 +138,41 @@ const userPopup = $('.user-popup');
             
                 
                     
-            // Register method
                 // Register method
-            document.getElementById('register').addEventListener('submit', function(event) {
-                event.preventDefault();
-            
-                const formData = new FormData(event.target);
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
+                $(document).ready(function() {
+                    $('#register').submit(function(event) {
+                        event.preventDefault();
+                        
+                        const formData = new FormData(this);
+                        const data = {};
+                        formData.forEach((value, key) => {
+                            data[key] = value;
+                        });
+                        
+                        // Send POST request to your API using jQuery
+                        $.ajax({
+                            url: 'http://localhost:3000/api/v1/users/register',
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(data),
+                            success: function(result) {
+                                if (result.message) {
+                                    // Registration successful
+                                    $('.registration-success-message').text(result.message);
+                                    $('.registration-error-message').text('');
+                                    window.location.href = '../views/mainPage.html';
+                                } else {
+                                    // Registration failed
+                                    $('.registration-success-message').text('');
+                                    $('.registration-error-message').text(result); // Display error message here
+                                }
+                            },
+                            error: function(error) {
+                                console.error('Registration failed:', error);
+                                $('.registration-error-message').text('An error occurred during registration. Please try again.');
+                                $('.registration-success-message').text(''); // Clear success message
+                            }
+                        });
+                    });
                 });
-            
-                // Send POST request to your API
-                fetch('http://localhost:3000/api/v1/users/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.message) {
-                        // Registration successful
-                        document.querySelector('.registration-success-message').textContent = result.message;
-                        document.querySelector('.registration-error-message').textContent = '';
-                        window.location.href = '../views/mainPage.html';
-                        // You can add other handling here if needed
-                    } else {
-                        // Registration failed
-                        document.querySelector('.registration-success-message').textContent = '';
-                        document.querySelector('.registration-error-message').textContent = result; // Display error message here
-                        // You can add other error handling here if needed
-                    }
-                })
-                .catch(error => {
-                    console.error('Registration failed:', error);
-                    document.querySelector('.registration-error-message').textContent = 'An error occurred during registration. Please try again.';
-                    document.querySelector('.registration-success-message').textContent = ''; // Clear success message
-                    // Add your error handling here
-                });
-            });
+                
