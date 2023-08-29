@@ -90,7 +90,7 @@ MONGODB_URL<br />
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
-* Stackoverflow
+* Stackoverflow, w3schools, Get Boostrap 
 * Facebook, Google
 * ASUS, OnePlus, Apple, Samsung, Xiaomi, Lenovo, HP
 
