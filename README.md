@@ -91,7 +91,6 @@ MONGODB_URL<br />
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * Stackoverflow
-* ChatGPT
 * Facebook, Google
 * ASUS, OnePlus, Apple, Samsung, Xiaomi, Lenovo, HP
 
