@@ -33,6 +33,12 @@
                         `;
                         productContainer.appendChild(productBox);
                     });
+                    
+                    $('.product-box').on('click', function() {
+                        const productId = $(this).data('product-id');
+                        // Redirect to the product details page with the product ID
+                        window.location.href = `sproduct.html?id=${productId}`;
+                    });
                 });
             }
     
