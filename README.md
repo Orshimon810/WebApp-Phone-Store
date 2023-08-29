@@ -1,6 +1,6 @@
 
 <p align="center">
-  <h1 align="center">Phonebook - E-Commerce Web API</h1>
+  <h1 align="center">Phonebook - E-Commerce Website</h1>
 
   <p align="center">
     <br>
@@ -9,7 +9,7 @@
   </p>
 </p>
 <br><br>
-          
+              
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
@@ -18,16 +18,16 @@
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [Contact](#contact)
+* [Demo](#demo) 
 * [Acknowledgements](#acknowledgements)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This is an ecommerce API  built with NodeJs. It features authentication, full CRUD ability on products, order, cart and user.
-Documentation here:
-https://documenter.getpostman.com/view/11784799/UVJhDEyt
+This is an ecommerce website  built with NodeJs Express. It features authentication, full CRUD ability on products, order, cart and users.
+Useabiility of Google Maps API, Facebook API for posting products on the website's page on facebook, and news from GNews API.
+
+<a href="https://github.com/Orshimon810/WebApp-Phone-Store"><strong>Documentation »</strong></a>
+
 
 ## Environmental variables
 PORT=3000<br />
@@ -72,9 +72,7 @@ MONGODB_URL<br />
 ```npm test```
 
 <!-- ROADMAP -->
-## Roadmap
 
-See the [open issues](https://github.com/breellz/e-commerce-api/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -86,13 +84,14 @@ See the [open issues](https://github.com/breellz/e-commerce-api/issues) for a li
 
 
 
-
+## Demo
+[<img src="https://img001.prntscr.com/file/img001/Zjm8gmCOQ8SoZOZf_br1HA.png" width="70%">](https://www.veed.io/embed/19b1ee62-63e7-4ea0-a3af-120918d50327)
 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 * Stackoverflow
+* ChatGPT
+* Facebook, Google
+* ASUS, OnePlus, Apple, Samsung, Xiaomi, Lenovo, HP
 
-
-## Demo
-[<img src="https://img001.prntscr.com/file/img001/Zjm8gmCOQ8SoZOZf_br1HA.png" width="70%">](https://www.veed.io/embed/19b1ee62-63e7-4ea0-a3af-120918d50327)
