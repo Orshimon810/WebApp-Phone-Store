@@ -26,7 +26,7 @@
 This is an ecommerce website  built with NodeJs Express. It features authentication, full CRUD ability on products, order, cart and users.
 Useabiility of Google Maps API, Facebook API for posting products on the website's page on facebook, and news from GNews API.
 
-<a href="https://github.com/Orshimon810/WebApp-Phone-Store"><strong>Documentation »</strong></a>
+<a href="https://github.com/Orshimon810/WebApp-Phone-Store/tree/dev"><strong>Documentation »</strong></a>
 
 
 ## Environmental variables
