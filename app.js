@@ -1,12 +1,12 @@
 const express = require('express');
-const http = require('http'); // Add this line
-const socketIo = require('socket.io'); // Add this line
+const http = require('http');
+const socketIo = require('socket.io'); 
 
 const app = express();
-const server = http.createServer(app); // Create an HTTP server
+const server = http.createServer(app); 
 const io = socketIo(server, {
     cors: {
-      origin: '*' // Set this to the origin(s) you want to allow
+      origin: '*' 
     }
   });
 const path = require('path');
